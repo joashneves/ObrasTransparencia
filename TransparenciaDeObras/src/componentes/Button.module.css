@@ -1,0 +1,30 @@
+:root{
+    --sem-mouse-cor:  rgba(173, 173, 173, 0.76);
+    --com-mouse-cor: rgba(244, 244, 244, 0.76);
+}
+
+.botaoNormal{
+    color: #FFF;
+    
+
+    font-family: Inter;
+    font-size: normal;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    width: 326px;
+    height: 37px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border-color: var(--sem-mouse-cor) ;
+    background: var(--sem-mouse-cor);
+}
+.botaoNormal:hover{
+    color: #0f0f0f;
+
+    cursor: pointer;
+    border-radius: 6px;
+    background: var(--com-mouse-cor);
+    border-color: var(--com-mouse-cor);
+}

@@ -1,0 +1,9 @@
+.projecaoDeObraInicial{
+    display: flex;
+
+}
+.fotoDaObra{
+    width: 247px;
+    height: 177px;
+    flex-shrink: 0;
+}
