@@ -10,7 +10,11 @@ function FormularioBuscarObrasTransparencia (){
         <div><label>Buscar</label>
         <input className={styles.buscarInput}></input></div>
         <div><label>Situação</label>
-        <input className={styles.situacaoInput}></input></div>
+        <select className={styles.situacaoInput}>
+            <option className={styles.situacaoInput}>Finalizado</option>
+            <option className={styles.situacaoInput}>Parado</option>
+            <option className={styles.situacaoInput}>Em andamento</option></select>
+            </div>
         <div><label>Data Inicio</label>
         <input type="date" className={styles.dataInicioInput}></input></div>
         <div><label>Tipo de Obra</label>
