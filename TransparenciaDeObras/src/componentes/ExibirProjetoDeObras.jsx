@@ -1,27 +1,28 @@
 import imagemNaoEncontrada from '../assets/images.png';
 import styles from "./ExibirProjetoDeObras.module.css";
-function ExibirProjetoDeObras(){
+
+const ExibirProjetoDeObras = (props) =>{
     return(
         <article className={styles.projecaoDeObraInicial}>
         <img src={imagemNaoEncontrada} 
             alt="imagem_nao_encontrada" 
                 className={styles.fotoDaObra}/>
-        <h1 className={styles.textoTitulo}>TP Nº 09/2020 - CONTRATO Nº 110/2022 - CONTRATAÇÃO DE EMPRESA PARA EXECUÇÃO DE OBRAS DE IMPLANTAÇÃO DE INFRA-ESTRUTURA BÁSICA E PAVIMENTAÇÃO COM BLOCOS DE CONCRETO NAS LOCALIDADES DE CANCELAS</h1>
+        <h1 className={styles.textoTitulo}>{props.tituloObra}</h1>
         <div className={styles.informacaoPreviasObras}>
-            <p className={styles.medicaoObras}>Medicção Any%</p>
+            <p className={styles.medicaoObras}>Medição {props.porcentagemMedicao}%</p>
             <div className={styles.informacaoFixasObras}>
             <p className={styles.informacaoFixasObrasFixo}>Situação :
-                <a className={styles.informacaoFixasObrasStatus}> andamento </a></p>
-            <p className={styles.informacaoFixasObrasFixo}>Data de pubacação :
-                <a className={styles.informacaoFixasObrasStatus}> 17/07/2023</a></p>
-            <p className={styles.informacaoFixasObrasFixo}>Orgão pubaco :
-                <a className={styles.informacaoFixasObrasStatus}> Prefeitura</a></p>
+                <a className={styles.informacaoFixasObrasStatus}> {props.situacaoObra} </a></p>
+            <p className={styles.informacaoFixasObrasFixo}>Data de publicacação :
+                <a className={styles.informacaoFixasObrasStatus}> {props.dataPublicacao}</a></p>
+            <p className={styles.informacaoFixasObrasFixo}>Orgão publico :
+                <a className={styles.informacaoFixasObrasStatus}> {props.prefeituraObras}</a></p>
             <p className={styles.informacaoFixasObrasFixo}>Tipo de Obra :
-                <a className={styles.informacaoFixasObrasStatus}> Rua</a></p>
+                <a className={styles.informacaoFixasObrasStatus}> {props.tipoObra}</a></p>
             <p className={styles.informacaoFixasObrasFixo}>Valor Pago : 
-                <a className={styles.informacaoFixasObrasStatus}> R$ 1.320.980,71</a></p>
+                <a className={styles.informacaoFixasObrasStatus}> R${props.valorPagoObra}</a></p>
             <p className={styles.informacaoFixasObrasFixo}>Contratada :
-                <a className={styles.informacaoFixasObrasStatus}> W.m vasconcelos</a></p>
+                <a className={styles.informacaoFixasObrasStatus}> {props.contratadaObra}</a></p>
             
             </div>
         </div>

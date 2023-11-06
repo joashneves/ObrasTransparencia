@@ -1,6 +1,7 @@
 :root{
     --titulo-do-topo-da-pesquisa: #405875;
     --cor-de-fundo-da-pesquisa: #D9D9D9;
+    --cor-de-branco-mesmo: #FFF;
 }
 label{
     color: #000;
@@ -27,7 +28,7 @@ input{
     border-radius: 4px;
     border: 1px solid #AB9A9A;
 
-    background: #FFF;
+    background: var(--cor-de-branco-mesmo);
 
 }
 a{
@@ -86,16 +87,41 @@ a{
 }
 .situacaoInput{
 
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border-radius: 4px;
+    border: 1px solid #AB9A9A;
+
+    background: var(--cor-de-branco-mesmo);
 
     width: 289px;
-    height: 35px;
+    height: 39px;
     flex-shrink: 0;
+}
+.situacaoInput option{
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border-radius: 4px;
+    border: 1px solid #AB9A9A;
+
+    background: var(--cor-de-branco-mesmo);
+
 }
 .dataInicioInput{
 
 
     width: 280px;
-height: 35px;
+height: 37px;
 flex-shrink: 0;
 }
 .tipoDeObraInput{
@@ -115,7 +141,7 @@ flex-shrink: 0;
 .dataFInalInput{
 
     width: 280px;
-    height: 35px;
+    height: 37px;
     flex-shrink: 0;
 }
 .orgaoPublicoInput{
