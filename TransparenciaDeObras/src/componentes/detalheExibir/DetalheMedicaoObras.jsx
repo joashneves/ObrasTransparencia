@@ -3,7 +3,7 @@ import styles from "./DetalheMedicaoObras.module.css";
 const DetalheMedicaoObras =(props)=>{
     return(
         <article className={styles.obrasDetalhePrincipal}>
-            <div className={styles.gestoresFiscaisTituloAzul}><h1>Medicao</h1></div>
+            <div className={styles.gestoresFiscaisTituloAzul}><h1>Mediçao</h1></div>
         <div className={styles.porcentagemMedicao}>Medição</div>
             <table>
                 <tr>

@@ -1,4 +1,7 @@
 import React from "react";
+import FormularioBuscarObrasTransparencia from "../componentes/detalheExibir/FormularioBuscarObrasTransparencia";
+import ExibirProjetoDeObras from "../componentes/detalheExibir/ExibirProjetoDeObras";
+import DetalheSobreObras from "../componentes/detalheExibir/DetalhesSobreObras";
 
 const Home = () =>{
     return(<><FormularioBuscarObrasTransparencia/>
@@ -20,13 +23,7 @@ const Home = () =>{
               valorPagoObra={'1.350.31,00'}
                 contratadaObra={'W.M VASCONCELOS - ME'}
            />
-    <DetalheSobreObras numeroDetalhes={"110"}
-    situacaoDetalhes={"Andamento"}
-    dataPublicacaoDetalhes={'17/11/2023'}
-          prefeituraObrasDetalhes={'Prefeitura'}
-            tipoObraDetalhes={'Rua'}
-              valorPagoObraDetalhes={'1.350.31,00'}
-                contratadaObraDetalhes={'W.M VASCONCELOS - ME'}/>
+   
     </>)
 }
 

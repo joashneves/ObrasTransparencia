@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from './routes/Home.jsx';
 import ExibirOBras from './routes/ExibirObras.jsx';
 import ErrorPage from './routes/ErrorPage.jsx';
+import CadastrarObras from './routes/CadastrarObras.jsx';
 
 const router = createBrowserRouter([
   {
@@ -16,9 +17,17 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage/>,
   },
   {
+    path: "Home",
+    element: <Home/>,
+  },
+  {
     path: "Exibir",
     element: <ExibirOBras/>,
   },
+  {
+    path: "Cadastrar",
+    element: <CadastrarObras/>
+  }
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

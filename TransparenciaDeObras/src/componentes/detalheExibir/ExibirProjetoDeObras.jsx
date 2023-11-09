@@ -1,4 +1,4 @@
-import imagemNaoEncontrada from '../assets/images.png';
+import imagemNaoEncontrada from 'C:\\Users\\joas.neves\\Documents\\Prefeitura\\Obras\\TransparenciaDeObras\\src\\assets\\images.png';
 import styles from "./ExibirProjetoDeObras.module.css";
 
 const ExibirProjetoDeObras = (props) =>{
