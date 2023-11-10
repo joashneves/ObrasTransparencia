@@ -19,7 +19,7 @@ div{
 
     padding: 1rem;
 }
-input{
+input, select{
     color: #000;
     font-family: Inter;
     font-size: 24px;
@@ -40,65 +40,39 @@ a{
     font-size: 24px;
 
 }
-.tituloDeCadastro{
+.tituloDeUsuario{
     color: var(--cor-de-branco-mesmo);
     
     border-radius: 0.375rem 0.375rem 0rem 0rem;
     background-color: var(--titulo-do-topo-da-pesquisa);
 }
-.fundoDeCadastro{
+.fundoDeUsuario{
     margin: 1rem;
     
     background: #D9D9D9;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
-.formularioDeCadastro{
-    display: grid;
-    grid-template-columns: auto auto auto;
-}
-.cadastrarNome{
-    width: 564px;
-    height: 35px;
-    flex-shrink: 0;
-}
-.cadastrarSitucao{
-    width: 336px;
-height: 35px;
-flex-shrink: 0;
-}
-.cadastrarNumero{
-    width: 378px;
-height: 35px;
-flex-shrink: 0;;
+.formularioPesquisa{
+    display: flex;
 
+    flex-direction: row;
+    flex-wrap: wrap;
+    
 }
-.cadastrarTipoObra{
-    width: 564px;
-height: 35px;
-flex-shrink: 0;
-}
-.cadastrarStatus{
-    width: 336px;
-height: 35px;
-flex-shrink: 0;
-}
-.cadastrarAno{
-    width: 400px;
-height: 35px;
-flex-shrink: 0;
-}
-.cadastrarOrgãoPublico{
-    width: 564px;
-height: 35px;
-flex-shrink: 0;
-}
-.cadastrarNomeContratada{
-    width: 412px;
-height: 35px;
-flex-shrink: 0;
-}
-.cadastrarCNPJContratada{
-    width: 412px;
+.usuarioNome{
+    
     height: 35px;
-    flex-shrink: 0;
+    width: 35rem;
+}
+.usuarioNomeCompleto{
+    height: 35px;
+    width: 25rem;
+}
+.usuarioPerfil{
+    height: 35px;
+    width: 35rem;
+}
+.usuarioMatricula{
+    height: 35px;
+    width: 35rem;
 }

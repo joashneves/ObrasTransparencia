@@ -48,57 +48,46 @@ a{
 }
 .fundoDeCadastro{
     margin: 1rem;
-    
+
     background: #D9D9D9;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
-.formularioDeCadastro{
-    display: grid;
-    grid-template-columns: auto auto auto;
+
+table{
+    width: 100%;
+    height: auto;
+    margin: 2px;
+
+    text-align: center;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    background-color: #D9D9D9;;
 }
-.cadastrarNome{
-    width: 564px;
-    height: 35px;
+.tabelaObrasTopo{
+    width: 21.375rem;
+    height: 1.5625rem;
     flex-shrink: 0;
+
+    background: rgba(67, 74, 84, 0.30);
 }
-.cadastrarSitucao{
-    width: 336px;
-height: 35px;
-flex-shrink: 0;
-}
-.cadastrarNumero{
-    width: 378px;
-height: 35px;
-flex-shrink: 0;;
+.tabelaObrasTopoEsquerdo{
+    border-radius: 0.75rem 0rem 0rem 0rem;
+    background: rgba(67, 74, 84, 0.30);
+
+    width: auto;
+    height: 1.5625rem;
+    flex-shrink: 0;
 
 }
-.cadastrarTipoObra{
-    width: 564px;
-height: 35px;
+.tabelaObrasTopoDireito{
+    width: auto;
+height: 1.5625rem;
 flex-shrink: 0;
+
+border-radius: 0rem 0.75rem 0rem 0rem;
+background: rgba(67, 74, 84, 0.30);
 }
-.cadastrarStatus{
-    width: 336px;
-height: 35px;
-flex-shrink: 0;
-}
-.cadastrarAno{
-    width: 400px;
-height: 35px;
-flex-shrink: 0;
-}
-.cadastrarOrgãoPublico{
-    width: 564px;
-height: 35px;
-flex-shrink: 0;
-}
-.cadastrarNomeContratada{
-    width: 412px;
-height: 35px;
-flex-shrink: 0;
-}
-.cadastrarCNPJContratada{
-    width: 412px;
-    height: 35px;
-    flex-shrink: 0;
+.tabelaObrasMeio{
+    
+    background: #EDEDED;
 }

@@ -4,6 +4,7 @@ import CadastrarFiscaisGestores from "../componentes/cadastrar/CadastrarFiscaisG
 import CadastrarAnexo from "../componentes/cadastrar/CadastrarAnexo";
 import CadastrarAditivo from "../componentes/cadastrar/CadastrarAditivo";
 import CadastrarObraOpcao from "../componentes/cadastrar/CadastrarObraOpcao";
+import CadastrarFoto from "../componentes/cadastrar/CadastrarFoto";
 
 const CadastrarObras = () =>{
     return(
@@ -12,6 +13,7 @@ const CadastrarObras = () =>{
             <CadastrarFiscaisGestores/>
             <CadastrarAnexo/>
             <CadastrarAditivo/>
+            <CadastrarFoto/>
             <CadastrarObraOpcao/>
         </>
     )

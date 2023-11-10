@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./CadastrarAditivo.module.css";
 import EnviarDocumento from "../EnviarDocumento";
 import ButtonSalvar from "../ButtonSalvar";
+import TabelaAditivo from "./tabela/TabelaAditivo";
 
 function CadastrarAditivo(){
     return(
@@ -19,6 +20,7 @@ function CadastrarAditivo(){
             <ButtonSalvar/>
             </div>
             </div>
+            <TabelaAditivo/>
         </article>
     )
 }

@@ -9,6 +9,8 @@ import Home from './routes/Home.jsx';
 import ExibirOBras from './routes/ExibirObras.jsx';
 import ErrorPage from './routes/ErrorPage.jsx';
 import CadastrarObras from './routes/CadastrarObras.jsx';
+import ExibirObrasEditaveis from './routes/ExibirObrasEditaveis.jsx';
+import GerenciarPerfis from './routes/GerenciarPerfis.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,14 @@ const router = createBrowserRouter([
   {
     path: "Cadastrar",
     element: <CadastrarObras/>
+  },
+  {
+    path: "ProcurarObra",
+    element: <ExibirObrasEditaveis/>
+  },
+  {
+    path: "Perfis",
+    element: <GerenciarPerfis/>
   }
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
