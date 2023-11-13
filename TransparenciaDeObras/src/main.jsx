@@ -11,16 +11,13 @@ import ErrorPage from './routes/ErrorPage.jsx';
 import CadastrarObras from './routes/CadastrarObras.jsx';
 import ExibirObrasEditaveis from './routes/ExibirObrasEditaveis.jsx';
 import GerenciarPerfis from './routes/GerenciarPerfis.jsx';
+import RegistroLog from './routes/RegistroLog.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home/>,
     errorElement: <ErrorPage/>,
-  },
-  {
-    path: "Home",
-    element: <Home/>,
   },
   {
     path: "Exibir",
@@ -37,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "Perfis",
     element: <GerenciarPerfis/>
+  },
+  {
+    path: "log",
+    element: <RegistroLog/>
   }
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
