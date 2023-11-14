@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -20,10 +19,6 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage/>,
   },
   {
-    path: "Exibir",
-    element: <ExibirOBras/>,
-  },
-  {
     path: "Cadastrar",
     element: <CadastrarObras/>
   },
@@ -38,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "log",
     element: <RegistroLog/>
+  },
+  {
+    path: "Exibir/:situacao/:dataPublicaca/:orgaoPublico/:tipoObra/:valorPago/:nomeContratada",
+    element: <ExibirOBras/>
   }
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(

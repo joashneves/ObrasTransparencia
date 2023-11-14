@@ -1,4 +1,6 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+
 import InformacaoDaObra from "../componentes/detalheExibir/InformacaoDaObra";
 import DetalheAditivosObras from "../componentes/detalheExibir/DetalheAditivosObras";
 import DetalheGestoresFiscaisObras from "../componentes/detalheExibir/DetalheGestoresFiscaisObras";
@@ -8,23 +10,27 @@ import DetalheSobreObras from "../componentes/detalheExibir/DetalhesSobreObras";
 import DetalheHistoricoObras from "../componentes/detalheExibir/DetalheHistoricoObras";
 
 const ExibirOBras = () =>{
-    return(
-        <>
-         <DetalheSobreObras numeroDetalhes={"110"}
-    situacaoDetalhes={"Andamento"}
-    dataPublicacaoDetalhes={'17/11/2023'}
-          prefeituraObrasDetalhes={'Prefeitura'}
-            tipoObraDetalhes={'Rua'}
-              valorPagoObraDetalhes={'1.350.31,00'}
-                contratadaObraDetalhes={'W.M VASCONCELOS - ME'}/>
-                
-        <DetalheGestoresFiscaisObras/>
-        <DetalheAnexoObras/>
-        <DetalheMedicaoObras/>
-        <DetalheAditivosObras/>
-        <DetalheHistoricoObras/>
-        </>
-    )
+  const {situacao, dataPublicacao, orgaoPublico, tipoObra, valorPago, nomeContratada} = useParams();
+
+
+
+  return(
+      <>
+       <DetalheSobreObras numeroDetalhes={situacao}
+  situacaoDetalhes={situacao}
+  dataPublicacaoDetalhes={dataPublicacao}
+        prefeituraObrasDetalhes={orgaoPublico}
+          tipoObraDetalhes={tipoObra}
+            valorPagoObraDetalhes={valorPago}
+              contratadaObraDetalhes={nomeContratada}/>
+              
+      <DetalheGestoresFiscaisObras/>
+      <DetalheAnexoObras/>
+      <DetalheMedicaoObras/>
+      <DetalheAditivosObras/>
+      <DetalheHistoricoObras/>
+      </>
+  )
 }
 
 export default ExibirOBras;

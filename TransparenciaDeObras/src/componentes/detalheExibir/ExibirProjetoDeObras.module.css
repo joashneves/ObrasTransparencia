@@ -1,3 +1,15 @@
+h1, p ,a,nav{
+    width: 1200px;
+    height: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    align-self: center;
+    color: #000;
+}
 .projecaoDeObraInicial{
     display: flex;
 

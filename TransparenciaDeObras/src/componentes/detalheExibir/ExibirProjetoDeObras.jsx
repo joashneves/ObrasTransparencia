@@ -1,8 +1,14 @@
 import imagemNaoEncontrada from 'C:\\Users\\joas.neves\\Documents\\Prefeitura\\Obras\\TransparenciaDeObras\\src\\assets\\images.png';
 import styles from "./ExibirProjetoDeObras.module.css";
 
+import {Link} from "react-router-dom";
+
+
+
 const ExibirProjetoDeObras = (props) =>{
     return(
+           
+        <Link to={`/exibir/${props.situacaoObra}/${props.dataPublicacao}/${props.prefeituraObras}/${props.valorPagoObra}/${props.contratadaObra}`}>
         <article className={styles.projecaoDeObraInicial}>
         <img src={imagemNaoEncontrada} 
             alt="imagem_nao_encontrada" 
@@ -27,6 +33,9 @@ const ExibirProjetoDeObras = (props) =>{
             </div>
         </div>
         </article>
+        </Link>
+        
+
     )
 }
 
