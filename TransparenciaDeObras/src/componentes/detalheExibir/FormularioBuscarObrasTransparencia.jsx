@@ -1,18 +1,24 @@
-import Button from "../Button";
+
+import React, {useState} from "react";
 import styles from "./FormularioBuscarObrasTransparencia.module.css";
 
 function FormularioBuscarObrasTransparencia (props){
-    
+    const [situacaoSelecionada, setSituacaoSelecionada] = useState("");
+
     const filtrarBusca = async(event) =>{
-        event.preventDefault();
-        const situcao = event.target.Situacao.value;
+        
+        const buscar = event.target.Buscar.value;
+        const situacao = situacaoSelecionada;
         const dataInicio = event.target.DataInicio.value;
+        const dataFinal = event.target.DataFinal.value;
         const tipo = event.target.Tipo.value;
         const contratada = event.target.Contratada.value;
+        const orgao = event.target.Orgao.value;
         
         
-        return(situcao,dataInicio,tipo,contratada)
-        
+        props.realizarBuscaCallback(buscar, situacao,dataInicio, tipo, contratada, dataFinal, orgao);
+
+        event.preventDefault();
     }
  
 
@@ -24,8 +30,12 @@ function FormularioBuscarObrasTransparencia (props){
         <div><label>Buscar</label>
         <input className={styles.buscarInput} id="Buscar"></input></div>
         <div><label>Situação</label>
-        <select className={styles.situacaoInput} id="Situacao">
-            <option className={styles.situacaoInput}>Finalizado</option>
+        <select className={styles.situacaoInput}
+         id="Situacao"
+         onChange={(e) => setSituacaoSelecionada(e.target.value)}
+            value={situacaoSelecionada}>
+            <option className={styles.situacaoInput}></option>
+            <option className={styles.situacaoInput}>Concluída</option>
             <option className={styles.situacaoInput}>Parado</option>
             <option className={styles.situacaoInput}>Em andamento</option>
             <option className={styles.situacaoInput}>Execução</option></select>

@@ -17,9 +17,9 @@ const InformacaoDaObra = (props) => {
             <div className={styles.detalhesFundo}>Contrato</div> <div className={styles.detalhesFundo}>{props.contratoObraDetalhes}</div>
             <div className={styles.detalhesFundo}>Prazo Incial</div> <div className={styles.detalhesFundo}>{props.prazoInicialObraDetalhes}</div>
             <div className={styles.detalhesFundo}>Prazo Total</div> <div className={styles.detalhesFundo}>{props.prazoTotalObraDetalhes}</div>
-            <div className={styles.detalhesFundo}>Valor Empenhado</div> <div className={styles.detalhesFundo}>{props.valorEmpenhadoObraDetalhes}</div>
-            <div className={styles.detalhesFundo}>Valor Liquidado</div> <div className={styles.detalhesFundo}>{props.valorLiquidadoObraDetalhes}</div>
-            <div className={styles.detalhesFundoFinalEsquerdo}>Valor pago</div> <div className={styles.detalhesFundoFinalDireito}>{props.valorPagoObraDetalhes}</div>
+            <div className={styles.detalhesFundo}>Valor Empenhado</div> <div className={styles.detalhesFundo}>R$ {props.valorEmpenhadoObraDetalhes}</div>
+            <div className={styles.detalhesFundo}>Valor Liquidado</div> <div className={styles.detalhesFundo}>R$ {props.valorLiquidadoObraDetalhes}</div>
+            <div className={styles.detalhesFundoFinalEsquerdo}>Valor pago</div> <div className={styles.detalhesFundoFinalDireito}>R$ {props.valorPagoObraDetalhes}</div>
             </div>
             </div>
         </article>

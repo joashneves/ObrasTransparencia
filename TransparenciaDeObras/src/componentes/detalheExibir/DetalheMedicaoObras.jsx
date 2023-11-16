@@ -4,7 +4,7 @@ const DetalheMedicaoObras =(props)=>{
     return(
         <article className={styles.obrasDetalhePrincipal}>
             <div className={styles.gestoresFiscaisTituloAzul}><h1>Mediçao</h1></div>
-        <div className={styles.porcentagemMedicao}>Medição</div>
+        <div className={styles.porcentagemMedicao}>{props.porcentagemMedicao}%</div>
             <table>
                 <tr>
                     <th className={styles.tabelaMedicaoTopoEsquerdo}>Numero</th>

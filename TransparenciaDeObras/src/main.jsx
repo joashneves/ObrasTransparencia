@@ -16,7 +16,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home/>,
-    errorElement: <ErrorPage/>,
+    
   },
   {
     path: "Cadastrar",
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
     element: <RegistroLog/>
   },
   {
-    path: "Exibir/:situacao/:dataPublicaca/:orgaoPublico/:tipoObra/:valorPago/:nomeContratada",
+    path: "Exibir/:tituloObra",
     element: <ExibirOBras/>
   }
 ]);
