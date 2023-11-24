@@ -8,8 +8,8 @@ import {Link} from "react-router-dom";
 const ExibirProjetoDeObras = (props) =>{
     return(
            
-        <Link to={`/exibir/${props.tituloObra}`}>
-        <article className={styles.projecaoDeObraInicial}>
+        <Link className={styles.projecaoDeObraInicial} to={`/exibir/${props.tituloObra}` }>
+        
         <img src={imagemNaoEncontrada} 
             alt="imagem_nao_encontrada" 
                 className={styles.fotoDaObra}/>
@@ -32,7 +32,6 @@ const ExibirProjetoDeObras = (props) =>{
             
             </div>
         </div>
-        </article>
         </Link>
         
 

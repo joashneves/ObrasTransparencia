@@ -15,7 +15,6 @@ function FormularioBuscarObrasTransparencia (props){
         const contratada = event.target.Contratada.value;
         const orgao = event.target.Orgao.value;
         
-        
         props.realizarBuscaCallback(buscar, situacao,dataInicio, tipo, contratada, dataFinal, orgao);
 
         event.preventDefault();

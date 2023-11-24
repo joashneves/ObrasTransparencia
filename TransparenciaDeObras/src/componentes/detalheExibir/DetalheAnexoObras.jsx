@@ -1,5 +1,7 @@
 import styles from "./DetalheAnexoObras.module.css";
 
+import DetalheAnexoListaObras from "./DetalheAnexoListaObras";
+
 const DetalheAnexoObras =(props)=>{
     return(
         <article className={styles.obrasDetalhePrincipal}>
@@ -12,18 +14,7 @@ const DetalheAnexoObras =(props)=>{
                     <th className={styles.tabelaAnexoTopo}>Descrição</th>
                     <th className={styles.tabelaAnexoTopoDireito}>Arquivo</th>
                 </tr>
-                <tr>
-                    <td className={styles.tabelaAnexoMeio}>Fiscal Titular</td>
-                    <td className={styles.tabelaAnexoMeio}>João Generico da Silva</td>
-                    <td className={styles.tabelaAnexoMeio}>SEMOB</td>
-                    <td className={styles.tabelaAnexoMeioVisualizar}><a>Visualizar</a></td>
-                </tr>
-                <tr> 
-                    <td className={styles.tabelaAnexoFinalEsquerdo}>Fiscal Substituto</td>
-                    <td className={styles.tabelaAnexoFinal}>Pedro Generico da Silva</td>
-                    <td className={styles.tabelaAnexoFinal}>SEMOB</td>
-                    <td className={styles.tabelaAnexoFinalDireitoVisualizar}><a>Visualizar</a></td>
-                </tr>
+                <DetalheAnexoListaObras/>
             </table>
             
         </article>

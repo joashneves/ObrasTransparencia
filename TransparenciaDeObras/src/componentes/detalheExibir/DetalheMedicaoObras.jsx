@@ -1,3 +1,4 @@
+import DetalheMedicaoListaObras from "./DetalheMedicacaoListaObras";
 import styles from "./DetalheMedicaoObras.module.css";
 
 const DetalheMedicaoObras =(props)=>{
@@ -16,26 +17,7 @@ const DetalheMedicaoObras =(props)=>{
                     <th className={styles.tabelaMedicaoTopo}>Valor Medido</th>
                     <th className={styles.tabelaMedicaoTopoDireito}>Detalhes</th>
                 </tr>
-                <tr>
-                    <td className={styles.tabelaMedicaoMeio}>01</td>
-                    <td className={styles.tabelaMedicaoMeio}>23285023/2022</td>
-                    <td className={styles.tabelaMedicaoMeio}>Aditivo</td>
-                    <td className={styles.tabelaMedicaoMeio}>23285023/2022</td>
-                    <td className={styles.tabelaMedicaoMeio}>Aditivo</td>
-                    <td className={styles.tabelaMedicaoMeio}>23285023/2022</td>
-                    <td className={styles.tabelaMedicaoMeio}>Aditivo</td>
-                    <td className={styles.tabelaMedicaoMeioVisualizar}><a>Visualizar</a></td>
-                </tr>
-                <tr> 
-                    <td className={styles.tabelaMedicaoFinalEsquerdo}>02</td>
-                    <td className={styles.tabelaMedicaoFinal}>231655/2022</td>
-                    <td className={styles.tabelaMedicaoFinal}>Aditivo</td>
-                    <td className={styles.tabelaMedicaoFinal}>231655/2022</td>
-                    <td className={styles.tabelaMedicaoFinal}>Aditivo</td>
-                    <td className={styles.tabelaMedicaoFinal}>231655/2022</td>
-                    <td className={styles.tabelaMedicaoFinal}>Aditivo</td>
-                    <td className={styles.tabelaMedicaoFinalDireitoVisualizar}><a>Visualizar</a></td>
-                </tr>
+                <DetalheMedicaoListaObras/>
             </table>
             
         </article>

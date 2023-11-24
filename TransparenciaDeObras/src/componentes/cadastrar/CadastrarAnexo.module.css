@@ -41,12 +41,14 @@ a{
 
 }
 .tituloDeCadastro{
+
     color: var(--cor-de-branco-mesmo);
     
     border-radius: 0.375rem 0.375rem 0rem 0rem;
     background-color: var(--titulo-do-topo-da-pesquisa);
 }
 .fundoDeCadastro{
+    width: 84rem;
     margin: 1rem;
     
     background: #D9D9D9;

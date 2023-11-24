@@ -12,9 +12,9 @@ const Home = () =>{
 
   const realizarBusca = (buscar, situacao,dataInicio, tipo, contratada, dataFinal, orgao ) => {
 
-        // Aqui você deve implementar a lógica de filtragem dos dados com base nos critérios de pesquisa
+        // Dados a serem filtrados na pesquisa
         const dadosFiltrados = jsonData.filter((data) => {
-          // Adapte os critérios conforme necessário
+        
           return (
             data.Descricao.toLowerCase().includes(buscar.toLowerCase()) &&
             data.Situacao.toLowerCase().includes(situacao.toLowerCase()) &&
@@ -38,36 +38,37 @@ const Home = () =>{
         dadosFiltrados.map((data) => {
           return (
             <ExibirProjetoDeObras
-              key={data.Contrato} // Certifique-se de ter uma chave única
-              tituloObra={data.Descricao}
-              porcentagemMedicao={data.Percentual}
-              situacaoObra={data.Situacao}
-              dataPublicacao={data.Inicio}
-              prefeituraObras={data.Secretaria}
-              tipoObra={data.Tipo}
-              valorPagoObra={data.ValorPago}
-              contratadaObra={data.Contrato}
+            key={data.Contrato} // Certifique-se de ter uma chave única
+            tituloObra={data.Descricao}
+            porcentagemMedicao={data.Percentual}
+            situacaoObra={data.Situacao}
+            dataPublicacao={data.Inicio}
+            prefeituraObras={data.Secretaria}
+            tipoObra={data.Tipo}
+            valorPagoObra={data.ValorPago}
+            contratadaObra={data.Contrato}
             />
-          );
-        })
-      ) : (
-        // Se não houver dados filtrados, renderiza todos os dados do JSON
-        jsonData.map((data) => {
-          return (
-            <ExibirProjetoDeObras
-              key={data.Contrato} // Certifique-se de ter uma chave única
-              tituloObra={data.Descricao}
-              porcentagemMedicao={data.Percentual}
-              situacaoObra={data.Situacao}
-              dataPublicacao={data.Inicio}
-              prefeituraObras={data.Secretaria}
-              tipoObra={data.Tipo}
-              valorPagoObra={data.ValorPago}
-              contratadaObra={data.Contrato}
-            />
-          );
-        })
-      )}
+            );
+          })
+          ) : (
+            // Se não houver dados filtrados, renderiza todos os dados do JSON
+            jsonData.map((data) => {
+              return (
+                <ExibirProjetoDeObras
+                key={data.Contrato} // Certifique-se de ter uma chave única
+                tituloObra={data.Descricao}
+                porcentagemMedicao={data.Percentual}
+                situacaoObra={data.Situacao}
+                dataPublicacao={data.Inicio}
+                prefeituraObras={data.Secretaria}
+                tipoObra={data.Tipo}
+                valorPagoObra={data.ValorPago}
+                contratadaObra={data.Contrato}
+                />
+                );
+              })
+              )}
+        
     </>
   );
 }

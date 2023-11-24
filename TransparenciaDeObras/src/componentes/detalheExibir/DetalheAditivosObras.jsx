@@ -1,3 +1,4 @@
+import DetalheAditivosListaObras from "./DetalheAditivosListaObras";
 import styles from "./DetalheAditivosObras.module.css";
 
 const DetalheAditivosObras =(props)=>{
@@ -12,18 +13,7 @@ const DetalheAditivosObras =(props)=>{
                     <th className={styles.tabelaAditivosTopo}>Tipo</th>
                     <th className={styles.tabelaAditivosTopoDireito}>Arquivo</th>
                 </tr>
-                <tr>
-                    <td className={styles.tabelaAditivosMeio}>01</td>
-                    <td className={styles.tabelaAditivosMeio}>23285023/2022</td>
-                    <td className={styles.tabelaAditivosMeio}>Aditivo</td>
-                    <td className={styles.tabelaAditivosMeioVisualizar}><a>Visualizar</a></td>
-                </tr>
-                <tr> 
-                    <td className={styles.tabelaAditivosFinalEsquerdo}>02</td>
-                    <td className={styles.tabelaAditivosFinal}>231655/2022</td>
-                    <td className={styles.tabelaAditivosFinal}>Aditivo</td>
-                    <td className={styles.tabelaAditivosFinalDireitoVisualizar}><a>Visualizar</a></td>
-                </tr>
+                <DetalheAditivosListaObras/>
             </table>
             
         </article>
