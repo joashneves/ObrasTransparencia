@@ -39,7 +39,7 @@ function CadastrarFiscaisGestores (){
             className={styles.cadastrarEmailPapelFiscalGestor} 
             onChange={(e) => setEmail(e.target.value)} /></label>
             <div>
-                <input type="submit" value="enviarInformacoes" />
+                <input type="submit" />
             </div>
             </div>
             <div><TabelaGestoresFiscais
