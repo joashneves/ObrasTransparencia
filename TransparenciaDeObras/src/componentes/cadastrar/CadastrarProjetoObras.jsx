@@ -13,6 +13,8 @@ function CadastrarProjetoObras (){
             <label>Status <input type="text" id="User" name="Name" className={styles.cadastrarStatus} /></label>
             <label>Ano <input type="text" id="User" name="Name" className={styles.cadastrarAno} /></label>
             <label>Orgão Publico <input type="text" id="User" name="Name" className={styles.cadastrarOrgãoPublico} /></label>
+            <label>Local <input type="text" id="User" name="local" className={styles.cadastrarLocal} /></label>
+            <div></div>
             <label>Nome da Contratada *<input type="text" id="User" name="Name" className={styles.cadastrarNomeContratada} /></label>
             <label>CNPJ da Contratada * <input type="text" id="User" name="Name" className={styles.cadastrarCNPJContratada} /></label>
 

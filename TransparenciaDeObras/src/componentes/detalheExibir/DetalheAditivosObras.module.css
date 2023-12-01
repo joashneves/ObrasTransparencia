@@ -4,11 +4,16 @@
     --cor-de-branco-mesmo: #FFF;
     --cor-de-fundo-visualizar: #434A54;
 }
+h1{
+    color: #fff;
+    font-size: 2rem;
+    margin: 0px;
+}
 .obrasDetalhePrincipal{
     margin: 1rem;
     background-color: var(--cor-de-fundo-da-pesquisa);
 }
-.gestoresFiscaisTituloAzul, h1{
+.gestoresFiscaisTituloAzul{
     color: #fff;
     font-size: 2rem;
     margin: 0px;

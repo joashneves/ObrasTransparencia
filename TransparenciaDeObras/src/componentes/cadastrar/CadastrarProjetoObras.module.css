@@ -98,6 +98,11 @@ flex-shrink: 0;
     height: 35px;
     flex-shrink: 0;
 }
+.cadastrarLocal{
+    width: 21rem;
+    height: 35px;
+    flex-shrink: 0;
+}
 .cadastrarNomeContratada{
     width: 25.7rem;
     height: 35px;
