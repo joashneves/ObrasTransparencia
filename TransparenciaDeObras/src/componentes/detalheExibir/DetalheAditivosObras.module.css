@@ -8,8 +8,9 @@
     margin: 1rem;
     background-color: var(--cor-de-fundo-da-pesquisa);
 }
-.gestoresFiscaisTituloAzul{
+.gestoresFiscaisTituloAzul, h1{
     color: #fff;
+    font-size: 2rem;
     margin: 0px;
 
     border-radius: 6px 6px 0px 0px;
