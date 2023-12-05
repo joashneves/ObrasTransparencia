@@ -1,4 +1,4 @@
-import React from "react";
+import {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 
 import InformacaoDaObra from "../componentes/detalheExibir/InformacaoDaObra";
@@ -9,30 +9,53 @@ import DetalheAnexoObras from "../componentes/detalheExibir/DetalheAnexoObras";
 import DetalheSobreObras from "../componentes/detalheExibir/DetalhesSobreObras";
 import DetalheHistoricoObras from "../componentes/detalheExibir/DetalheHistoricoObras";
 
-import jsonData from "./Dados.json"
+import axios from "axios";
 
 const ExibirOBras = () =>{
   const {tituloObra} = useParams();
+  const [jsonData, setJsonData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [obraSelecionada, setObraSelecionada] = useState({})
+  const Adquirirdados = async (event) =>{
+    try{
+      const response = await axios.get('https://localhost:7031/api/Obras/');
+      
+      const dadosRecebidos = response.data;
+      
+      console.log("Dados acessados", dadosRecebidos)
+      setJsonData(dadosRecebidos);
+      setObraSelecionada(jsonData.find((obra) => obra.nomeDetalhe === tituloObra));
+      setLoading(false); // Indica que os dados foram carregados
+    }catch(err){
+      console.log("Erro", err);
+      setLoading(false); // Indica que ocorreu um erro ao carregar os dados
+    }
+  }
 
-  const obraSelecionada = jsonData.find((obra) => obra.Descricao === tituloObra);
+  // Efeito para carregar os dados ao montar o componente
+  useEffect(() => {
+    Adquirirdados();
+  }, []); // O array de dependências vazio assegura que o efeito seja executado apenas uma vez, equivalente a componentDidMount
+
 
   return(
       <>
-       <DetalheSobreObras numeroDetalhes={obraSelecionada.Situacao}
-  situacaoDetalhes={obraSelecionada.Situacao}
-  dataPublicacaoDetalhes={obraSelecionada.Inicio}
-        prefeituraObrasDetalhes={obraSelecionada.Secretaria}
-          tipoObraDetalhes={obraSelecionada.Tipo}
-            valorPagoObraDetalhes={obraSelecionada.ValorPago}
-              contratadaObraDetalhes={obraSelecionada.Contrato}
+      
+       <DetalheSobreObras numeroDetalhes={obraSelecionada.numeroDetalhe}
+  situacaoDetalhes={obraSelecionada.situacaoDetalhe}
+  dataPublicacaoDetalhes={obraSelecionada.publicacaoData}
+        prefeituraObrasDetalhes={obraSelecionada.orgaoPulicoDetalhe}
+          tipoObraDetalhes={obraSelecionada.tipoObraDetalhe}
+            valorPagoObraDetalhes={obraSelecionada.valorPagoDetalhe}
+              contratadaObraDetalhes={obraSelecionada.nomeContratadaDetalhe}
               
               inicioObraDetalhes={obraSelecionada.Inicio}
-              previsaoConclusaoDetalhes={obraSelecionada.Final}
-              formaExecucaoDetalhes={obraSelecionada.Inicio}
+              previsaoConclusaoDetalhes={obraSelecionada.previsaoConclusaoDetalhe}
+              formaExecucaoDetalhes={obraSelecionada.formaExecucaoDetalhe}
               descricaoObraDetalhes={obraSelecionada.Inicio}
-              localizacaoObraDetalhes={obraSelecionada.Inicio}
-              nomeContratadaObraDetalhes={obraSelecionada.Inicio}
-              cnpjContratadaObraDetalhes={obraSelecionada.Inicio}
+              localizacaoObraDetalhes={obraSelecionada.localizacaoobraDetalhe}
+              nomeContratadaObraDetalhes={obraSelecionada.nomeContratadaDetalhe}
+              cnpjContratadaObraDetalhes={obraSelecionada.cnpjContratadaObraDetalhe}
               licitacaoObraDetalhes={obraSelecionada.Inicio}
               contratoObraDetalhes={obraSelecionada.Contrato}
               prazoInicialObraDetalhes={obraSelecionada.Inicio}

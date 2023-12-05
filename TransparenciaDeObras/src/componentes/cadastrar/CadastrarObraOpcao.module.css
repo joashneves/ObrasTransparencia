@@ -60,6 +60,12 @@ a{
     display: grid;
     grid-template-columns: auto  auto;
 }
+.cadastrarStatus{
+    align-self: flex-end;
+    width: 21rem;
+height: 35px;
+flex-shrink: 0;
+}
 .configuracaoDePerfil{
     width: 570px;
     height: 35px;

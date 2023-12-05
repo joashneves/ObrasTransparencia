@@ -1,11 +1,35 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import FormularioBuscarObrasTransparencia from "../componentes/detalheExibir/FormularioBuscarObrasTransparencia";
 import ExibirProjetoDeObras from "../componentes/detalheExibir/ExibirProjetoDeObras";
 import DetalheSobreObras from "../componentes/detalheExibir/DetalhesSobreObras";
+import axios from "axios";
 
-import jsonData from "./Dados.json"
 
 const Home = () =>{
+  // Estado para armazenar os dados recebidos
+  const [jsonData, setJsonData] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  const Adquirirdados = async (event) =>{
+    try{
+      const response = await axios.get('https://localhost:7031/api/Obras/');
+      
+      const dadosRecebidos = response.data;
+      
+      console.log("Dados acessados", dadosRecebidos)
+      setJsonData(dadosRecebidos);
+      setLoading(false); // Indica que os dados foram carregados
+    }catch(err){
+      console.log("Erro", err);
+      setLoading(false); // Indica que ocorreu um erro ao carregar os dados
+    }
+  }
+
+  // Efeito para carregar os dados ao montar o componente
+  useEffect(() => {
+    Adquirirdados();
+  }, []); // O array de dependências vazio assegura que o efeito seja executado apenas uma vez, equivalente a componentDidMount
+
 
 
   const [dadosFiltrados, setDadosFiltrados] = useState(null); // Estado para armazenar os dados filtrados
@@ -33,41 +57,28 @@ const Home = () =>{
     <>
       <FormularioBuscarObrasTransparencia realizarBuscaCallback={realizarBusca} />
 
-      {dadosFiltrados ? (
-        // Renderiza os dados filtrados
-        dadosFiltrados.map((data) => {
-          return (
-            <ExibirProjetoDeObras
-            key={data.Contrato} // Certifique-se de ter uma chave única
-            tituloObra={data.Descricao}
-            porcentagemMedicao={data.Percentual}
-            situacaoObra={data.Situacao}
-            dataPublicacao={data.Inicio}
-            prefeituraObras={data.Secretaria}
-            tipoObra={data.Tipo}
-            valorPagoObra={data.ValorPago}
-            contratadaObra={data.Contrato}
-            />
-            );
-          })
-          ) : (
-            // Se não houver dados filtrados, renderiza todos os dados do JSON
-            jsonData.map((data) => {
+         {loading ? (
+        // Exibe um componente de carregamento enquanto os dados estão sendo carregados
+        <p>Carregando...</p>
+      ) : (
+        // Renderiza os dados quando eles estiverem prontos
+          jsonData.map((data) => {
               return (
                 <ExibirProjetoDeObras
                 key={data.Contrato} // Certifique-se de ter uma chave única
-                tituloObra={data.Descricao}
+                tituloObra={data.nomeDetalhe}
                 porcentagemMedicao={data.Percentual}
-                situacaoObra={data.Situacao}
-                dataPublicacao={data.Inicio}
-                prefeituraObras={data.Secretaria}
-                tipoObra={data.Tipo}
-                valorPagoObra={data.ValorPago}
-                contratadaObra={data.Contrato}
+                situacaoObra={data.situacaoDetalhe}
+                dataPublicacao={data.publicacaoData}
+                prefeituraObras={data.orgaoPulicoDetalhe}
+                tipoObra={data.tipoObraDetalhe}
+                valorPagoObra={data.valorPagoDetalhe}
+                contratadaObra={data.nomeContratadaDetalhe}
                 />
                 );
               })
-              )}
+        
+      )}
         
     </>
   );

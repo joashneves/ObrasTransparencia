@@ -11,6 +11,7 @@ function CadastrarObraOpcao (){
             <label>Perfis que podem gerenciar este documento* <input type="text" id="User" name="Name" className={styles.configuracaoDePerfil} /></label>
             <label>Perfis a serem notificados *<input type="text" id="User" name="Name" className={styles.configuracaoDePerfil} /></label>
             <label>Pessoas a Serem notificadas <input type="text" id="User" name="Name" className={styles.configuracaoDePerfil} /></label>
+            <label>Publicado? <input type="checkbox" id="User" name="Name" className={styles.cadastrarStatus} /></label>
             </div>
 
             <div><TabelaPerfisObras/></div>

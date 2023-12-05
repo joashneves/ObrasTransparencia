@@ -13,7 +13,7 @@ label{
     font-weight: 400;
     line-height: normal;
 }
-div{
+div,form{
     display: flex;
     flex-direction: column;
 
@@ -67,10 +67,23 @@ a{
     flex-shrink: 0;
     
 }
-.cadastrarSitucao{
-    width: 21rem;
-height: 35px;
-flex-shrink: 0;
+.situacaoInput{
+
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border-radius: 4px;
+    border: 1px solid #AB9A9A;
+
+    background: var(--cor-de-branco-mesmo);
+
+    width: 289px;
+    height: 39px;
+    flex-shrink: 0;
 }
 .cadastrarNumero{
     width: 18.8rem;
@@ -80,11 +93,6 @@ flex-shrink: 0;
 }
 .cadastrarTipoObra{
     width: 35.2rem;
-height: 35px;
-flex-shrink: 0;
-}
-.cadastrarStatus{
-    width: 21rem;
 height: 35px;
 flex-shrink: 0;
 }
