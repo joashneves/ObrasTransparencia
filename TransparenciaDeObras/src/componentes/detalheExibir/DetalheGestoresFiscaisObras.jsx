@@ -13,7 +13,10 @@ const DetalheGestoresFiscaisObras = (props) => {
                     <th className={styles.tabelaFiscalGestorTopo}>Secretaria</th>
                     <th className={styles.tabelaFiscalGestorTopoDireito}>E-mail</th>
                 </tr>
-                <DetalheGestoresFiscaisListaObras />
+                <DetalheGestoresFiscaisListaObras papel={props.papel}
+                    nome={props.nome}
+                    setor={props.setor}
+                    email={props.email} />
             </table>
         </article>
     )

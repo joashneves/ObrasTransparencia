@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     
   },
   {
-    path: "Cadastrar",
+    path: "Cadastrar/:id",
     element: <CadastrarObras/>
   },
   {
