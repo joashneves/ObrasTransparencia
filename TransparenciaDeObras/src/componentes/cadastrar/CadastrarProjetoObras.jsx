@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import styles from "./CadastrarProjetoObras.module.css";
 import axios from "axios";
 
-function CadastrarProjetoObras() {
 
-  let id = 0;
+
+function CadastrarProjetoObras() {
+  const history = useNavigate();
+
+  const [idObra, setIdObra] = useState();
+  const [jsonData, setJsonData] = useState({});
 
   const [nomeDetalhe, setNomeDetalhe] = useState();
   const [situcaoDetalhe, setSitucaoDetalhe] = useState();
@@ -19,12 +24,36 @@ function CadastrarProjetoObras() {
   const [nomeContratadaDetalhe, setNomeContratadaDetalhe] = useState();
   const [cnpjContratadaDetalhe, setCnpjContratadaDetalhe] = useState();
 
-  const cadastrarObras = () => {
-    // Chame a função passada como prop
-    props.onClick();
-    id++;
-  };
-
+      // Adiquirir dados da API dos Gestores ou fiscais
+      useEffect(() => {
+        const Adquirirdados = async () => {
+          try {
+            const response = await axios.get('https://localhost:7031/api/Obras/');
+            const dadosRecebidos = response.data;
+            setJsonData(dadosRecebidos);
+  
+            const dadosObras = dadosRecebidos.find((obra) => obra.id);
+            
+            console.log(dadosObras);
+            if (dadosObras) {
+            // Obtém o índice do último elemento
+            const lastIndex = dadosRecebidos.length - 1;
+  
+            // Acessa o último objeto
+            const ultimoObjeto = dadosRecebidos[lastIndex];
+  
+            setIdObra(ultimoObjeto.id+1)
+            console.log(ultimoObjeto.id)
+            } 
+          } catch (err) {
+            console.log("Erro", err);
+            
+          }
+        };
+    
+        Adquirirdados();
+      }, [idObra]); // Adiciona título da obra como dependência
+  
   const handleSubmit = async (event) => {
     event.preventDefault(); // Impede o comportamento padrão de envio do formulário
     // Obtém a data atual
@@ -42,7 +71,7 @@ function CadastrarProjetoObras() {
     console.log(publicacaoData);
 
     const dado = {
-      "id": id,
+      "id": idObra,
       "nomeDetalhe": nomeDetalhe,
       "numeroDetalhe": numeroDetalhe,
       "situacaoDetalhe": situcaoDetalhe,
@@ -67,6 +96,7 @@ function CadastrarProjetoObras() {
       // Enviar as credenciais para a sua API usando o axios
       const response = await axios.post('https://localhost:7031/api/Obras/', dado);
       window.alert('Cadastrado');
+      history('/procurarObra');
 
     } catch (error) {
       console.log('Erro ao enviar!', error);
@@ -133,7 +163,7 @@ function CadastrarProjetoObras() {
           className={styles.cadastrarCNPJContratada}
           onChange={(e) => setCnpjContratadaDetalhe(e.target.value)} /></label>
 
-        <button type="submit" onClick={cadastrarObras}>Cadastrar</button>
+        <button type="submit" className={styles.salvarFormulario} >Cadastrar</button>
       </form>
     </article>
   )

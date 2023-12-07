@@ -15,7 +15,7 @@ import axios from "axios";
 
 const ExibirOBras = () =>{
 
-    const { tituloObra } = useParams();
+    const { id } = useParams();
     const [jsonData, setJsonData] = useState([]);
     const [obraSelecionada, setObraSelecionada] = useState({});
    
@@ -28,7 +28,7 @@ const ExibirOBras = () =>{
           const dadosRecebidos = response.data;
           setJsonData(dadosRecebidos);
   
-          const obraEncontrada = dadosRecebidos.find((obra) => obra.nomeDetalhe === tituloObra);
+          const obraEncontrada = dadosRecebidos.find((obra) => obra.id == id);
   
           if (obraEncontrada) {
             setObraSelecionada(obraEncontrada);
@@ -41,32 +41,7 @@ const ExibirOBras = () =>{
       };
   
       Adquirirdados();
-    }, [tituloObra]); // Adiciona título da obra como dependência
-
-     // Adiquirir dados da API dos Gestores ou fiscais
-     const [listaFiscalGestor, setListaFiscalGestor] = useState({});
-     useEffect(() => {
-      const AdquirirdadosGestoresFiscais = async () => {
-        try {
-          const response = await axios.get('https://localhost:7031/api/GestorFiscals/');
-          const dadosRecebidos = response.data;
-          setJsonData(dadosRecebidos);
-  
-          const dadosGestorFiscal = dadosRecebidos.find((obra) => obra.id_obra == obraSelecionada.id);
-          
-          console.log(dadosGestorFiscal);
-          if (dadosGestorFiscal) {
-            setListaFiscalGestor(dadosGestorFiscal);
-            setLoading(false);
-          } 
-        } catch (err) {
-          console.log("Erro", err);
-          
-        }
-      };
-  
-      AdquirirdadosGestoresFiscais();
-    }, [obraSelecionada.id]); // Adiciona título da obra como dependência
+    }, [id]); // Adiciona título da obra como dependência
 
   return(
       <>
@@ -94,10 +69,7 @@ const ExibirOBras = () =>{
               valorLiquidadoObraDetalhes={obraSelecionada.ValorLiquidado}
               />
               
-      <DetalheGestoresFiscaisObras papel={listaFiscalGestor.papel}
-        nome={listaFiscalGestor.nome}
-          setor={listaFiscalGestor.secretaria}
-            email={listaFiscalGestor.email}/>
+      <DetalheGestoresFiscaisObras/>
       <DetalheAnexoObras/>
       <DetalheMedicaoObras
       porcentagemMedicao={obraSelecionada.Percentual}/>

@@ -1,7 +1,40 @@
-import React from "react";
+import React, {useEffect, useState } from "react";
 import styles from "./TabelaGestoresFiscais.module.css";
+import ListarGestoresFiscais from "./ListarGestoresFiscais";
+
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const TabelaGestoresFiscais = (props) =>{
+
+    const {id} = useParams();
+// Estado para armazenar os dados recebidos
+  const [jsonData, setJsonData] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  
+  const Adquirirdados = async (event) => {
+    try {
+      const response = await axios.get('https://localhost:7031/api/GestorFiscals/');
+
+      const dadosRecebidos = response.data;
+
+      console.log("Dados acessados", dadosRecebidos)
+      const dadosFiltrados = dadosRecebidos.filter((item) => item.id_obra == id);
+      setJsonData(dadosFiltrados);
+      setLoading(false); // Indica que os dados foram carregados
+      console.log("Dados filtrados:", dadosFiltrados);
+    } catch (err) {
+      console.log("Erro", err);
+      setLoading(false); // Indica que ocorreu um erro ao carregar os dados
+    }
+  }
+
+  // Efeito para carregar os dados ao montar o componente
+  useEffect(() => {
+    Adquirirdados();
+  }, []); // O array de dependências vazio assegura que o efeito seja executado apenas uma vez, equivalente a componentDidMount
+
     return(
         <div>
             <table>
@@ -12,13 +45,16 @@ const TabelaGestoresFiscais = (props) =>{
                     <th className={styles.tabelaGestorFiscalTopo}>Email</th>
                     <th className={styles.tabelaGestorFiscalTopoDireito}></th>
                 </tr>
-                <tr>
-                    <td className={styles.tabelaGestorFiscalMeio}>{props.nomeGestorFiscal}</td>
-                    <td className={styles.tabelaGestorFiscalMeio}>{props.papelGestorFiscal}</td>
-                    <td className={styles.tabelaGestorFiscalMeio}>{props.secretariaGestorFiscal}</td>
-                    <td className={styles.tabelaGestorFiscalMeio}>{props.emailGestorFiscal}</td>
-                    <td className={styles.tabelaGestorFiscalMeio}>Editar</td>
-                </tr>
+                {loading ? (<p></p>):(Object.values(jsonData).map((data) =>{
+                    return(
+                        <ListarGestoresFiscais nomeGestorFiscal={data.nome}
+                        papelGestorFiscal={data.papel}
+                        secretariaGestorFiscal={data.secretaria}
+                        emailGestorFiscal={data.email}/>
+                    );
+                })
+                    )}
+                
             </table>
         </div>
     )

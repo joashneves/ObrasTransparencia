@@ -8,7 +8,7 @@ import axios from "axios";
 function CadastrarFiscaisGestores (){
 
     const {id} = useParams();
-    const [idGestorFiscal, setIdGestorFiscal] = useState(id)
+    const [idGestorFiscal, setIdGestorFiscal] = useState()
 
     const [nome, setNome] = useState();
     const [papel,setPapel] = useState();
@@ -93,21 +93,17 @@ function CadastrarFiscaisGestores (){
             name="Secretaria" 
             className={styles.cadastrarSecretariaPapelFiscalGestor} 
             onChange={(e) => setSecretaria(e.target.value)} /></label>
-            <label>E-mail <input type="text" 
+            <label>E-mail <input type="email" 
             id="email" 
             name="Email" 
             className={styles.cadastrarEmailPapelFiscalGestor} 
             onChange={(e) => setEmail(e.target.value)} /></label>
             <div>
-                <button type="submit"></button>
+                <button type="submit" className={styles.salvarFormulario}>Salvar</button>
             </div>
             </form>
             <div>
-             {loading ? (<p></p>):(<TabelaGestoresFiscais
-                    nomeGestorFiscal={listaFiscalGestor.nome}
-                    papelGestorFiscal={listaFiscalGestor.papel}
-                    secretariaGestorFiscal={listaFiscalGestor.secretaria}
-                    emailGestorFiscal={listaFiscalGestor.email}/>)} </div>
+             {loading ? (<p></p>):(<TabelaGestoresFiscais/>)} </div>
         </article>
     )
 }

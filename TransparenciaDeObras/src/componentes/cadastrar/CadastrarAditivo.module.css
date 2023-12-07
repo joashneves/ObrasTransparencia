@@ -40,6 +40,48 @@ a{
     font-size: 24px;
 
 }
+.enviarDocumento{
+    font-family: Inter;
+    font-size: normal;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    text-align: center;
+    
+    width: 223px;
+    height: 35px;
+    flex-shrink: 0;
+
+    border-radius: 12px;
+    background: rgba(255, 0, 0, 0.45);
+}
+.esconderBotao{
+    display: none;
+}
+.salvarFormulario{
+    font-family: Inter;
+    font-size: normal;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    cursor: pointer;
+
+    width: 223px;
+    height: 35px;
+    flex-shrink: 0;
+
+    border-radius: 12px;
+    background: rgba(0, 122, 255, 0.45);
+}
+.salvarFormulario:hover{
+
+    cursor: pointer;
+    border-radius: 6px;
+    background: #007AFF;
+    border-color:  #007AFF;;
+}
 .tituloDeCadastro{
     color: var(--cor-de-branco-mesmo);
     

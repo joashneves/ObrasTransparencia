@@ -65,7 +65,8 @@ const Home = () => {
         jsonData.map((data) => {
           return (
             <ExibirProjetoDeObras
-              key={data.Contrato} // Certifique-se de ter uma chave única
+              key={data.id} // Certifique-se de ter uma chave única
+              id={data.id}
               tituloObra={data.nomeDetalhe}
               porcentagemMedicao={data.Percentual}
               situacaoObra={data.situacaoDetalhe}

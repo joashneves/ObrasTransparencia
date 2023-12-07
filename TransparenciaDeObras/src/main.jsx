@@ -35,7 +35,7 @@ const router = createBrowserRouter([
     element: <RegistroLog/>
   },
   {
-    path: "Exibir/:tituloObra",
+    path: "Exibir/:id",
     element: <ExibirOBras/>
   }
 ]);
