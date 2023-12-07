@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from "react";
+import React,{useState, useEffect, useRef} from "react";
 import { useParams } from "react-router-dom";
 import styles from "./CadastrarAditivo.module.css";
 import ButtonSalvar from "../ButtonSalvar";
@@ -17,32 +17,40 @@ function CadastrarAditivo(){
     const [dataDocumento, setDataDocumetno] = useState();
     const [tipoAditivo, setTipoAditivo ] = useState();
     const [tipoCaso, setTipoCaso] = useState();
-    const [arquivo, setArquivo] = useState(null); // Adiciona um estado para o arquivo
+    const [arquivo, setArquivo] = useState(); // Adiciona um estado para o arquivo
 
     const [jsonData, setJsonData] = useState({});
     const [loading, setLoading] = useState(true);
     const [listarAditivo, setListaAditivo] = useState();
 
+    const fileInputRef = useRef(null);
+
     const handleSubmit = async (event) =>{
         event.preventDefault();
 
-        const dados =  {
-          "id": parseInt(idAditivo, 0),
-          "id_obras": parseInt(id),
-          "nome": nomeAditivo,
-          "ano": parseInt(anoAditivo),
-          "dataAssinatura": dataDocumento,
-          "tipo": tipoCaso,
-          "arquivo": "string"
-        }
-        console.log("Id do advito",dados);
-    try {
-      // Enviar as credenciais para a sua API usando o axios
-      const response = await axios.post('https://localhost:7031/api/Adtivoes/', dados, {
-        headers: {
-          'Content-Type': 'multipart/form-data', // Define o tipo de conteúdo como 'multipart/form-data'
-        },
-      });
+        const fileInput = fileInputRef.current;
+        const arquivo = fileInput.files[0]; // Obtém o primeiro arquivo selecionado    
+        try {
+          const formData = new FormData();
+          formData.append("id", idAditivo);
+          formData.append("id_obras", id);
+          formData.append("nome", nomeAditivo);
+          formData.append("ano", anoAditivo);
+          formData.append("dataAssinatura", dataDocumento);
+          formData.append("tipo", tipoAditivo);
+          formData.append("arquivo", arquivo);
+          
+          console.log([...formData]);
+          // Enviar as credenciais para a sua API usando o axios
+          const response = await axios.post(
+            "https://localhost:7031/api/Adtivoes/",
+            formData.values("arquivo"),
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
             window.alert('Cadastrado');
             window.location.reload();
         } catch (error) {
@@ -111,7 +119,11 @@ function CadastrarAditivo(){
 
             <div className={styles.enviarFormulario}>
             <label for="file" className={styles.enviarDocumento}>Enviar Aquivo</label>
-            <input type="file" id="file" name="file" accept=".pdf" className={styles.esconderBotao} />
+            <input  type="file"
+              id="file"
+              name="file"
+              ref={fileInputRef}
+              accept=".pdf, .doc, .docx" className={styles.esconderBotao} />
 
             <button type="submit" name="botaoSalvar" value="Salvar" className={styles.salvarFormulario}>Salvar</button>
             </div>
