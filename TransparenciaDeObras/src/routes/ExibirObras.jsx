@@ -8,7 +8,7 @@ import DetalheMedicaoObras from "../componentes/detalheExibir/DetalheMedicaoObra
 import DetalheAnexoObras from "../componentes/detalheExibir/DetalheAnexoObras";
 import DetalheSobreObras from "../componentes/detalheExibir/DetalhesSobreObras";
 import DetalheHistoricoObras from "../componentes/detalheExibir/DetalheHistoricoObras";
-
+import DetalheFotoObras from "../componentes/detalheExibir/DetalheFotoObras";
 
 
 import axios from "axios";
@@ -75,6 +75,7 @@ const ExibirOBras = () =>{
       porcentagemMedicao={obraSelecionada.Percentual}/>
       <DetalheAditivosObras/>
       <DetalheHistoricoObras/>
+      <DetalheFotoObras/>
       
       </>
   )

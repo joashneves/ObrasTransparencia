@@ -41,8 +41,8 @@ const TabelaAditivo = (props) =>{
         <div>
             <table>
             <tr>
-                    <th className={styles.tabelaAditivoTopoEsquerdo}>Nome</th>
-                    <th className={styles.tabelaAditivoTopo}>Data da assinatura</th>
+                    <th className={styles.tabelaAditivoTopoEsquerdo}>Data da assinatura</th>
+                    <th className={styles.tabelaAditivoTopo}>Nome do aditivo</th>
                     <th className={styles.tabelaAditivoTopo}>Tipo</th>
                     <th className={styles.tabelaAditivoTopo}>Ano</th>
                     <th className={styles.tabelaAditivoTopo}>Tipo(aditivo)</th>
@@ -53,9 +53,9 @@ const TabelaAditivo = (props) =>{
                     <ListarAditivo
                     nomeAditivo={data.nome}
                     dataAssinaturaAditivo={data.dataAssinatura}
-                    tipoAditivo="-"
+                    tipoAditivo={data.tipo}
                     anoAditivo={data.ano}
-                    tipoCasoAditivo={data.tipoAditivo}
+                    tipoCasoAditivo={data.tipoCaso}
                     />)}))}
             </table>
         </div>

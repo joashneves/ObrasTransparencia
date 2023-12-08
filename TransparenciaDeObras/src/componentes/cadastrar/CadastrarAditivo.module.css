@@ -57,7 +57,7 @@ a{
     background: rgba(255, 0, 0, 0.45);
 }
 .esconderBotao{
-    display: none;
+    display: unset;
 }
 .salvarFormulario{
     font-family: Inter;

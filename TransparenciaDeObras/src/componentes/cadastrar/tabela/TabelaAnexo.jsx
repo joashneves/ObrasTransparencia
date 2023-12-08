@@ -40,8 +40,8 @@ const TabelaAnexo = (props) =>{
         <div>
             <table>
             <tr>
-                    <th className={styles.tabelaAnexoTopoEsquerdo}>Nome</th>
-                    <th className={styles.tabelaAnexoTopo}>Data</th>
+                    <th className={styles.tabelaAnexoTopoEsquerdo}>Data</th>
+                    <th className={styles.tabelaAnexoTopo}>Nome</th>
                     <th className={styles.tabelaAnexoTopo}>Descrição</th>
                     <th className={styles.tabelaAnexoTopo}>Arquivo</th>
                     <th className={styles.tabelaAnexoTopoDireito}></th>
