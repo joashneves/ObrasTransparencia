@@ -91,3 +91,10 @@ background: rgba(67, 74, 84, 0.30);
     
     background: #EDEDED;
 }
+.tabelaObrasMeioLink{
+    background: var(--titulo-do-topo-da-pesquisa);
+}
+.tabelaObrasMeioLink:hover{
+    background: #000;
+    color:#000;
+}

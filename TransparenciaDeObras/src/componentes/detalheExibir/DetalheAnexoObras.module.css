@@ -54,7 +54,11 @@ background: rgba(67, 74, 84, 0.30);
     background: #EDEDED;
 }
 .tabelaAnexoMeioVisualizar{
-    background: var(--cor-de-fundo-visualizar)
+    cursor: pointer;
+    background: var(--cor-de-fundo-visualizar);
+}
+.tabelaAnexoMeioVisualizar:hover{
+    background: var(--titulo-do-topo-da-pesquisa);
 }
 .tabelaAnexoFinalEsquerdo{
     width: auto;

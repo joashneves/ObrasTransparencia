@@ -31,10 +31,21 @@ function CadastrarFiscaisGestores (){
             "email": email
           }
           try {
+            const responseGet = await axios.get('https://localhost:7031/api/GestorFiscals/'); 
+            const dadosRecebidos = responseGet.data // Pega os dado da api
+
+            const dadosExistente = dadosRecebidos.find((dados) => dados.id == idGestorFiscal); // Verifica se na lista possui um id parecido 
+
+            if (dadosExistente) { // se existir atualiza
+            const respondePut = await axios.put(`https://localhost:7031/api/GestorFiscals/${idGestorFiscal}`, dado);
+            window.alert('Atualizado!');
+            window.location.reload();
+            }else {
             // Enviar as credenciais para a sua API usando o axios
-            const response = await axios.post('https://localhost:7031/api/GestorFiscals/', dado);        
+            const responsePost = await axios.post('https://localhost:7031/api/GestorFiscals/', dado);        
             window.alert('Cadastrado');
             window.location.reload();
+            }
         } catch (error) {
             console.log('Erro ao enviar!', error);
         }
@@ -73,37 +84,61 @@ function CadastrarFiscaisGestores (){
       Adquirirdados();
     }, [id]); // Adiciona título da obra como dependência
 
-
+    // Ao clicar coloca os dados do que foi clicado
+    const editarValoresDoGestorFiscal = (dados) =>{
+      console.log("esse é ",dados);
+      setIdGestorFiscal(dados.id);
+      setNome(dados.nome);
+      setSecretaria(dados.secretaria);
+      setPapel(dados.papel);
+      setEmail(dados.email);
+    }
     return(
         <article className={styles.fundoDeCadastro} >
             <div  className={styles.tituloDeCadastro}><h1>Gestores e Fiscais</h1></div>
             <form onSubmit={handleSubmit} className={styles.formularioDeCadastro}>
+            <input type="hidden" value={idGestorFiscal}></input>
             <label>Nome* <input type="text" 
             id="nome" 
             name="Nome" 
             className={styles.cadastrarNomePapelFiscalGestor}
+            value={nome}
             onChange={(e) => setNome(e.target.value)}/></label>
-            <label>Papel *<input type="text" 
+            <label>Papel *<select type="text" 
             id="papel" 
             name="Papel" 
             className={styles.cadastrarPapelFiscalGestor} 
-            onChange={(e) => setPapel(e.target.value)}/></label>
+            value={papel}
+            onChange={(e) => setPapel(e.target.value)}>
+              <option></option>
+              <option>Fiscal Titular</option>
+              <option>Fiscal Substituto</option>
+              <option>Fiscal Técnico</option>
+              <option>Fiscal Administrativo</option>
+              <option>Fiscal Requisitante</option>
+              <option>Outro Fiscal</option>
+              <option>Gestor Titular</option>
+              <option>Gestor Substituto</option>
+              <option>Outro Gestor</option></select></label>
             <label>Secretaria <input type="text" 
             id="secretaria" 
             name="Secretaria" 
             className={styles.cadastrarSecretariaPapelFiscalGestor} 
+            value={secretaria}
             onChange={(e) => setSecretaria(e.target.value)} /></label>
             <label>E-mail <input type="email" 
             id="email" 
             name="Email" 
             className={styles.cadastrarEmailPapelFiscalGestor} 
+            value={email}
             onChange={(e) => setEmail(e.target.value)} /></label>
             <div>
                 <button type="submit" className={styles.salvarFormulario}>Salvar</button>
             </div>
             </form>
             <div>
-             {loading ? (<p></p>):(<TabelaGestoresFiscais/>)} </div>
+             {loading ? (<p></p>):(<TabelaGestoresFiscais
+             onEditarClick={editarValoresDoGestorFiscal}/>)} </div>
         </article>
     )
 }

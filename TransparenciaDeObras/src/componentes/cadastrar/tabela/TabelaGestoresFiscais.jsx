@@ -12,6 +12,14 @@ const TabelaGestoresFiscais = (props) =>{
   const [jsonData, setJsonData] = useState({});
   const [loading, setLoading] = useState(true);
 
+  const [gestorSelecionado, setGestorSelecionado] = useState(null);
+
+  const onEditarClick = (dados) => {
+    setGestorSelecionado(dados);
+    props.onEditarClick(gestorSelecionado)
+    
+  };
+
   
   const Adquirirdados = async (event) => {
     try {
@@ -47,10 +55,13 @@ const TabelaGestoresFiscais = (props) =>{
                 </tr>
                 {loading ? (<p></p>):(Object.values(jsonData).map((data) =>{
                     return(
-                        <ListarGestoresFiscais nomeGestorFiscal={data.nome}
+                        <ListarGestoresFiscais
+                        id={data.id}
+                        nomeGestorFiscal={data.nome}
                         papelGestorFiscal={data.papel}
                         secretariaGestorFiscal={data.secretaria}
-                        emailGestorFiscal={data.email}/>
+                        emailGestorFiscal={data.email}
+                        onEditarClick={onEditarClick}/>
                     );
                 })
                     )}

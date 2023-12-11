@@ -47,6 +47,7 @@ const DetalheAnexoObras = (props) => {
                 {loadig ? (<></>) : (Object.values(jsonData).map((data) => {
                     return (
                         <DetalheAnexoListaObras
+                            id={data.id}
                             dataPublicacao={data.dataDocumento}
                             nome={data.nome}
                             descricao={data.descricao} />

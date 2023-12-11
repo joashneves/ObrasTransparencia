@@ -36,6 +36,24 @@ background: rgba(67, 74, 84, 0.30);
     
     background: #EDEDED;
 }
+.tabelaAditivoMeioDownload{
+    color: #EDEDED;
+    background: var(--cor-de-fundo-visualizar);
+    cursor: pointer;
+}
+.tabelaAditivoMeioDownload:hover{
+    color: #EDEDED;
+    background: var(--titulo-do-topo-da-pesquisa);
+    cursor: pointer;
+}
+.tabelaAditivoMeioLink{
+    color: #EDEDED;
+    cursor: pointer;
+    background: var(--titulo-do-topo-da-pesquisa);
+}
+.tabelaAditivoMeioLink:hover{
+    background: #000;
+}
 .tabelaAditivoMeioVisualizar{
     background: var(--cor-de-fundo-visualizar)
 }

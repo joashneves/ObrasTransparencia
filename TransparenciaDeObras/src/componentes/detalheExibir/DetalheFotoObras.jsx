@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import styles from "./DetalheFotoObras.module.css";
 import ExibirFoto from "../cadastrar/tabela/ExibirFoto";
 import axios from "axios";
+import DetalheExibirFoto from "./DetalheExibirFoto";
 
 const DetalheFotoObras = () => {
 
@@ -51,7 +52,7 @@ const DetalheFotoObras = () => {
                 <div className={styles.fotoLista}>
                 {loading ? (<></>) : (Object.values(jsonData).map((data) => {
                     return (
-                        <ExibirFoto fotoId={data.id} />
+                        <DetalheExibirFoto fotoId={data.id} />
                     );
                 })
                 )}

@@ -11,7 +11,7 @@ const ListaDeDocumentosEditaveis = (props) =>{
         <td className={styles.tabelaObrasMeio}>{props.numeroObras}</td>
         <td className={styles.tabelaObrasMeio}>{props.tipoObras}</td>
         <td className={styles.tabelaObrasMeio}>{props.publicadoObras}</td>
-        <td className={styles.tabelaObrasMeio}><Link to={`/cadastrar/${props.id}`}>Editar</Link></td>
+        <td className={styles.tabelaObrasMeioLink}><Link to={`/cadastrar/${props.id}`}>Editar</Link></td>
         </tr>
         );
 }

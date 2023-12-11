@@ -1,4 +1,16 @@
+.imagemContainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 img {
     width: 26rem;
     height: 100%;
+}
+.botaoSobreImagem{
+    position: absolute;
+    background-color: red;
+}
+.botaoSobreImagem:hover{
+    cursor: pointer;
 }

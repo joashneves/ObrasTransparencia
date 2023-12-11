@@ -60,7 +60,11 @@ background: rgba(67, 74, 84, 0.30);
     background: #EDEDED;
 }
 .tabelaAditivosMeioVisualizar{
-    background: var(--cor-de-fundo-visualizar)
+    cursor: pointer;
+    background: var(--cor-de-fundo-visualizar);
+}
+.tabelaAditivosMeioVisualizar:hover{
+    background: var(--titulo-do-topo-da-pesquisa);
 }
 .tabelaAditivosFinalEsquerdo{
     width: auto;

@@ -13,6 +13,14 @@ const TabelaAnexo = (props) =>{
   const [jsonData, setJsonData] = useState({});
   const [loading, setLoading] = useState(true);
 
+  const [documentoSelecionado, setDocumentoSelecionado] = useState(null);
+
+  const onEditarClick = (dadosDocumento) => {
+    setDocumentoSelecionado(dadosDocumento);
+    props.onEditarClick(documentoSelecionado);
+    console.log("dados anexo", documentoSelecionado);
+  };
+
   
   const Adquirirdados = async (event) => {
     try {
@@ -49,9 +57,11 @@ const TabelaAnexo = (props) =>{
                 {loading ? (<p></p>):(Object.values(jsonData).map((data) =>{
                     return(
                     <ListarAnexo
+                    id={data.id}
                     nomeAnexo={data.nome}
                     dataAnexo={data.dataDocumento}
                     descricaonexo={data.descricao}
+                    onEditarClick={onEditarClick}
                     />)}))}
             </table>
         </div>

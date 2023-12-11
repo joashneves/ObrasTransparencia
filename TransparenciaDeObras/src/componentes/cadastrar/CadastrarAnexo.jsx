@@ -15,7 +15,7 @@ function CadastrarAnexo() {
   const [nomeAnexo, setNomeAnexo] = useState();
   const [descricaoAnexo, setDescricaoAnexo] = useState();
   const [dataDocumento, setDataDocumetno] = useState();
-  const [arquivo, setArquivo] = useState();
+  const [arquivo, setArquivo] = useState(null);
   const inputRef = useRef();
 
   const [jsonData, setJsonData] = useState({});
@@ -25,6 +25,9 @@ function CadastrarAnexo() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const dataFormatada = formatarData(dataDocumento);
+    console.log("Data formatada:", dataFormatada);
+
     try {
       console.log("Valor do arquivo: ANEXO", arquivo);
       const formData = new FormData();
@@ -32,17 +35,37 @@ function CadastrarAnexo() {
       formData.append("id_obras", id);
       formData.append("nome", nomeAnexo);
       formData.append("descricao", descricaoAnexo);
-      formData.append("dataDocumento", dataDocumento);
+      formData.append("dataDocumento", dataFormatada);
       formData.append("arquivo", arquivo)
 
       console.log([...formData]);
+
+      const responseGet = await axios.get('https://localhost:7031/api/Anexoes/');
+      const dadosRecebidos = responseGet.data // Pega os dado da api
+
+      const dadosExistente = dadosRecebidos.find((dados) => dados.id == idAnexo); // Verifica se na lista possui um id parecido 
+
+      if (dadosExistente) { // se existir atualiza
       // Enviar as credenciais para a sua API usando o axios
+      const respondePut = await axios.put(`https://localhost:7031/api/Anexoes/${idAnexo}`, formData);
+            window.alert('Atualizado!');
+            window.location.reload();
+      }else{
       const response = await axios.post('https://localhost:7031/api/Anexoes/', formData);
       window.alert('Cadastrado');
       window.location.reload();
+      }
     } catch (error) {
       console.log('Erro ao enviar!', error);
     }
+  }
+  const setEditarDocumento = (documentoSelecionado) =>{
+    const dataFormatada = converterFormatoData(documentoSelecionado.dataDocumento);
+
+    setIdAnexo(documentoSelecionado.id);
+    setNomeAnexo(documentoSelecionado.nome);
+    setDescricaoAnexo(documentoSelecionado.descricao);
+    setDataDocumetno(dataFormatada);
   }
   const handleFileChange = (e) => {
     if (e.target.files) {
@@ -82,19 +105,39 @@ function CadastrarAnexo() {
     Adquirirdados();
   }, [id]); // Adiciona título da obra como dependência
 
+  const formatarData = (data) => {
+    const dataObj = new Date(data);
+    const dia = dataObj.getDate().toString().padStart(2, "0");
+    const mes = (dataObj.getMonth() + 1).toString().padStart(2, "0");
+    const ano = dataObj.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+  };
+
+  const handleDataChange = (event) => {
+    setDataDocumetno(event.target.value);
+  };
+
+  const converterFormatoData = (data) => {
+    const [dia, mes, ano] = data.split("/");
+    return `${ano}-${mes}-${dia}`;
+  };
+
   return (
     <article className={styles.fundoDeCadastro}>
       <div className={styles.tituloDeCadastro}><h1>Anexo</h1></div>
       <form className={styles.formularioDeCadastro} onSubmit={handleSubmit}>
         <label>Nome* <input type="text" id="Name" name="Name"
           className={styles.cadastrarNomeAnexo}
+          value={nomeAnexo}
           onChange={(e) => setNomeAnexo(e.target.value)} /></label>
         <label>Descrição *<input type="text" id="Descicao" name="Descicao"
           className={styles.cadastrarDescricaoAnexo}
+          value={descricaoAnexo}
           onChange={(e) => setDescricaoAnexo(e.target.value)} /></label>
-        <label>Data Documento <input type="text" id="DataDocumento" name="DataDocumento"
+        <label>Data Documento <input type="date" id="DataDocumento" name="DataDocumento"
           className={styles.cadastrarDataDocumentoAnexo}
-          onChange={(e) => setDataDocumetno(e.target.value)} /></label>
+          value={dataDocumento}
+          onChange={handleDataChange} /></label>
 
         <div className={styles.enviarFormulario}>
         <input type="file"
@@ -105,7 +148,8 @@ function CadastrarAnexo() {
             accept=".pdf" className={styles.esconderBotao} />
           <button type="submit" name="botaoSalvar" value="Salvar" className={styles.salvarFormulario}>Salvar</button></div>
       </form>
-      <TabelaAnexo />
+      <TabelaAnexo 
+      onEditarClick={setEditarDocumento}/>
     </article>
   )
 }

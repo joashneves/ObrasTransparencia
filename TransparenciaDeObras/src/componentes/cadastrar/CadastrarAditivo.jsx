@@ -31,6 +31,9 @@ function CadastrarAditivo() {
     const fileInput = inputRef.current;
     setArquivo(fileInput.files[0]);
 
+    const dataFormatada = formatarData(dataDocumento);
+    console.log("Data formatada:", dataFormatada);
+
     try {
       console.log("Valor do arquivo:", arquivo);
       const formData = new FormData();
@@ -38,7 +41,7 @@ function CadastrarAditivo() {
       formData.append("id_obras", id);
       formData.append("nome", nomeAditivo);
       formData.append("ano", anoAditivo);
-      formData.append("dataAssinatura", dataDocumento);
+      formData.append("dataAssinatura", dataFormatada);
       formData.append("tipo", tipoAditivo);
       formData.append("tipoCaso", tipoCaso);
       formData.append("arquivo", arquivo);
@@ -54,11 +57,24 @@ function CadastrarAditivo() {
     }
   }
 
+  const setEditarDocumento = (documentoSelecionado) =>{
+    const dataFormatada = converterFormatoData(documentoSelecionado.dataAssinaturaAditivo);
+    console.log("dados aditivo", documentoSelecionado);
+    setIdAditivo(documentoSelecionado.id);
+    setNomeAditivo(documentoSelecionado.nomeAditivo);
+    setAnoAditivo(documentoSelecionado.anoAditivo);
+    setDataDocumetno(dataFormatada);
+    setTipoAditivo(documentoSelecionado.tipoAditivo);
+    setTipoCaso(documentoSelecionado.tipoCasoAditivo);
+
+  }
+
   const handleFileChange = (e) => {
     if (e.target.files) {
       setArquivo(e.target.files[0]);
     }
   };
+
 
   // Adiquirir dados da API dos Aditivos e filtra
   useEffect(() => {
@@ -89,6 +105,24 @@ function CadastrarAditivo() {
     Adquirirdados();
   }, [id]); // Adiciona título da obra como dependência
 
+  const formatarData = (data) => {
+    const dataObj = new Date(data);
+    const dia = dataObj.getDate().toString().padStart(2, "0");
+    const mes = (dataObj.getMonth() + 1).toString().padStart(2, "0");
+    const ano = dataObj.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+  };
+
+  const handleDataChange = (event) => {
+    setDataDocumetno(event.target.value);
+  };
+
+  const converterFormatoData = (data) => {
+    const [dia, mes, ano] = data.split("/");
+    return `${ano}-${mes}-${dia}`;
+  };
+
+
   return (
     <article className={styles.fundoDeCadastro}>
       <div className={styles.tituloDeCadastro}><h1>Aditivo</h1></div>
@@ -96,23 +130,44 @@ function CadastrarAditivo() {
         <label>Nome* <input type="text" id="User"
           name="Name"
           onChange={(e) => setNomeAditivo(e.target.value)}
+          value={nomeAditivo}
           className={styles.cadastrarNomeAditivo} /></label>
-        <label>Ano<input type="text" id="User"
+        <label>Ano<input type="number" id="User"
           name="Ano"
           onChange={(e) => setAnoAditivo(e.target.value)}
+          value={anoAditivo}
           className={styles.cadastrarAnoAditivo} /></label>
-        <label>Data da Assinatura <input type="text" id="User"
+        <label>Data da Assinatura <input type="date" id="User"
           name="DataAssinatura"
-          onChange={(e) => setDataDocumetno(e.target.value)}
+          onChange={handleDataChange}
+          value={dataDocumento}
           className={styles.cadastrarDataAssinaturaAditivo} /></label>
-        <label>Tipo* <input type="text" id="User"
-          name="Tipo"
-          onChange={(e) => setTipoAditivo(e.target.value)}
-          className={styles.cadastrarTipoAditivo} /></label>
-        <label>Tipo (caso aditivo) *<input type="text" id="User"
+        <label>Tipo* <select type="text" id="User"
           name="Aditivo"
+          onChange={(e) => setTipoAditivo(e.target.value)}
+          value={tipoAditivo}
+          className={styles.cadastrarTipoAditivo} >
+            <option></option>
+            <option>Aditivo</option>
+            <option>Recisão</option>
+            <option>Reajuste</option></select></label>
+        <label>Tipo (caso aditivo) *<select type="text" id="User"
+          name="Tipo"
           onChange={(e) => setTipoCaso(e.target.value)}
-          className={styles.cadastrarTipoDoAditivoAditivo} /></label>
+          value={tipoCaso}
+          className={styles.cadastrarTipoDoAditivoAditivo} >
+            <option></option>
+            <option>Prazo</option>
+            <option>Valor contratual</option>
+            <option>Execução</option>
+            <option>Valor contratual e Prazo</option>
+            <option>Execução e Prazo</option>
+            <option>Prazo e valor</option>
+            <option>Execução e valor</option>
+            <option>Prazo e execução</option>
+            <option>Valor contratual e execução</option>
+            <option>Prazo, Valor e execução</option>
+            </select></label>
 
         <div className={styles.enviarFormulario}>
           
@@ -127,7 +182,7 @@ function CadastrarAditivo() {
           <button type="submit" name="botaoSalvar" value="Salvar" className={styles.salvarFormulario}>Salvar</button>
         </div>
       </form>
-      <TabelaAditivo />
+      <TabelaAditivo onEditarClick={setEditarDocumento} />
     </article>
   )
 }

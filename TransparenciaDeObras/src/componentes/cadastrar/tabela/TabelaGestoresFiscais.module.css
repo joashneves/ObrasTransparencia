@@ -36,6 +36,15 @@ background: rgba(67, 74, 84, 0.30);
     
     background: #EDEDED;
 }
+.tabelaGestorFiscalMeioLink{
+    color: #EDEDED;
+    background: var(--titulo-do-topo-da-pesquisa);
+    cursor: pointer;
+}
+.tabelaGestorFiscalMeioLink:hover{
+    color: #EDEDED;
+    background: #000;
+}
 .tabelaGestorFiscalMeioVisualizar{
     background: var(--cor-de-fundo-visualizar)
 }

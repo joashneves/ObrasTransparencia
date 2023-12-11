@@ -1,4 +1,5 @@
 import React from "react";
+import BotaoVoltarcadastro from "../componentes/miscs/BotaoVoltarcadastro";
 import CadastrarProjetoObras from "../componentes/cadastrar/CadastrarProjetoObras";
 import CadastrarFiscaisGestores from "../componentes/cadastrar/CadastrarFiscaisGestores";
 import CadastrarAnexo from "../componentes/cadastrar/CadastrarAnexo";
@@ -9,6 +10,7 @@ import CadastrarFoto from "../componentes/cadastrar/CadastrarFoto";
 const CadastrarObras = () =>{
     return(
         <>
+            <BotaoVoltarcadastro/>
             <CadastrarProjetoObras/>
             <CadastrarFiscaisGestores/>
             <CadastrarAnexo/>

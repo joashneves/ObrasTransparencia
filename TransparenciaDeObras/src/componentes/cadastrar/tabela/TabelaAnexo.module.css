@@ -33,8 +33,25 @@ border-radius: 0rem 0.75rem 0rem 0rem;
 background: rgba(67, 74, 84, 0.30);
 }
 .tabelaAnexoMeio{
-    
     background: #EDEDED;
+}
+.tabelaAnexoMeioDownload{
+    color: #EDEDED;
+    background: var(--cor-de-fundo-visualizar);
+    cursor: pointer;
+}
+.tabelaAnexoMeioDownload:hover{
+    color: #EDEDED;
+    background: var(--titulo-do-topo-da-pesquisa);
+
+}
+.tabelaAnexoMeioLink{
+    color: #EDEDED;
+    cursor: pointer;
+    background: var(--titulo-do-topo-da-pesquisa);
+}
+.tabelaAnexoMeioLink:hover{
+    background: #000;
 }
 .tabelaAnexoMeioVisualizar{
     background: var(--cor-de-fundo-visualizar)

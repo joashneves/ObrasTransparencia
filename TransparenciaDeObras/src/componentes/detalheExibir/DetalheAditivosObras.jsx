@@ -48,6 +48,7 @@ const DetalheAditivosObras =(props)=>{
                 {loadig ? (<></>) : (Object.values(jsonData).map((data) => {
                     return(
                 <DetalheAditivosListaObras 
+                id={data.id}
                 numero={data.dataAssinatura}
                 processo={data.nome}
                 ano={data.ano}

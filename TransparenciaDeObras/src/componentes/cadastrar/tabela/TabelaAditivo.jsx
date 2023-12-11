@@ -13,7 +13,15 @@ const TabelaAditivo = (props) =>{
   const [jsonData, setJsonData] = useState({});
   const [loading, setLoading] = useState(true);
 
-  
+  const [documentoSelecionado, setDocumentoSelecionado] = useState(null);
+
+  const onEditarClick = (dadosDocumento) => {
+    setDocumentoSelecionado(dadosDocumento);
+    props.onEditarClick(documentoSelecionado);
+    
+  };
+
+
   const Adquirirdados = async (event) => {
     try {
       const response = await axios.get('https://localhost:7031/api/Adtivoes/');
@@ -44,18 +52,20 @@ const TabelaAditivo = (props) =>{
                     <th className={styles.tabelaAditivoTopoEsquerdo}>Data da assinatura</th>
                     <th className={styles.tabelaAditivoTopo}>Nome do aditivo</th>
                     <th className={styles.tabelaAditivoTopo}>Tipo</th>
-                    <th className={styles.tabelaAditivoTopo}>Ano</th>
                     <th className={styles.tabelaAditivoTopo}>Tipo(aditivo)</th>
+                    <th className={styles.tabelaAditivoTopo}>Arquivo</th>
                     <th className={styles.tabelaAditivoTopoDireito}></th>
                 </tr>
                 {loading ? (<p></p>):(Object.values(jsonData).map((data) =>{
                     return(
                     <ListarAditivo
+                    id={data.id}
                     nomeAditivo={data.nome}
                     dataAssinaturaAditivo={data.dataAssinatura}
                     tipoAditivo={data.tipo}
-                    anoAditivo={data.ano}
                     tipoCasoAditivo={data.tipoCaso}
+                    anoAditivo={data.ano}
+                    onEditarClick={onEditarClick}
                     />)}))}
             </table>
         </div>

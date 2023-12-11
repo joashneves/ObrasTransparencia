@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from "./CadastrarProjetoObras.module.css";
 import axios from "axios";
 
@@ -7,6 +7,8 @@ import axios from "axios";
 
 function CadastrarProjetoObras() {
   const history = useNavigate();
+  const { id } = useParams();
+
 
   const [idObra, setIdObra] = useState();
   const [jsonData, setJsonData] = useState({});
@@ -24,36 +26,60 @@ function CadastrarProjetoObras() {
   const [nomeContratadaDetalhe, setNomeContratadaDetalhe] = useState();
   const [cnpjContratadaDetalhe, setCnpjContratadaDetalhe] = useState();
 
-      // Adiquirir dados da API dos Gestores ou fiscais
-      useEffect(() => {
-        const Adquirirdados = async () => {
-          try {
-            const response = await axios.get('https://localhost:7031/api/Obras/');
-            const dadosRecebidos = response.data;
-            setJsonData(dadosRecebidos);
-  
-            const dadosObras = dadosRecebidos.find((obra) => obra.id);
-            
-            console.log(dadosObras);
-            if (dadosObras) {
-            // Obtém o índice do último elemento
-            const lastIndex = dadosRecebidos.length - 1;
-  
-            // Acessa o último objeto
-            const ultimoObjeto = dadosRecebidos[lastIndex];
-  
-            setIdObra(ultimoObjeto.id+1)
-            console.log(ultimoObjeto.id)
-            } 
-          } catch (err) {
-            console.log("Erro", err);
-            
-          }
-        };
-    
-        Adquirirdados();
-      }, [idObra]); // Adiciona título da obra como dependência
-  
+  // Adiquirir dados da API dos Gestores ou fiscais
+  useEffect(() => {
+    const Adquirirdados = async () => {
+      try {
+        const response = await axios.get('https://localhost:7031/api/Obras/');
+        const dadosRecebidos = response.data;
+        setJsonData(dadosRecebidos);
+
+        // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto
+        const dadosObras = dadosRecebidos.find((obra) => obra.id);
+
+        console.log(dadosObras);
+
+        if (dadosObras) {
+          // Obtém o índice do último elemento
+          const lastIndex = dadosRecebidos.length - 1;
+
+          // Acessa o último objeto
+          const ultimoObjeto = dadosRecebidos[lastIndex];
+
+          setIdObra(ultimoObjeto.id + 1)
+          console.log(ultimoObjeto.id)
+        }
+
+        // Verifica se o id da pagina ja existe na lista
+        const obraExistente = dadosRecebidos.find((obra) => obra.id == id);
+        console.log("Id da pagina", id)
+        console.log("Id da test", dadosRecebidos.find((obra) => obra.id == id))
+        // Se a obra ja existe
+        if (obraExistente) {
+          // Definir o ID da obra com base nos dados recebidos
+          setIdObra(obraExistente.id);
+
+          console.log("Essa obra existe", obraExistente)
+          setNomeDetalhe(obraExistente.nomeDetalhe);
+          setSitucaoDetalhe(obraExistente.situacaoDetalhe);
+          setNumeroDetalhe(obraExistente.numeroDetalhe);
+          setOrgaoPublicoDetalhe(obraExistente.orgaoPublicoDetalhe);
+          setAnoDetalhe(obraExistente.anoDetalhe);
+          setTipoObraDetalhe(obraExistente.tipoObraDetalhe);
+          setLocalDetalhe(obraExistente.localizacaoobraDetalhe);
+          setNomeContratadaDetalhe(obraExistente.nomeContratadaDetalhe);
+          setCnpjContratadaDetalhe(obraExistente.cnpjContratadaObraDetalhe);
+        }
+
+      } catch (err) {
+        console.log("Erro", err);
+
+      }
+    };
+
+    Adquirirdados();
+  }, [idObra]); // Adiciona título da obra como dependência
+
   const handleSubmit = async (event) => {
     event.preventDefault(); // Impede o comportamento padrão de envio do formulário
     // Obtém a data atual
@@ -69,7 +95,7 @@ function CadastrarProjetoObras() {
 
     // Envie a `formattedDate` para onde você precisar
     console.log(publicacaoData);
-
+    //Criar um objeto em formato de json
     const dado = {
       "id": idObra,
       "nomeDetalhe": nomeDetalhe,
@@ -77,7 +103,7 @@ function CadastrarProjetoObras() {
       "situacaoDetalhe": situcaoDetalhe,
       "publicadoDetalhe": false,
       "publicacaoData": publicacaoData,
-      "orgaoPulicoDetalhe": orgaoPublicoDetalhe,
+      "orgaoPublicoDetalhe": orgaoPublicoDetalhe,
       "tipoObraDetalhe": tipoObraDetalhe,
       "valorPagoDetalhe": valorPagoDetalhe,
       "nomeContratadaDetalhe": nomeContratadaDetalhe,
@@ -89,14 +115,26 @@ function CadastrarProjetoObras() {
       "prazoInicialObraDetalhe": 0,
       "prazoTotalObraDetalhe": 0,
       "valorEmpenhadoObraDetalhe": 0,
-      "valorLiquidadoObraDetalhe": 0
+      "valorLiquidadoObraDetalhe": 0,
+      "anoDetalhe": anoDetalhe
     };
 
     try {
-      // Enviar as credenciais para a sua API usando o axios
-      const response = await axios.post('https://localhost:7031/api/Obras/', dado);
-      window.alert('Cadastrado');
-      history('/procurarObra');
+      const response = await axios.get('https://localhost:7031/api/Obras/');
+      const dadosRecebidos = response.data;
+
+      //Verificar se tem a obra
+      const obraExistente = dadosRecebidos.find((obra) => obra.id == id);
+
+      if (obraExistente) {
+        const response = await axios.put(`https://localhost:7031/api/Obras/${obraExistente.id}`, dado);
+        window.alert('Atualizado!');
+      } else {
+        // Enviar as credenciais para a sua API usando o axios
+        const response = await axios.post('https://localhost:7031/api/Obras/', dado);
+        window.alert('Cadastrado');
+        history('/procurarObra');
+      }
 
     } catch (error) {
       console.log('Erro ao enviar!', error);
@@ -112,55 +150,66 @@ function CadastrarProjetoObras() {
           id="User"
           name="Name"
           className={styles.cadastrarNome}
+          value={nomeDetalhe}
           onChange={(e) => setNomeDetalhe(e.target.value)} /></label>
-        <div >
-          <label >Situação *</label>
+        <label >Situação *
           <select className={styles.situacaoInput}
             id="Situacao"
             name="Situacao"
+            value={situcaoDetalhe}
             onChange={(e) => setSitucaoDetalhe(e.target.value)}>
-            <option className={styles.situacaoInput}></option>
-            <option className={styles.situacaoInput}>Concluída</option>
-            <option className={styles.situacaoInput}>Parado</option>
-            <option className={styles.situacaoInput}>Em andamento</option>
-            <option className={styles.situacaoInput}>Execução</option></select>
-        </div>
-        <label>Numero <input type="text"
+            <option value="">Selecione...</option>
+            <option value="Não iniciada">Não iniciada</option>
+            <option value="Inicio">Inicio</option>
+            <option value="Paralisada">Paralisada</option>
+            <option value="Reinicio">Reinicio</option>
+            <option value="Paralisada por recisão contratual">Paralisada por recisão contratual</option>
+            <option value="Concluída">Concluída</option>
+            <option value="Concluída e recebida provisoriamente">Concluída e recebida provisoriamente</option></select>
+        </label>
+        <label>Numero <input type="number"
           id="User"
           name="Numero"
           className={styles.cadastrarNumero}
+          value={numeroDetalhe}
           onChange={(e) => setNumeroDetalhe(e.target.value)} /></label>
         <label>Tipo da Obra <input type="text"
           id="User"
           name="TipoDaObra"
           className={styles.cadastrarTipoObra}
+          value={tipoObraDetalhe}
           onChange={(e) => setTipoObraDetalhe(e.target.value)} /></label>
-        <label>Ano <input type="text"
+        <label>Ano <input type="number"
           id="User"
           name="Ano"
           className={styles.cadastrarAno}
+          value={anoDetalhe}
           onChange={(e) => setAnoDetalhe(e.target.value)} /></label>
         <div></div>
         <label>Orgão Publico <input type="text"
           id="User"
           name="OrgaoPublico"
           className={styles.cadastrarOrgãoPublico}
+          value={orgaoPublicoDetalhe}
           onChange={(e) => setOrgaoPublicoDetalhe(e.target.value)} /></label>
         <label>Local <input type="text"
           id="User"
           name="Local"
           className={styles.cadastrarLocal}
+          value={localDetalhe}
           onChange={(e) => setLocalDetalhe(e.target.value)} /></label>
         <div></div>
         <label>Nome da Contratada *<input type="text"
           id="User"
           name="NomeContratada"
           className={styles.cadastrarNomeContratada}
+          value={nomeContratadaDetalhe}
           onChange={(e) => setNomeContratadaDetalhe(e.target.value)} /></label>
         <label>CNPJ da Contratada * <input type="text"
           id="User"
           name="CNPJContratada"
           className={styles.cadastrarCNPJContratada}
+          value={cnpjContratadaDetalhe}
           onChange={(e) => setCnpjContratadaDetalhe(e.target.value)} /></label>
 
         <button type="submit" className={styles.salvarFormulario} >Cadastrar</button>

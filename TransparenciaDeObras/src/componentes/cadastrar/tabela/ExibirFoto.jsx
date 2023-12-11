@@ -3,16 +3,16 @@ import axios from 'axios';
 import styles from "./ExibirFoto.module.css";
 
 function ExibirFoto({ fotoId }) {
+  const [idImagem, setIdImagem] = useState();
   const [imagem, setImagem] = useState(null);
 
   useEffect(() => {
     const carregarImagem = async () => {
       try {
         const response = await axios.get(`https://localhost:7031/api/Fotoes/${fotoId}/download`, {
-          responseType: 'arraybuffer', // Configura responseType para 'arraybuffer' para tratar a resposta como um buffer de bytes
+          responseType: 'arraybuffer',
         });
 
-        // Cria uma URL de dados para a imagem e a define como a fonte da tag <img>
         const base64Image = btoa(
           new Uint8Array(response.data).reduce((data, byte) => data + String.fromCharCode(byte), '')
         );
@@ -25,9 +25,25 @@ function ExibirFoto({ fotoId }) {
     carregarImagem();
   }, [fotoId]);
 
+  const excluir =  async () =>
+  {
+    console.log("Nops")
+    try{
+      const response = await axios.delete(`https://localhost:7031/api/Fotoes/${fotoId}`);
+      window.alert('Apagado');
+      window.location.reload();
+    } catch (error){
+      console.error('Erro ao apagar a imagem', error);
+    }
+  }
   return (
-    <div>
-      {imagem && <img src={imagem} alt="Imagem" />}
+    <div className={styles.imagemContainer}>
+      {imagem && (
+        <div className={styles.imagemComBotao}>
+          <img src={imagem} alt="Imagem" />
+          <button className={styles.botaoSobreImagem} onClick={excluir}>excluir</button>
+        </div>
+      )}
     </div>
   );
 }
