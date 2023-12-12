@@ -39,7 +39,6 @@ function FormularioBuscarObrasTransparencia ({
         <div><label>Orgão Publico</label>
         <input className={styles.orgaoPublicoInput} id="Orgao" onChange={(e) => onOrgaoChange(e.target.value)}></input></div>
 
-        <div><button value="BUSCAR" className={styles.botaoNormal}/></div>
         </form>
         
     </article>)
