@@ -18,6 +18,8 @@ function CadastrarAditivo() {
   const [tipoAditivo, setTipoAditivo] = useState();
   const [tipoCaso, setTipoCaso] = useState();
   const [arquivo, setArquivo] = useState(); // Adiciona um estado para o arquivo
+
+  const [isAditivo, setIsAditivo] = useState(true);
   const inputRef = useRef();
 
   const [jsonData, setJsonData] = useState({});
@@ -32,7 +34,7 @@ function CadastrarAditivo() {
     setArquivo(fileInput.files[0]);
 
     const dataFormatada = formatarData(dataDocumento);
-    console.log("Data formatada:", dataFormatada);
+    console.log("Tipo do aditivo:", tipoAditivo);
 
     try {
       console.log("Valor do arquivo:", arquivo);
@@ -43,15 +45,35 @@ function CadastrarAditivo() {
       formData.append("ano", anoAditivo);
       formData.append("dataAssinatura", dataFormatada);
       formData.append("tipo", tipoAditivo);
-      formData.append("tipoCaso", tipoCaso);
+      formData.append("casoAditivo", tipoCaso);
       formData.append("arquivo", arquivo);
 
-      console.log("dados arquivo", [...formData]);
+      console.log("dados arquivo", formData);
+      const responseGet = await axios.get('https://localhost:7031/api/Adtivoes/');
+      const dadosRecebidos = responseGet.data // Pega os dado da api
+
+      const dadosExistente = dadosRecebidos.find((dados) => dados.id == idAditivo); // Verifica se na lista possui um id parecido 
+
+      if (dadosExistente) { // se existir atualiza
+        const dataPut = {
+          "id": idAditivo,
+          "nome": nomeAditivo,
+          "ano":anoAditivo,
+          "dataAssinatura": dataFormatada,
+          "tipo": tipoAditivo,
+          "casoAditivo": tipoCaso
+        }
+      // Enviar as credenciais para a sua API usando o axios
+      const respondePut = await axios.put(`https://localhost:7031/api/Adtivoes/${idAditivo}`, dataPut);
+            window.alert('Atualizado!');
+            window.location.reload();
+      }else {
       // Enviar as credenciais para a sua API usando o axios
       const response = await axios.post('https://localhost:7031/api/Adtivoes/', formData);
 
       window.alert('Cadastrado');
       window.location.reload();
+      }
     } catch (error) {
       console.log('Erro ao enviar!', error);
     }
@@ -122,6 +144,15 @@ function CadastrarAditivo() {
     return `${ano}-${mes}-${dia}`;
   };
 
+  useEffect(() => {
+    console.log("tipo é ", tipoAditivo);
+    if (tipoAditivo === "Aditivo") {
+      setIsAditivo(false);
+    } else if (tipoAditivo === "Recisão" || "Reajuste") {
+      setIsAditivo(true);
+      setTipoCaso("-");
+    }
+  }, [tipoAditivo]);
 
   return (
     <article className={styles.fundoDeCadastro}>
@@ -144,14 +175,15 @@ function CadastrarAditivo() {
           className={styles.cadastrarDataAssinaturaAditivo} /></label>
         <label>Tipo* <select type="text" id="User"
           name="Aditivo"
-          onChange={(e) => setTipoAditivo(e.target.value)}
+          onChange={(e) =>  setTipoAditivo(e.target.value)}
           value={tipoAditivo}
           className={styles.cadastrarTipoAditivo} >
             <option></option>
             <option>Aditivo</option>
             <option>Recisão</option>
             <option>Reajuste</option></select></label>
-        <label>Tipo (caso aditivo) *<select type="text" id="User"
+       {isAditivo ? (<div></div>):( 
+       <label>Tipo (caso aditivo) *<select type="text" id="User"
           name="Tipo"
           onChange={(e) => setTipoCaso(e.target.value)}
           value={tipoCaso}
@@ -168,7 +200,7 @@ function CadastrarAditivo() {
             <option>Valor contratual e execução</option>
             <option>Prazo, Valor e execução</option>
             </select></label>
-
+       )}
         <div className={styles.enviarFormulario}>
           
           <input type="file"

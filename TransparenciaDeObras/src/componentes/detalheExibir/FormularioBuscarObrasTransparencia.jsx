@@ -1,25 +1,14 @@
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./FormularioBuscarObrasTransparencia.module.css";
 
-function FormularioBuscarObrasTransparencia (props){
-    const [situacaoSelecionada, setSituacaoSelecionada] = useState("");
-
-    const filtrarBusca = async(event) =>{
-        
-        const buscar = event.target.Buscar.value;
-        const situacao = situacaoSelecionada;
-        const dataInicio = event.target.DataInicio.value;
-        const dataFinal = event.target.DataFinal.value;
-        const tipo = event.target.Tipo.value;
-        const contratada = event.target.Contratada.value;
-        const orgao = event.target.Orgao.value;
-        
-        props.realizarBuscaCallback(buscar, situacao,dataInicio, tipo, contratada, dataFinal, orgao);
-
-        event.preventDefault();
-    }
- 
+function FormularioBuscarObrasTransparencia ({
+    onBuscarChange,
+    onSituacaoChange,
+    onTipoChange,
+    onContratadaChange,
+    onOrgaoChange
+}){
 
     return(
     <article className={styles.corDeFundoDosInputs}>
@@ -27,12 +16,12 @@ function FormularioBuscarObrasTransparencia (props){
         <form className={styles.organizarInputs} onSubmit={filtrarBusca}>
         
         <div><label>Buscar</label>
-        <input className={styles.buscarInput} id="Buscar"></input></div>
+        <input className={styles.buscarInput} id="Buscar" onChange={(e) => onBuscarChange(e.target.value)}></input></div>
         <div><label>Situação</label>
         <select className={styles.situacaoInput}
          id="Situacao"
-         onChange={(e) => setSituacaoSelecionada(e.target.value)}
-            value={situacaoSelecionada}>
+         onChange={(e) => onSituacaoChange(e.target.value)}
+            >
             <option className={styles.situacaoInput}></option>
             <option className={styles.situacaoInput}>Concluída</option>
             <option className={styles.situacaoInput}>Parado</option>
@@ -40,15 +29,15 @@ function FormularioBuscarObrasTransparencia (props){
             <option className={styles.situacaoInput}>Execução</option></select>
             </div>
         <div><label>Data Inicio</label>
-        <input type="date" className={styles.dataInicioInput} id="DataInicio"></input></div>
+        <input type="date" className={styles.dataInicioInput} id="DataInicio" onChange={(e) => onDataChange(e.target.value)}></input></div>
         <div><label>Tipo de Obra</label>
-        <input className={styles.tipoDeObraInput} id="Tipo"></input></div>
+        <input className={styles.tipoDeObraInput} id="Tipo" onChange={(e) => onTipoChange(e.target.value)}></input></div>
         <div><label>Contratada</label>
-        <input className={styles.contratadaInput} id="Contratada"></input></div>
+        <input className={styles.contratadaInput} id="Contratada" onChange={(e) => onContratadaChange(e.target.value)}></input></div>
         <div><label>Data Final</label>
         <input type="date" className={styles.dataFInalInput} id="DataFinal"></input></div>
         <div><label>Orgão Publico</label>
-        <input className={styles.orgaoPublicoInput} id="Orgao"></input></div>
+        <input className={styles.orgaoPublicoInput} id="Orgao" onChange={(e) => onOrgaoChange(e.target.value)}></input></div>
 
         <div><button value="BUSCAR" className={styles.botaoNormal}/></div>
         </form>

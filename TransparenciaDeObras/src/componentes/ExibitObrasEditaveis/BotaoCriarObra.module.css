@@ -1,17 +1,9 @@
 .botaoCriarObra{
-
-    color: #FFF;
-    font-family: Inter;
-    font-size: 1.5rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-
-    width: 19.3125rem;
-    height: 4.1875rem;
-    flex-shrink: 0;
-
-    border-radius: 0.75rem;
+    width: 14rem;
+    height: 2rem;
+    align-self: initial;
+    text-align: center;
+    border-radius: 12px;
     background: #1E7A9D;
 }
 .botaoCriarObra:hover{

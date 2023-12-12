@@ -32,7 +32,7 @@ const DetalheAditivosObras =(props)=>{
     useEffect(() => {
       Adquirirdados();
     }, []); // O array de dependências vazio assegura que o efeito seja executado apenas uma vez, equivalente a componentDidMount
-  
+    
   
     return(
         <article className={styles.obrasDetalhePrincipal}>
@@ -52,7 +52,7 @@ const DetalheAditivosObras =(props)=>{
                 numero={data.dataAssinatura}
                 processo={data.nome}
                 ano={data.ano}
-                tipo={data.tipoCaso}/>
+                tipo={data.casoAditivo}/>
                 );
             })
             )}

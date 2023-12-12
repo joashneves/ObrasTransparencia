@@ -6,7 +6,7 @@ const BotaoVoltarcadastro = () => {
 
     return(
         <>
-        <Link className={styles.botaoVoltar} to={"/procurarObra"}></Link>
+        <Link className={styles.botaoVoltar} to={"/procurarObra"}>Voltar</Link>
         </>
     )
 }

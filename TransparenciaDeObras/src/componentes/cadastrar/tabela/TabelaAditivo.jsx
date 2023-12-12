@@ -63,7 +63,7 @@ const TabelaAditivo = (props) =>{
                     nomeAditivo={data.nome}
                     dataAssinaturaAditivo={data.dataAssinatura}
                     tipoAditivo={data.tipo}
-                    tipoCasoAditivo={data.tipoCaso}
+                    tipoCasoAditivo={data.casoAditivo}
                     anoAditivo={data.ano}
                     onEditarClick={onEditarClick}
                     />)}))}

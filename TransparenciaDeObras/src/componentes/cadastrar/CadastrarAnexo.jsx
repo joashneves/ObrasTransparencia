@@ -46,8 +46,14 @@ function CadastrarAnexo() {
       const dadosExistente = dadosRecebidos.find((dados) => dados.id == idAnexo); // Verifica se na lista possui um id parecido 
 
       if (dadosExistente) { // se existir atualiza
+        const dataPut = {
+          "id": idAnexo,
+          "nome": nomeAnexo,
+          "descricao": descricaoAnexo,
+          "dataDocumento":dataFormatada
+        }
       // Enviar as credenciais para a sua API usando o axios
-      const respondePut = await axios.put(`https://localhost:7031/api/Anexoes/${idAnexo}`, formData);
+      const respondePut = await axios.put(`https://localhost:7031/api/Anexoes/${idAnexo}`, dataPut);
             window.alert('Atualizado!');
             window.location.reload();
       }else{
