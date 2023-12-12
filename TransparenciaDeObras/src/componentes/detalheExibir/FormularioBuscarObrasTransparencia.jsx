@@ -13,7 +13,7 @@ function FormularioBuscarObrasTransparencia ({
     return(
     <article className={styles.corDeFundoDosInputs}>
         <header className={styles.tituloDeFundo}><a>Buscar Obras</a></header>
-        <form className={styles.organizarInputs} onSubmit={filtrarBusca}>
+        <form className={styles.organizarInputs}>
         
         <div><label>Buscar</label>
         <input className={styles.buscarInput} id="Buscar" onChange={(e) => onBuscarChange(e.target.value)}></input></div>
