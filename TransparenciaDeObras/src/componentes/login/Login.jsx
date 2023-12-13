@@ -7,14 +7,12 @@ import axios from "axios";
 
 const Login = (props) => {
   const history = useNavigate();
-  
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    console.log("nome ", username);
-    console.log("senha ", password);
     try {
       const response = await axios.get('https://localhost:7031/api/Users/');
       const userData = response.data;
