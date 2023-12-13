@@ -100,7 +100,7 @@ const Home = () => {
               porcentagemMedicao={data.Percentual}
               situacaoObra={data.situacaoDetalhe}
               dataPublicacao={data.publicacaoData}
-              prefeituraObras={data.orgaoPulicoDetalhe}
+              prefeituraObras={data.orgaoPublicoDetalhe}
               tipoObra={data.tipoObraDetalhe}
               valorPagoObra={data.valorPagoDetalhe}
               contratadaObra={data.nomeContratadaDetalhe}

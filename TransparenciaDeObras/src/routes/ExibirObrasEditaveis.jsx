@@ -9,7 +9,7 @@ const ExibirObrasEditaveis = () => {
   const [tipoDeObra, setTipoDeObra] = useState();
   const [contratada, setContratada] = useState();
   const [publicado, setPublicado] = useState();
-    console.log(publicado)
+    console.log(window.sessionStorage.getItem('username'))
 
   return (
     <>

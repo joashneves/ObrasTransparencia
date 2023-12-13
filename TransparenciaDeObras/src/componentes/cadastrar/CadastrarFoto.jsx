@@ -17,13 +17,17 @@ function CadastrarFoto() {
   const [loading, setLoading] = useState(true);
   const [listarFoto, setListaFoto] = useState([]);
 
+  const [idLog, setIdLog] = useState(); // Id para config de log
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const now = new Date();  // Obtém a data atual
 
     const fileInput = inputRef.current;
     setArquivo(fileInput.files[0]);
 
+      // Recebe os dados do nome do usuario
+      const nomeUsuario = window.sessionStorage.getItem('username');
     try {
       console.log("Valor do arquivo:", arquivo);
       const formData = new FormData();
@@ -35,6 +39,19 @@ function CadastrarFoto() {
       console.log("dados arquivo", [...formData]);
       // Enviar as credenciais para a sua API usando o axios
       const response = await axios.post('https://localhost:7031/api/Fotoes/', formData);
+
+              
+        //Criar um objeto em formato de json para a ação de criar do usuario logado
+        const dadosUsuario = {
+          "id": idLog,
+          "id_obra": id,
+          "nomeObra": nomeFoto,
+          "nome": "Atribuido Foto",
+          "nomePerfil": nomeUsuario,
+          "dataHora": now
+        }
+        const responseUser = await axios.post(`https://localhost:7031/api/Acoes/`, dadosUsuario);
+
 
       window.alert('Cadastrado');
       window.location.reload();
@@ -78,7 +95,40 @@ function CadastrarFoto() {
     Adquirirdados();
   }, [id]); // Adiciona título da obra como dependência
 
+  
+  // Achar ultimo ID de log e criar um mais novo
+  useEffect(() => {
+    const Adquirirdados = async () => {
+      try {
+        const response = await axios.get('https://localhost:7031/api/Acoes/');
+        const dadosRecebidos = response.data;
 
+        // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto
+        const dadosLog = dadosRecebidos.find((log) => log.id);
+
+        console.log("log de dados encontrado", dadosLog);
+
+        if (dadosLog) {
+          // Obtém o índice do último elemento
+          const lastIndex = dadosRecebidos.length - 1;
+
+          // Acessa o último objeto
+          const ultimoObjeto = dadosRecebidos[lastIndex];
+
+          setIdLog(ultimoObjeto.id + 1)
+
+        }
+
+      } catch (err) {
+        console.log("Erro", err);
+
+      }
+    };
+
+    Adquirirdados();
+  }, [idLog]); // Adiciona título da obra como dependência
+
+  
   return (
     <article className={styles.fundoDeCadastro}>
       <div className={styles.tituloDeCadastro}><h1>Fotos</h1></div>

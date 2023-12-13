@@ -26,7 +26,9 @@ function CadastrarProjetoObras() {
   const [nomeContratadaDetalhe, setNomeContratadaDetalhe] = useState();
   const [cnpjContratadaDetalhe, setCnpjContratadaDetalhe] = useState();
 
-  // Adiquirir dados da API dos Gestores ou fiscais
+  const [idLog , setIdLog] = useState(); // Id para config de log
+
+  // Adiquirir dados da API de obras 
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
@@ -80,6 +82,38 @@ function CadastrarProjetoObras() {
     Adquirirdados();
   }, [idObra]); // Adiciona título da obra como dependência
 
+  // Achar ultimo ID de log e criar um mais novo
+  useEffect(() => {
+    const Adquirirdados = async () => {
+      try {
+        const response = await axios.get('https://localhost:7031/api/Acoes/');
+        const dadosRecebidos = response.data;
+
+        // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto
+        const dadosLog = dadosRecebidos.find((log) => log.id);
+
+        console.log("log de dados encontrado",dadosLog);
+
+        if (dadosLog) {
+          // Obtém o índice do último elemento
+          const lastIndex = dadosRecebidos.length - 1;
+
+          // Acessa o último objeto
+          const ultimoObjeto = dadosRecebidos[lastIndex];
+
+          setIdLog(ultimoObjeto.id + 1)
+          
+        }
+
+      } catch (err) {
+        console.log("Erro", err);
+
+      }
+    };
+
+    Adquirirdados();
+  }, [idLog]); // Adiciona título da obra como dependência
+
   const handleSubmit = async (event) => {
     event.preventDefault(); // Impede o comportamento padrão de envio do formulário
     // Obtém a data atual
@@ -95,7 +129,7 @@ function CadastrarProjetoObras() {
 
     // Envie a `formattedDate` para onde você precisar
     console.log(publicacaoData);
-    //Criar um objeto em formato de json
+    //Criar um objeto em formato de json para Obras
     const dado = {
       "id": idObra,
       "nomeDetalhe": nomeDetalhe,
@@ -118,7 +152,8 @@ function CadastrarProjetoObras() {
       "valorLiquidadoObraDetalhe": 0,
       "anoDetalhe": anoDetalhe
     };
-
+    // Recebe os dados do nome do usuario
+    const nomeUsuario = window.sessionStorage.getItem('username');
     try {
       const response = await axios.get('https://localhost:7031/api/Obras/');
       const dadosRecebidos = response.data;
@@ -128,10 +163,36 @@ function CadastrarProjetoObras() {
 
       if (obraExistente) {
         const response = await axios.put(`https://localhost:7031/api/Obras/${obraExistente.id}`, dado);
+
+
+        //Criar um objeto em formato de json para a ação de atualizar do usuario logado
+        const dadosUsuario = {
+          "id": idLog,
+          "id_obra": idObra,
+          "nomeObra": nomeDetalhe,
+          "nome": "Atualizado Obra",
+          "nomePerfil": nomeUsuario,
+          "dataHora": now
+        }
+        const responseUser = await axios.post(`https://localhost:7031/api/Acoes/`, dadosUsuario);
+
         window.alert('Atualizado!');
+        setIdLog(idLog+1);
       } else {
         // Enviar as credenciais para a sua API usando o axios
         const response = await axios.post('https://localhost:7031/api/Obras/', dado);
+
+        //Criar um objeto em formato de json para a ação de criar do usuario logado
+        const dadosUsuario = {
+          "id": idLog,
+          "id_obra": idObra,
+          "nomeObra": nomeDetalhe,
+          "nome": "Criado Obra",
+          "nomePerfil": nomeUsuario,
+          "dataHora": now
+        }
+        const responseUser = await axios.post(`https://localhost:7031/api/Acoes/`, dadosUsuario);
+
         window.alert('Cadastrado');
         history('/procurarObra');
       }

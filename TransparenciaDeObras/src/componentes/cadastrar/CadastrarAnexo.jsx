@@ -22,12 +22,17 @@ function CadastrarAnexo() {
   const [loading, setLoading] = useState(true);
   const [listarAnexo, setListaAnexo] = useState();
 
+  const [idLog, setIdLog] = useState(); // Id para config de log
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const now = new Date();  // Obtém a data atual
 
     const dataFormatada = formatarData(dataDocumento);
     console.log("Data formatada:", dataFormatada);
 
+    // Recebe os dados do nome do usuario
+    const nomeUsuario = window.sessionStorage.getItem('username');
     try {
       console.log("Valor do arquivo: ANEXO", arquivo);
       const formData = new FormData();
@@ -50,22 +55,45 @@ function CadastrarAnexo() {
           "id": idAnexo,
           "nome": nomeAnexo,
           "descricao": descricaoAnexo,
-          "dataDocumento":dataFormatada
+          "dataDocumento": dataFormatada
         }
-      // Enviar as credenciais para a sua API usando o axios
-      const respondePut = await axios.put(`https://localhost:7031/api/Anexoes/${idAnexo}`, dataPut);
-            window.alert('Atualizado!');
-            window.location.reload();
-      }else{
-      const response = await axios.post('https://localhost:7031/api/Anexoes/', formData);
-      window.alert('Cadastrado');
-      window.location.reload();
+        // Enviar as credenciais para a sua API usando o axios
+        const respondePut = await axios.put(`https://localhost:7031/api/Anexoes/${idAnexo}`, dataPut);
+        
+        //Criar um objeto em formato de json para a ação de atualizar do usuario logado
+        const dadosUsuario = {
+          "id": idLog,
+          "id_obra": id,
+          "nomeObra": nomeAnexo,
+          "nome": "Atualizado Anexo",
+          "nomePerfil": nomeUsuario,
+          "dataHora": now
+        }
+        const responseUser = await axios.post(`https://localhost:7031/api/Acoes/`, dadosUsuario);
+
+        window.alert('Atualizado!');
+        setIdLog(idLog + 1);
+        window.location.reload();
+      } else {
+        const response = await axios.post('https://localhost:7031/api/Anexoes/', formData);
+        const dadosUsuario = {
+          "id": idLog,
+          "id_obra": id,
+          "nomeObra": nomeAnexo,
+          "nome": "Criado Anexo",
+          "nomePerfil": nomeUsuario,
+          "dataHora": now
+        }
+        const responseUser = await axios.post(`https://localhost:7031/api/Acoes/`, dadosUsuario);
+
+        window.alert('Cadastrado');
+        window.location.reload();
       }
     } catch (error) {
       console.log('Erro ao enviar!', error);
     }
   }
-  const setEditarDocumento = (documentoSelecionado) =>{
+  const setEditarDocumento = (documentoSelecionado) => {
     const dataFormatada = converterFormatoData(documentoSelecionado.dataDocumento);
 
     setIdAnexo(documentoSelecionado.id);
@@ -111,6 +139,40 @@ function CadastrarAnexo() {
     Adquirirdados();
   }, [id]); // Adiciona título da obra como dependência
 
+  
+  // Achar ultimo ID de log e criar um mais novo
+  useEffect(() => {
+    const Adquirirdados = async () => {
+      try {
+        const response = await axios.get('https://localhost:7031/api/Acoes/');
+        const dadosRecebidos = response.data;
+
+        // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto
+        const dadosLog = dadosRecebidos.find((log) => log.id);
+
+        console.log("log de dados encontrado", dadosLog);
+
+        if (dadosLog) {
+          // Obtém o índice do último elemento
+          const lastIndex = dadosRecebidos.length - 1;
+
+          // Acessa o último objeto
+          const ultimoObjeto = dadosRecebidos[lastIndex];
+
+          setIdLog(ultimoObjeto.id + 1)
+
+        }
+
+      } catch (err) {
+        console.log("Erro", err);
+
+      }
+    };
+
+    Adquirirdados();
+  }, [idLog]); // Adiciona título da obra como dependência
+
+  
   const formatarData = (data) => {
     const dataObj = new Date(data);
     const dia = dataObj.getDate().toString().padStart(2, "0");
@@ -146,7 +208,7 @@ function CadastrarAnexo() {
           onChange={handleDataChange} /></label>
 
         <div className={styles.enviarFormulario}>
-        <input type="file"
+          <input type="file"
             id="file"
             name="file"
             ref={inputRef}
@@ -154,8 +216,8 @@ function CadastrarAnexo() {
             accept=".pdf" className={styles.esconderBotao} />
           <button type="submit" name="botaoSalvar" value="Salvar" className={styles.salvarFormulario}>Salvar</button></div>
       </form>
-      <TabelaAnexo 
-      onEditarClick={setEditarDocumento}/>
+      <TabelaAnexo
+        onEditarClick={setEditarDocumento} />
     </article>
   )
 }

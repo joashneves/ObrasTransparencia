@@ -49,7 +49,7 @@ const ExibirOBras = () =>{
        <DetalheSobreObras numeroDetalhes={obraSelecionada.numeroDetalhe}
   situacaoDetalhes={obraSelecionada.situacaoDetalhe}
   dataPublicacaoDetalhes={obraSelecionada.publicacaoData}
-        prefeituraObrasDetalhes={obraSelecionada.orgaoPulicoDetalhe}
+    prefeituraObrasDetalhes={obraSelecionada.orgaoPublicoDetalhe}
           tipoObraDetalhes={obraSelecionada.tipoObraDetalhe}
             valorPagoObraDetalhes={obraSelecionada.valorPagoDetalhe}
               contratadaObraDetalhes={obraSelecionada.nomeContratadaDetalhe}
