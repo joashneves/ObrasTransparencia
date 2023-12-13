@@ -8,8 +8,6 @@ const InformacaoDaObra = (props) => {
             <div className={styles.informacaoDetalheSobreObraListaIntroducao}>
             <div className={styles.detalhesFundo}>Inicio da Obra</div> <div className={styles.detalhesFundo}>{props.inicioObraDetalhes}</div>
             <div className={styles.detalhesFundo}>Previsão de Conclusão</div> <div className={styles.detalhesFundo}>{props.previsaoConclusaoDetalhes}</div>
-            <div className={styles.detalhesFundo}>Forma de execução</div> <div className={styles.detalhesFundo}>{props.formaExecucaoDetalhes}</div>
-            <div className={styles.detalhesFundo}>Descrição da Obra</div> <div className={styles.detalhesFundo}>{props.descricaoObraDetalhes}</div>
             <div className={styles.detalhesFundo}>Localização da Obra</div> <div className={styles.detalhesFundo}>{props.localizacaoObraDetalhes}</div>
             <div className={styles.detalhesFundo}>Nome da Contratada</div> <div className={styles.detalhesFundo}>{props.nomeContratadaObraDetalhes}</div>
             <div className={styles.detalhesFundo}>CNPJ da Contratada</div> <div className={styles.detalhesFundo}>{props.cnpjContratadaObraDetalhes}</div>

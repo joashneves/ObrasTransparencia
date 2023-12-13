@@ -143,7 +143,6 @@ function CadastrarProjetoObras() {
       "nomeContratadaDetalhe": nomeContratadaDetalhe,
       "inicioObraDetalhe": 0,
       "previsaoConclusaoDetalhe": 0,
-      "formaExecucaoDetalhe": "string",
       "localizacaoobraDetalhe": localDetalhe,
       "cnpjContratadaObraDetalhe": cnpjContratadaDetalhe,
       "prazoInicialObraDetalhe": 0,

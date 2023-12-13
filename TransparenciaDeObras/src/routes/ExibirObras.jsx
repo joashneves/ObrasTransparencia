@@ -56,8 +56,6 @@ const ExibirOBras = () =>{
               
               inicioObraDetalhes={obraSelecionada.Inicio}
               previsaoConclusaoDetalhes={obraSelecionada.previsaoConclusaoDetalhe}
-              formaExecucaoDetalhes={obraSelecionada.formaExecucaoDetalhe}
-              descricaoObraDetalhes={obraSelecionada.Inicio}
               localizacaoObraDetalhes={obraSelecionada.localizacaoobraDetalhe}
               nomeContratadaObraDetalhes={obraSelecionada.nomeContratadaDetalhe}
               cnpjContratadaObraDetalhes={obraSelecionada.cnpjContratadaObraDetalhe}
