@@ -17,9 +17,13 @@ function CadastrarAditivo() {
   const [dataDocumento, setDataDocumetno] = useState();
   const [tipoAditivo, setTipoAditivo] = useState();
   const [tipoCaso, setTipoCaso] = useState();
+  const [prazoAditivo, setPrazoAditivo] = useState();
+  const [valorContratualAditivo, setValorContratualAditivo] = useState();
   const [arquivo, setArquivo] = useState(); // Adiciona um estado para o arquivo
 
   const [isAditivo, setIsAditivo] = useState(true);
+  const [isAditivoPrazo, setIsAditivoPrazo] = useState(true);
+  const [isAditivoValor, setIsAditivoValor] = useState(true);
   const inputRef = useRef();
 
   const [jsonData, setJsonData] = useState({});
@@ -36,7 +40,7 @@ function CadastrarAditivo() {
     setArquivo(fileInput.files[0]);
 
     const dataFormatada = formatarData(dataDocumento);
-    console.log("Tipo do aditivo:", tipoAditivo);
+    console.log("valor do aditivo:", valorContratualAditivo);
 
     // Recebe os dados do nome do usuario
     const nomeUsuario = window.sessionStorage.getItem('username');
@@ -51,6 +55,8 @@ function CadastrarAditivo() {
       formData.append("tipo", tipoAditivo);
       formData.append("casoAditivo", tipoCaso);
       formData.append("arquivo", arquivo);
+      formData.append("valorContratual", valorContratualAditivo);
+      formData.append("prazo", prazoAditivo);
 
       console.log("dados arquivo", formData);
       const responseGet = await axios.get('https://localhost:7031/api/Adtivoes/');
@@ -61,11 +67,14 @@ function CadastrarAditivo() {
       if (dadosExistente) { // se existir atualiza
         const dataPut = {
           "id": idAditivo,
+          "id_obras": id,
           "nome": nomeAditivo,
           "ano": anoAditivo,
           "dataAssinatura": dataFormatada,
           "tipo": tipoAditivo,
-          "casoAditivo": tipoCaso
+          "casoAditivo": tipoCaso,
+          "valorContratual": valorContratualAditivo,
+          "prazo": prazoAditivo
         }
         // Enviar as credenciais para a sua API usando o axios
         const respondePut = await axios.put(`https://localhost:7031/api/Adtivoes/${idAditivo}`, dataPut);
@@ -78,6 +87,7 @@ function CadastrarAditivo() {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
+        
         const responseUser = await axios.post(`https://localhost:7031/api/Acoes/`, dadosUsuario);
 
         window.alert('Atualizado!');
@@ -213,6 +223,73 @@ function CadastrarAditivo() {
     }
   }, [tipoAditivo]);
 
+  useEffect(() => {
+    console.log("tipo é ", tipoCaso);
+    switch(tipoCaso){
+      case "Prazo":
+        setIsAditivoPrazo(false);
+        setIsAditivoValor(true);
+
+        setValorContratualAditivo(0);
+        break;
+      case "Valor contratual":
+        setIsAditivoPrazo(true);
+        setIsAditivoValor(false);
+
+        setPrazoAditivo(0);
+        break;
+      case "Execução":
+        setIsAditivoPrazo(true);
+        setIsAditivoValor(true);
+
+        setValorContratualAditivo(0);
+        setPrazoAditivo(0);
+        break;
+      case "Valor contratual e Prazo":
+        setIsAditivoPrazo(false);
+        setIsAditivoValor(false);
+        break;
+      case "Execução e Prazo":
+        setIsAditivoPrazo(false);
+        setIsAditivoValor(true);
+
+        setValorContratualAditivo(0);
+        break;
+      case "Prazo e valor":
+        setIsAditivoPrazo(false);
+        setIsAditivoValor(false);
+        break;
+      case "Execução e valor":
+        setIsAditivoPrazo(true);
+        setIsAditivoValor(false);
+
+        setPrazoAditivo(0);
+        break;
+      case "Prazo e execução":
+        setIsAditivoPrazo(false);
+        setIsAditivoValor(true);
+
+        setValorContratualAditivo(0);
+        break;
+      case "Valor contratual e execução":
+        setIsAditivoPrazo(true);
+        setIsAditivoValor(false);
+
+        setPrazoAditivo(0);
+        break;
+      case "Prazo, Valor e execução":
+        setIsAditivoPrazo(false);
+        setIsAditivoValor(false);
+        break;
+      default:
+        setIsAditivoPrazo(true);
+        setIsAditivoValor(true);
+
+        setValorContratualAditivo(0);
+        setPrazoAditivo(0);
+    }
+  }, [tipoCaso]);
+
   return (
     <article className={styles.fundoDeCadastro}>
       <div className={styles.tituloDeCadastro}><h1>Aditivo</h1></div>
@@ -259,6 +336,20 @@ function CadastrarAditivo() {
             <option>Valor contratual e execução</option>
             <option>Prazo, Valor e execução</option>
           </select></label>
+        )}
+        {isAditivoPrazo ? (<div></div>):(
+          <label>Prazo <input type="number" id="prazo"
+          name="prazo"
+          onChange={(e) => setPrazoAditivo(e.target.value)}
+          value={prazoAditivo}
+          className={styles.cadastrarAnoAditivo} /></label>
+        )}
+        {isAditivoValor ? (<div></div>):(
+          <label>Valor Contratual <input type="number" id="valor"
+          name="valor"
+          onChange={(e) => setValorContratualAditivo(e.target.value)}
+          value={valorContratualAditivo}
+          className={styles.cadastrarAnoAditivo} /></label>
         )}
         <div className={styles.enviarFormulario}>
 

@@ -30,10 +30,11 @@ const DetalheAditivosListaObras = (props) =>{
 
     return(
         <tr>
-        <td className={styles.tabelaAditivosMeio}>{props.numero}</td>
-        <td className={styles.tabelaAditivosMeio}>{props.processo}/{props.ano}</td>
+        <td className={styles.tabelaAditivosMeio}>{props.dataAssinatura}</td>
+        <td className={styles.tabelaAditivosMeio}>{props.nome}</td>
+        <td className={styles.tabelaAditivosMeio}>{props.ano}</td>
         <td className={styles.tabelaAditivosMeio}>{props.tipo}</td>
-        <td className={styles.tabelaAditivosMeioVisualizar} ><a onClick={Download}>Visualizar</a></td>
+        <td className={styles.tabelaAditivosMeioVisualizar} ><a onClick={Download}>download</a></td>
         </tr>
     )
 }

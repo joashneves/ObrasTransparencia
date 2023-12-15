@@ -18,10 +18,7 @@ const DetalheSobreObras = (props) => {
             <div className={styles.detalhesFundoFinalEsquerdo}>Nome da Contratada</div> <div className={styles.detalhesFundoFinalDireito}>{props.contratadaObraDetalhes}</div>
             </div>
             </div>
-            <InformacaoDaObra inicioObraDetalhes={props.inicioObraDetalhes}
-            previsaoConclusaoDetalhes={props.previsaoConclusaoDetalhes}
-            formaExecucaoDetalhes={props.formaExecucaoDetalhes}
-            descricaoObraDetalhes={props.descricaoObraDetalhes}
+            <InformacaoDaObra 
             localizacaoObraDetalhes={props.localizacaoObraDetalhes}
             nomeContratadaObraDetalhes={props.nomeContratadaObraDetalhes}
             cnpjContratadaObraDetalhes={props.cnpjContratadaObraDetalhes}

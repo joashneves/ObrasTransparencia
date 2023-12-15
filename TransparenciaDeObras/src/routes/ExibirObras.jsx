@@ -18,8 +18,15 @@ const ExibirOBras = () =>{
     const { id } = useParams();
     const [jsonData, setJsonData] = useState([]);
     const [obraSelecionada, setObraSelecionada] = useState({});
+    const [medicaoSelecionada, setMedicaoLiquido] = useState();
+    const [aditivioSelecionado, setAditivoSelecionado] = useState();
+
+    const [aditivioPrazoInicial, setAditivoPrazoInicial] = useState();
+    const [aditivioPrazoTotal, setAditivoPrazoTotal] = useState();
    
     const [numeroDetalhe, setNumeroDetalhe] = useState();
+    const [valorEmpenhado, setValorEmpenhado] = useState();
+    const [valorLiquidado, setValorLiquidado] = useState();
     
     useEffect(() => {
       const Adquirirdados = async () => {
@@ -39,7 +46,77 @@ const ExibirOBras = () =>{
           
         }
       };
-  
+
+      const SomarValores = async () =>{
+        try {
+          // Calcula valor
+          const responseAditivo = await axios.get('https://localhost:7031/api/Adtivoes/');
+          const responseMecaoe = await axios.get('https://localhost:7031/api/Medicaos/');
+          const dataAditivo = responseAditivo.data;
+          const dataMecaoe = responseMecaoe.data;
+          
+          const primeiraAditivo = dataAditivo.find((obra) => obra.id_obras == id && obra.prazo != 0) || 0;
+          
+          // calcula valor empenhado
+          let valorEmpenhadoAditivos = 0;
+          const AditivoEncontrada = dataAditivo.filter((obra) => obra.id_obras == id);
+          AditivoEncontrada.forEach(element => {
+            const valorContratual = parseFloat(element.valorContratual);
+            if (!isNaN(valorContratual)) {
+              valorEmpenhadoAditivos += valorContratual;
+              console.log("Valor empenhado em aditivo é :", valorContratual);
+            }
+          });
+          // calcula valor pago
+          let valorEmpenhadoMecaoes = 0;
+          const MecaoeEncontrada = dataMecaoe.filter((obra) => obra.id_obras == id);
+          MecaoeEncontrada.forEach((element) => {
+            const valorPago = parseFloat(element.valorPago);
+            if (!isNaN(valorPago)) {
+              valorEmpenhadoMecaoes += valorPago;
+              console.log("Valor empenhado em Mecaoe é :", valorPago);
+            }
+          });
+
+          // calcula valor liquidado 
+          let valorMedidoMecaoes = 0;
+        MecaoeEncontrada.forEach((element) => {
+          const valorMedido = parseFloat(element.valorMedido);
+          if (!isNaN(valorMedido)) {
+            valorMedidoMecaoes += valorMedido;
+            console.log("Valor liquidado em Mecaoe é :", valorMedido);
+          }
+        });
+          // calcula prazos do dia 
+          let prazoDiasAditivos = 0;
+          // calcula valor empenhado
+          AditivoEncontrada.forEach(element => {
+              const Aditivodias = parseFloat(element.prazo);
+              if (!isNaN(Aditivodias)) {
+                prazoDiasAditivos += Aditivodias;
+                console.log("Valor empenhado em aditivo é :", Aditivodias);
+              }
+            }); 
+
+          // Valor Prazo
+          setAditivoPrazoTotal(prazoDiasAditivos)
+            
+          // Valor pago
+          setValorEmpenhado(valorEmpenhadoAditivos + valorEmpenhadoMecaoes);
+
+          //Valor liquido
+          setValorLiquidado(valorMedidoMecaoes);
+
+          // Calcula prazo
+          setAditivoPrazoInicial(primeiraAditivo.prazo);
+
+        } catch (error) {
+          console.error("Erro na requisição:", error);
+        }
+      };
+      SomarValores();
+      
+
       Adquirirdados();
     }, [id]); // Adiciona título da obra como dependência
 
@@ -51,26 +128,23 @@ const ExibirOBras = () =>{
   dataPublicacaoDetalhes={obraSelecionada.publicacaoData}
     prefeituraObrasDetalhes={obraSelecionada.orgaoPublicoDetalhe}
           tipoObraDetalhes={obraSelecionada.tipoObraDetalhe}
-            valorPagoObraDetalhes={obraSelecionada.valorPagoDetalhe}
+            valorPagoObraDetalhes={valorEmpenhado}
               contratadaObraDetalhes={obraSelecionada.nomeContratadaDetalhe}
               
-              inicioObraDetalhes={obraSelecionada.Inicio}
-              previsaoConclusaoDetalhes={obraSelecionada.previsaoConclusaoDetalhe}
               localizacaoObraDetalhes={obraSelecionada.localizacaoobraDetalhe}
               nomeContratadaObraDetalhes={obraSelecionada.nomeContratadaDetalhe}
               cnpjContratadaObraDetalhes={obraSelecionada.cnpjContratadaObraDetalhe}
-              licitacaoObraDetalhes={obraSelecionada.Inicio}
-              contratoObraDetalhes={obraSelecionada.Contrato}
-              prazoInicialObraDetalhes={obraSelecionada.Inicio}
-              prazoTotalObraDetalhes={obraSelecionada.Inicio}
-              valorEmpenhadoObraDetalhes={obraSelecionada.ValorEmpenhado}
-              valorLiquidadoObraDetalhes={obraSelecionada.ValorLiquidado}
+              licitacaoObraDetalhes={obraSelecionada.licitacao}
+              contratoObraDetalhes={obraSelecionada.contrato}
+              prazoInicialObraDetalhes={aditivioPrazoInicial}
+              prazoTotalObraDetalhes={aditivioPrazoTotal}
+              valorEmpenhadoObraDetalhes={valorEmpenhado}
+              valorLiquidadoObraDetalhes={valorLiquidado}
               />
               
       <DetalheGestoresFiscaisObras/>
       <DetalheAnexoObras/>
-      <DetalheMedicaoObras
-      porcentagemMedicao={obraSelecionada.Percentual}/>
+      <DetalheMedicaoObras/>
       <DetalheAditivosObras/>
       <DetalheHistoricoObras/>
       <DetalheFotoObras/>

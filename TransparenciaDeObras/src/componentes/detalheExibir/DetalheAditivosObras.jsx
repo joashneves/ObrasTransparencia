@@ -5,7 +5,7 @@ import DetalheAditivosListaObras from "./DetalheAditivosListaObras";
 
 import axios from "axios";
 
-const DetalheAditivosObras =(props)=>{
+const DetalheAditivosObras =()=>{
 
     const { id } = useParams();
     const [jsonData, setJsonData] = useState([]);
@@ -40,18 +40,22 @@ const DetalheAditivosObras =(props)=>{
       
             <table>
                 <tr>
-                    <th className={styles.tabelaAditivosTopoEsquerdo}>Numero</th>
-                    <th className={styles.tabelaAditivosTopo}>Processo/ano</th>
+                    <th className={styles.tabelaAditivosTopoEsquerdo}>Data</th>
+                    <th className={styles.tabelaAditivosTopo}>Nome</th>
+                    <th className={styles.tabelaAditivosTopo}>ano</th>
                     <th className={styles.tabelaAditivosTopo}>Tipo</th>
                     <th className={styles.tabelaAditivosTopoDireito}>Arquivo</th>
                 </tr>
                 {loadig ? (<></>) : (Object.values(jsonData).map((data) => {
                     return(
                 <DetalheAditivosListaObras 
+                key={data.id}
                 id={data.id}
-                numero={data.dataAssinatura}
-                processo={data.nome}
+                dataAssinatura={data.dataAssinatura}
+                nome={data.nome}
                 ano={data.ano}
+                prazo={data.prazo}
+                valor={data.valorContratual}
                 tipo={data.casoAditivo}/>
                 );
             })

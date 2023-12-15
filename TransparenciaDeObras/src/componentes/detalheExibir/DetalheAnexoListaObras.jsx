@@ -35,7 +35,7 @@ const DetalheAnexoListaObras = (props) =>{
             <td className={styles.tabelaAnexoMeio}>{props.dataPublicacao}</td>
             <td className={styles.tabelaAnexoMeio}>{props.nome}</td>
             <td className={styles.tabelaAnexoMeio}>{props.descricao}</td>
-            <td className={styles.tabelaAnexoMeioVisualizar} ><a onClick={Download}>Baixar</a></td>
+            <td className={styles.tabelaAnexoMeioVisualizar} ><a onClick={Download}>download</a></td>
         </tr>
     )
 }

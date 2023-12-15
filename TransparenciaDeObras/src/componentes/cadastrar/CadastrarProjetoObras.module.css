@@ -144,3 +144,9 @@ flex-shrink: 0;
     height: 35px;
     flex-shrink: 0;
 }
+.cadastrarStatus{
+    align-self: flex-end;
+    width: 21rem;
+height: 35px;
+flex-shrink: 0;
+}

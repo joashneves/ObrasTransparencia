@@ -37,11 +37,9 @@ const DetalheMedicaoObras =(props)=>{
         <div className={styles.porcentagemMedicao}>{props.porcentagemMedicao}%</div>
             <table>
                 <tr>
-                    <th className={styles.tabelaMedicaoTopoEsquerdo}>Numero</th>
-                    <th className={styles.tabelaMedicaoTopo}>Processo/ano</th>
-                    <th className={styles.tabelaMedicaoTopo}>Inicio</th>
+                    <th className={styles.tabelaMedicaoTopoEsquerdo}>Inicio</th>
                     <th className={styles.tabelaMedicaoTopo}>Final</th>
-                    <th className={styles.tabelaMedicaoTopo}>Porcentagem</th>
+                    <th className={styles.tabelaMedicaoTopo}>Nome</th>
                     <th className={styles.tabelaMedicaoTopo}>Valor Pago</th>
                     <th className={styles.tabelaMedicaoTopo}>Valor Medido</th>
                     <th className={styles.tabelaMedicaoTopoDireito}>Detalhes</th>
@@ -49,7 +47,7 @@ const DetalheMedicaoObras =(props)=>{
                 {loadig ? (<></>) : (Object.values(jsonData).map((data) => {
                     return (
                 <DetalheMedicaoListaObras id={data.id}
-                numero={data.numero}
+                nome={data.nome}
                 processo={data.processo}
                 ano={data.ano}
                 dataInicio={data.dataInicio}

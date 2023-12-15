@@ -31,7 +31,7 @@ const router = createBrowserRouter([
     element: <GerenciarPerfis/>
   },
   {
-    path: "log",
+    path: "adm",
     element: <RegistroLog/>
   },
   {

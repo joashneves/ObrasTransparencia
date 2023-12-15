@@ -16,13 +16,14 @@ function CadastrarProjetoObras() {
   const [nomeDetalhe, setNomeDetalhe] = useState();
   const [situcaoDetalhe, setSitucaoDetalhe] = useState();
   const [numeroDetalhe, setNumeroDetalhe] = useState();
-  const [publicadoDetalhe, setPublicadoDetalhe] = useState();
-  const [publicacaoData, setPublicacaoData] = useState(null);
+  const [publicadoDetalhe, setPublicadoDetalhe] = useState(false);
   const [orgaoPublicoDetalhe, setOrgaoPublicoDetalhe] = useState();
+  const [contrato, setContrato] = useState();
+  const [licitacao, setLicitacao] = useState();
+  const [valorPagoDetalhe, setValorPagoDetalhe] = useState();
   const [anoDetalhe, setAnoDetalhe] = useState();
   const [tipoObraDetalhe, setTipoObraDetalhe] = useState();
   const [localDetalhe, setLocalDetalhe] = useState();
-  const [valorPagoDetalhe, setValorPagoDetalhe] = useState();
   const [nomeContratadaDetalhe, setNomeContratadaDetalhe] = useState();
   const [cnpjContratadaDetalhe, setCnpjContratadaDetalhe] = useState();
 
@@ -67,10 +68,13 @@ function CadastrarProjetoObras() {
           setNumeroDetalhe(obraExistente.numeroDetalhe);
           setOrgaoPublicoDetalhe(obraExistente.orgaoPublicoDetalhe);
           setAnoDetalhe(obraExistente.anoDetalhe);
+          setValorPagoDetalhe(obraExistente.valorPagoDetalhe)
           setTipoObraDetalhe(obraExistente.tipoObraDetalhe);
           setLocalDetalhe(obraExistente.localizacaoobraDetalhe);
           setNomeContratadaDetalhe(obraExistente.nomeContratadaDetalhe);
           setCnpjContratadaDetalhe(obraExistente.cnpjContratadaObraDetalhe);
+          setContrato(obraExistente.contrato);
+          setLicitacao(obraExistente.licitacao);
         }
 
       } catch (err) {
@@ -135,21 +139,17 @@ function CadastrarProjetoObras() {
       "nomeDetalhe": nomeDetalhe,
       "numeroDetalhe": numeroDetalhe,
       "situacaoDetalhe": situcaoDetalhe,
-      "publicadoDetalhe": false,
+      "publicadoDetalhe": publicadoDetalhe,
       "publicacaoData": publicacaoData,
       "orgaoPublicoDetalhe": orgaoPublicoDetalhe,
       "tipoObraDetalhe": tipoObraDetalhe,
       "valorPagoDetalhe": valorPagoDetalhe,
       "nomeContratadaDetalhe": nomeContratadaDetalhe,
-      "inicioObraDetalhe": 0,
-      "previsaoConclusaoDetalhe": 0,
       "localizacaoobraDetalhe": localDetalhe,
       "cnpjContratadaObraDetalhe": cnpjContratadaDetalhe,
-      "prazoInicialObraDetalhe": 0,
-      "prazoTotalObraDetalhe": 0,
-      "valorEmpenhadoObraDetalhe": 0,
-      "valorLiquidadoObraDetalhe": 0,
-      "anoDetalhe": anoDetalhe
+      "anoDetalhe": anoDetalhe,
+      "contrato": contrato,
+      "licitacao": licitacao
     };
     // Recebe os dados do nome do usuario
     const nomeUsuario = window.sessionStorage.getItem('username');
@@ -245,7 +245,6 @@ function CadastrarProjetoObras() {
           className={styles.cadastrarAno}
           value={anoDetalhe}
           onChange={(e) => setAnoDetalhe(e.target.value)} /></label>
-        <div></div>
         <label>Orgão Publico <input type="text"
           id="User"
           name="OrgaoPublico"
@@ -258,7 +257,6 @@ function CadastrarProjetoObras() {
           className={styles.cadastrarLocal}
           value={localDetalhe}
           onChange={(e) => setLocalDetalhe(e.target.value)} /></label>
-        <div></div>
         <label>Nome da Contratada *<input type="text"
           id="User"
           name="NomeContratada"
@@ -271,7 +269,32 @@ function CadastrarProjetoObras() {
           className={styles.cadastrarCNPJContratada}
           value={cnpjContratadaDetalhe}
           onChange={(e) => setCnpjContratadaDetalhe(e.target.value)} /></label>
+          <label>Contrato <input type="text"
+          id="Contrato"
+          name="Contrato"
+          className={styles.cadastrarCNPJContratada}
+          value={contrato}
+          onChange={(e) => setContrato(e.target.value)} /></label>
+          <label>Licitação <input type="text"
+          id="Licitação"
+          name="Licitação"
+          className={styles.cadastrarCNPJContratada}
+          value={licitacao}
+          onChange={(e) => setLicitacao(e.target.value)} /></label>
+          <label>Valor pago <input type="number"
+          id="User"
+          name="valor pago"
+          className={styles.cadastrarNumero}
+          value={valorPagoDetalhe}
+          onChange={(e) => setValorPagoDetalhe(e.target.value)} /></label>
 
+          <div>
+         <label>Publicado?</label> <input type="checkbox"
+          id="User"
+           name="Name" 
+           className={styles.cadastrarStatus}
+           checked={publicadoDetalhe}
+           onChange={(e) => setPublicadoDetalhe(e.target.checked)} /></div>
         <button type="submit" className={styles.salvarFormulario} >Cadastrar</button>
       </form>
     </article>
