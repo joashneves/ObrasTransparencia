@@ -153,6 +153,7 @@ function CadastrarProjetoObras() {
     };
     // Recebe os dados do nome do usuario
     const nomeUsuario = window.sessionStorage.getItem('username');
+    console.log("Nome de usuario é", nomeUsuario);
     try {
       const response = await axios.get('https://localhost:7031/api/Obras/');
       const dadosRecebidos = response.data;

@@ -24,7 +24,6 @@ const Home = () => {
 
       const dadosRecebidos = response.data;
 
-      console.log("Dados acessados", dadosRecebidos)
       setJsonData(dadosRecebidos);
       setLoading(false); // Indica que os dados foram carregados
     } catch (err) {

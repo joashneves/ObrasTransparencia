@@ -146,7 +146,6 @@ const ExibirOBras = () =>{
       <DetalheAnexoObras/>
       <DetalheMedicaoObras/>
       <DetalheAditivosObras/>
-      <DetalheHistoricoObras/>
       <DetalheFotoObras/>
       
       </>
