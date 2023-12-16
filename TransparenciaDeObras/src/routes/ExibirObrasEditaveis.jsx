@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import BotaoCriarObra from "../componentes/ExibitObrasEditaveis/botaoCriarObra";
 import CampoParaBuscarObrasEditaveis from "../componentes/ExibitObrasEditaveis/CampoParaBuscarObrasEditaveis";
 import SistemaListaDocumento from "../componentes/ExibitObrasEditaveis/SistemaListaDocumentos";
@@ -9,7 +11,32 @@ const ExibirObrasEditaveis = () => {
   const [tipoDeObra, setTipoDeObra] = useState();
   const [contratada, setContratada] = useState();
   const [publicado, setPublicado] = useState();
-    console.log(window.sessionStorage.getItem('username'))
+  const history = useNavigate();
+
+    useEffect(() => {
+        
+        const AutenticarUser = async () =>{
+
+        try{
+            const response = await axios.get('https://localhost:7031/api/Users/');
+            const dataUser = response.data;
+
+            const username = window.sessionStorage.getItem('username');
+
+            const acharUser = dataUser.find((o) => o.nome == username);
+
+            if(!acharUser){
+                history('/login');
+            }
+            console.log("logado");
+        }catch{
+            console.log("Erro no servidor ou na autenticação")
+            history('/login');
+        }
+
+        }
+        AutenticarUser();
+      }, [history]); 
 
   return (
     <>

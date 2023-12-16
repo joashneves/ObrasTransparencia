@@ -27,10 +27,6 @@ const router = createBrowserRouter([
     element: <ExibirObrasEditaveis/>
   },
   {
-    path: "Perfis",
-    element: <GerenciarPerfis/>
-  },
-  {
     path: "adm",
     element: <RegistroLog/>
   },
