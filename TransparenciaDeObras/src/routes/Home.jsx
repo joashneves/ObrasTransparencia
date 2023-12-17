@@ -20,7 +20,7 @@ const Home = () => {
 
   const Adquirirdados = async (event) => {
     try {
-      const response = await axios.get('https://localhost:7031/api/Obras/');
+      const response = await axios.get('https://localhost:7067/Obra/');
 
       const dadosRecebidos = response.data;
 

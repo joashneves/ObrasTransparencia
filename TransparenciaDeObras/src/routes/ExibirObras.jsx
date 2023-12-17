@@ -31,7 +31,7 @@ const ExibirOBras = () =>{
     useEffect(() => {
       const Adquirirdados = async () => {
         try {
-          const response = await axios.get('https://localhost:7031/api/Obras/');
+          const response = await axios.get('https://localhost:7067/Obra/');
           const dadosRecebidos = response.data;
           setJsonData(dadosRecebidos);
   
@@ -50,8 +50,8 @@ const ExibirOBras = () =>{
       const SomarValores = async () =>{
         try {
           // Calcula valor
-          const responseAditivo = await axios.get('https://localhost:7031/api/Adtivoes/');
-          const responseMecaoe = await axios.get('https://localhost:7031/api/Medicaos/');
+          const responseAditivo = await axios.get('https://localhost:7067/Aditivo/');
+          const responseMecaoe = await axios.get('https://localhost:7067/Medicao/');
           const dataAditivo = responseAditivo.data;
           const dataMecaoe = responseMecaoe.data;
           

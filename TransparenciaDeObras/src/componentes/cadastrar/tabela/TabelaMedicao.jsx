@@ -24,7 +24,7 @@ const TabelaMedicao = (props) => {
   
   const Adquirirdados = async (event) => {
     try {
-      const response = await axios.get('https://localhost:7031/api/Medicaos/');
+      const response = await axios.get('https://localhost:7067/Medicao');
 
       const dadosRecebidos = response.data;
 

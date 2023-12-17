@@ -38,7 +38,7 @@ function CadastrarFoto() {
 
       console.log("dados arquivo", [...formData]);
       // Enviar as credenciais para a sua API usando o axios
-      const response = await axios.post('https://localhost:7031/api/Fotoes/', formData);
+      const response = await axios.post('https://localhost:7067/Foto', formData);
 
               
         //Criar um objeto em formato de json para a ação de criar do usuario logado
@@ -50,7 +50,7 @@ function CadastrarFoto() {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`https://localhost:7031/api/Acoes/`, dadosUsuario);
+        const responseUser = await axios.post(`https://localhost:7067/Historico`, dadosUsuario);
 
 
       window.alert('Cadastrado');
@@ -70,7 +70,7 @@ function CadastrarFoto() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7031/api/Fotoes/');
+        const response = await axios.get('https://localhost:7067/Foto');
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
@@ -100,7 +100,7 @@ function CadastrarFoto() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7031/api/Acoes/');
+        const response = await axios.get('https://localhost:7067/Historico');
         const dadosRecebidos = response.data;
 
         // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto

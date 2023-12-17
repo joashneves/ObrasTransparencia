@@ -37,14 +37,13 @@ const CadastrarMedicao = (props) => {
         "id_obras": id,
         "dataInicio": dataFormatadaInicio,
         "dataFinal": dataFormatadaFinal,
-        "porcentagem": porcentagem,
         "valorPago": valorPago,
         "valorMedido": valorMedido,
         "nome": nomeMedicao
       }
       console.log("Valor do arquivo: Medicao", dataMedicao);
 
-      const responseGet = await axios.get('https://localhost:7031/api/Medicaos/');
+      const responseGet = await axios.get('https://localhost:7067/Medicao');
       const dadosRecebidos = responseGet.data // Pega os dado da api
 
       const dadosExistente = dadosRecebidos.find((dados) => dados.id == idMedicao); // Verifica se na lista possui um id parecido 
@@ -52,7 +51,7 @@ const CadastrarMedicao = (props) => {
       if (dadosExistente) { // se existir atualiza
 
         // Enviar as credenciais para a sua API usando o axios
-        const respondePut = await axios.put(`https://localhost:7031/api/Medicaos/${idMedicao}`, dataMedicao);
+        const respondePut = await axios.put(`https://localhost:7067/Medicao/${idMedicao}`, dataMedicao);
 
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
@@ -63,13 +62,13 @@ const CadastrarMedicao = (props) => {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`https://localhost:7031/api/Acoes/`, dadosUsuario);
+        const responseUser = await axios.post(`https://localhost:7067/Historico`, dadosUsuario);
 
         window.alert('Atualizado!');
         setIdLog(idLog + 1);
         window.location.reload();
       } else {
-        const response = await axios.post('https://localhost:7031/api/Medicaos/', dataMedicao);
+        const response = await axios.post('https://localhost:7067/Medicao', dataMedicao);
         const dadosUsuario = {
           "id": idLog,
           "id_obra": id,
@@ -78,7 +77,7 @@ const CadastrarMedicao = (props) => {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`https://localhost:7031/api/Acoes/`, dadosUsuario);
+        const responseUser = await axios.post(`https://localhost:7067/Historico`, dadosUsuario);
 
         window.alert('Cadastrado');
         window.location.reload();
@@ -104,7 +103,7 @@ const CadastrarMedicao = (props) => {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7031/api/Medicaos/');
+        const response = await axios.get('https://localhost:7067/Medicao');
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
@@ -134,7 +133,7 @@ const CadastrarMedicao = (props) => {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7031/api/Acoes/');
+        const response = await axios.get('https://localhost:7067/Historico');
         const dadosRecebidos = response.data;
 
         // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto

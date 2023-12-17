@@ -45,7 +45,7 @@ function CadastrarAnexo() {
 
       console.log([...formData]);
 
-      const responseGet = await axios.get('https://localhost:7031/api/Anexoes/');
+      const responseGet = await axios.get('https://localhost:7067/Anexo');
       const dadosRecebidos = responseGet.data // Pega os dado da api
 
       const dadosExistente = dadosRecebidos.find((dados) => dados.id == idAnexo); // Verifica se na lista possui um id parecido 
@@ -58,7 +58,7 @@ function CadastrarAnexo() {
           "dataDocumento": dataFormatada
         }
         // Enviar as credenciais para a sua API usando o axios
-        const respondePut = await axios.put(`https://localhost:7031/api/Anexoes/${idAnexo}`, dataPut);
+        const respondePut = await axios.put(`https://localhost:7067/Anexo/${idAnexo}`, dataPut);
         
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
@@ -69,13 +69,13 @@ function CadastrarAnexo() {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`https://localhost:7031/api/Acoes/`, dadosUsuario);
+        const responseUser = await axios.post(`https://localhost:7067/Historico`, dadosUsuario);
 
         window.alert('Atualizado!');
         setIdLog(idLog + 1);
         window.location.reload();
       } else {
-        const response = await axios.post('https://localhost:7031/api/Anexoes/', formData);
+        const response = await axios.post('https://localhost:7067/Anexo', formData);
         const dadosUsuario = {
           "id": idLog,
           "id_obra": id,
@@ -84,7 +84,7 @@ function CadastrarAnexo() {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`https://localhost:7031/api/Acoes/`, dadosUsuario);
+        const responseUser = await axios.post(`https://localhost:7067/Historico`, dadosUsuario);
 
         window.alert('Cadastrado');
         window.location.reload();
@@ -111,7 +111,7 @@ function CadastrarAnexo() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7031/api/Anexoes/');
+        const response = await axios.get('https://localhost:7067/Anexo');
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
@@ -144,7 +144,7 @@ function CadastrarAnexo() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7031/api/Acoes/');
+        const response = await axios.get('https://localhost:7067/Historico');
         const dadosRecebidos = response.data;
 
         // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto

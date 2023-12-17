@@ -15,7 +15,7 @@ const ExibirProjetoDeObras = (props) =>{
 
     const Adquirirdados = async (event) => {
         try {
-          const response = await axios.get('https://localhost:7031/api/Fotoes/');
+          const response = await axios.get('https://localhost:7067/Foto');
     
           const dadosRecebidos = response.data;
     
@@ -33,7 +33,7 @@ const ExibirProjetoDeObras = (props) =>{
         try {
            const fotolocalizada = jsonData.find((e) => e.id_obras == props.id);
     
-          const response = await axios.get(`https://localhost:7031/api/Fotoes/${fotolocalizada.id}/download`, {
+          const response = await axios.get(`https://localhost:7067/Foto/${fotolocalizada.id}/download`, {
             responseType: 'arraybuffer', // Configura responseType para 'arraybuffer' para tratar a resposta como um buffer de bytes
           });
   

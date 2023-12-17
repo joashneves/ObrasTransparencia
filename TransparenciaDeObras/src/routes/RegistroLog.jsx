@@ -16,7 +16,7 @@ const RegistroLog = () =>{
         const AutenticarUser = async () =>{
 
         try{
-            const response = await axios.get('https://localhost:7031/api/Users/');
+            const response = await axios.get('https://localhost:7067/User/');
             const dataUser = response.data;
 
             const username = window.sessionStorage.getItem('username');
@@ -40,7 +40,6 @@ const RegistroLog = () =>{
         <>
         <BuscarLog/>
         <CriarUsuario/>
-        <CriarPerfil/>
         <ListaLog/>
         </>
     )

@@ -24,7 +24,7 @@ const TabelaAnexo = (props) =>{
   
   const Adquirirdados = async (event) => {
     try {
-      const response = await axios.get('https://localhost:7031/api/Anexoes/');
+      const response = await axios.get('https://localhost:7067/Anexo');
 
       const dadosRecebidos = response.data;
 

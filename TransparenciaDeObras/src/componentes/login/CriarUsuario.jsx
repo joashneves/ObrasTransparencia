@@ -14,7 +14,7 @@ const CriarUsuario = () =>{
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7031/api/Users/');
+        const response = await axios.get('https://localhost:7067/User');
         const dadosRecebidos = response.data;
 
         // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto
@@ -55,20 +55,20 @@ const CriarUsuario = () =>{
         };
 
         try {
-          const response = await axios.get('https://localhost:7031/api/Users/');
+          const response = await axios.get('https://localhost:7067/User');
           const dadosRecebidos = response.data;
     
           //Verificar se tem a obra
           const existente = dadosRecebidos.find((obra) => obra.id == idUser);
     
           if (existente) {
-            const response = await axios.put(`https://localhost:7031/api/Users/${existente.id}`, dado);
+            const response = await axios.put(`https://localhost:7067/User/${existente.id}`, dado);
     
             window.alert('Atualizado!');
             setIdUser(idUser+1);
           } else {
             // Enviar as credenciais para a sua API usando o axios
-            const response = await axios.post('https://localhost:7031/api/Users/', dado);
+            const response = await axios.post('https://localhost:7067/User', dado);
     
             window.alert('Cadastrado');
             window.location.reload();

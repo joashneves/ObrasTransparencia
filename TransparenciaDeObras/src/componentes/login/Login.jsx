@@ -6,20 +6,20 @@ import styles from "./Login.module.css";
 import axios from "axios";
 
 const Login = (props) => {
-  const history = useNavigate();
 
+  const history = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.get('https://localhost:7031/api/Users/');
+      const response = await axios.get('https://localhost:7067/User');
       const userData = response.data;
 
       const senha = userData.find((log) => log.nome == username);
       // Aqui você deve verificar as propriedades corretas na resposta da API
-      if (senha.password == password) {
+      if (senha.senha_hash == password) {
         window.sessionStorage.setItem('username', username);
         history('/ProcurarObra');
       } else {

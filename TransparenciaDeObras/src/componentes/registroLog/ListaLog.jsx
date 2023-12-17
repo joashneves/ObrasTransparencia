@@ -11,7 +11,7 @@ const ListaLog = (props) => {
 
   const Adquirirdados = async (event) => {
     try {
-      const response = await axios.get('https://localhost:7031/api/Acoes/');
+      const response = await axios.get('https://localhost:7067/Historico');
 
       const dadosRecebidos = response.data;
 

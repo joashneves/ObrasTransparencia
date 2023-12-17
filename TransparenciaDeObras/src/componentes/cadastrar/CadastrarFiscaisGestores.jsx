@@ -36,13 +36,13 @@ function CadastrarFiscaisGestores() {
     // Recebe os dados do nome do usuario
     const nomeUsuario = window.sessionStorage.getItem('username');
     try {
-      const responseGet = await axios.get('https://localhost:7031/api/GestorFiscals/');
+      const responseGet = await axios.get('https://localhost:7067/FiscalGestor/');
       const dadosRecebidos = responseGet.data // Pega os dado da api
 
       const dadosExistente = dadosRecebidos.find((dados) => dados.id == idGestorFiscal); // Verifica se na lista possui um id parecido 
 
       if (dadosExistente) { // se existir atualiza
-        const respondePut = await axios.put(`https://localhost:7031/api/GestorFiscals/${idGestorFiscal}`, dado);
+        const respondePut = await axios.put(`https://localhost:7067/FiscalGestor/${idGestorFiscal}`, dado);
 
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
@@ -53,14 +53,14 @@ function CadastrarFiscaisGestores() {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`https://localhost:7031/api/Acoes/`, dadosUsuario);
+        const responseUser = await axios.post(`https://localhost:7067/Historico`, dadosUsuario);
 
         window.alert('Atualizado!');
         setIdLog(idLog + 1);
         window.location.reload();
       } else {
         // Enviar as credenciais para a sua API usando o axios
-        const responsePost = await axios.post('https://localhost:7031/api/GestorFiscals/', dado);
+        const responsePost = await axios.post('https://localhost:7067/FiscalGestor/', dado);
         
         //Criar um objeto em formato de json para a ação de criar do usuario logado
         const dadosUsuario = {
@@ -71,7 +71,7 @@ function CadastrarFiscaisGestores() {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`https://localhost:7031/api/Acoes/`, dadosUsuario);
+        const responseUser = await axios.post(`https://localhost:7067/Historico`, dadosUsuario);
 
         window.alert('Cadastrado');
         window.location.reload();
@@ -86,7 +86,7 @@ function CadastrarFiscaisGestores() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7031/api/GestorFiscals/');
+        const response = await axios.get('https://localhost:7067/FiscalGestor/');
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
@@ -118,7 +118,7 @@ function CadastrarFiscaisGestores() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7031/api/Acoes/');
+        const response = await axios.get('https://localhost:7067/Historico');
         const dadosRecebidos = response.data;
 
         // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto
