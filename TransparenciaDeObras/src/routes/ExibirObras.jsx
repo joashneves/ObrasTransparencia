@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import InformacaoDaObra from "../componentes/detalheExibir/InformacaoDaObra";
 import DetalheAditivosObras from "../componentes/detalheExibir/DetalheAditivosObras";
@@ -16,6 +16,9 @@ import axios from "axios";
 const ExibirOBras = () =>{
 
     const { id } = useParams();
+
+    const history = useNavigate();
+
     const [jsonData, setJsonData] = useState([]);
     const [obraSelecionada, setObraSelecionada] = useState({});
     const [medicaoSelecionada, setMedicaoLiquido] = useState();
@@ -38,11 +41,14 @@ const ExibirOBras = () =>{
           setJsonData(dadosRecebidos);
   
           const obraEncontrada = dadosRecebidos.find((obra) => obra.id == id);
-  
+          
           if (obraEncontrada) {
             setObraSelecionada(obraEncontrada);
 
           } 
+          if (!obraEncontrada.publicadoDetalhe){
+            history("/");
+          }
         } catch (err) {
           console.log("Erro", err);
           

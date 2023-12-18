@@ -21,8 +21,8 @@ const Home = () => {
   const Adquirirdados = async (event) => {
     try {
       const response = await axios.get('https://localhost:7067/Obra/');
-
-      const dadosRecebidos = response.data;
+      const obrasData = response.data;
+      const dadosRecebidos = obrasData.filter((o) => o.publicadoDetalhe == true);
 
       setJsonData(dadosRecebidos);
       setLoading(false); // Indica que os dados foram carregados
