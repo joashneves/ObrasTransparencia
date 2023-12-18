@@ -13,7 +13,7 @@ import DetalheFotoObras from "../componentes/detalheExibir/DetalheFotoObras";
 
 import axios from "axios";
 
-const ExibirOBras = () =>{
+const ExibirOBras =  () =>{
 
     const { id } = useParams();
 
@@ -31,8 +31,6 @@ const ExibirOBras = () =>{
     const [valorEmpenhado, setValorEmpenhado] = useState();
     const [valorLiquidado, setValorLiquidado] = useState();
 
-    
-    
     useEffect(() => {
       const Adquirirdados = async () => {
         try {
@@ -123,7 +121,7 @@ const ExibirOBras = () =>{
         }
       };
       SomarValores();
-      
+  
 
       Adquirirdados();
     }, [id]); // Adiciona título da obra como dependência
