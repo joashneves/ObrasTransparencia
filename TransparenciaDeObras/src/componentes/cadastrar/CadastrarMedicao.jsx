@@ -88,7 +88,9 @@ const CadastrarMedicao = (props) => {
   }
   const setEditarDocumento = (documentoSelecionado) => {
     const dataFormatadadataInicio = converterFormatoData(documentoSelecionado.dataInicio);
-    const dataFormatadadataFinal = converterFormatoData(documentoSelecionado.dataFinal);
+    const dataFormatadadataFinal = converterFormatoDataFinal(documentoSelecionado.dataFinal);
+
+    console.log("data final", documentoSelecionado.dataFinal);
 
     setIdMedicao(documentoSelecionado.id);
     setNomeMedicao(documentoSelecionado.nomeMedicao);
@@ -167,10 +169,28 @@ const CadastrarMedicao = (props) => {
   };
 
   const converterFormatoData = (data) => {
+    const [dia, mes, ano] = converterDataFormato(data).split("/");
+    return `${ano}-${mes}-${dia}`;
+  };
+
+  const converterFormatoDataFinal = (data) => {
     const [dia, mes, ano] = data.split("/");
     return `${ano}-${mes}-${dia}`;
   };
 
+  function converterDataFormato(dataISO) {
+    const dataObj = new Date(dataISO);
+  
+    // Obtém o dia, mês e ano da data
+    const dia = String(dataObj.getDate()).padStart(2, '0');
+    const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Os meses são indexados de 0 a 11
+    const ano = dataObj.getFullYear();
+  
+    // Monta a string no formato desejado
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+  
+    return dataFormatada;
+  }
   return (
     <article className={styles.fundoDeCadastro}>
       <div className={styles.tituloDeCadastro}><h1>Medicao</h1></div>

@@ -118,7 +118,7 @@ function CadastrarAditivo() {
 
   const setEditarDocumento = (documentoSelecionado) => {
     const dataFormatada = converterFormatoData(documentoSelecionado.dataAssinaturaAditivo);
-    console.log("dados aditivo", documentoSelecionado);
+    console.log("data aditivo", documentoSelecionado);
     setIdAditivo(documentoSelecionado.id);
     setNomeAditivo(documentoSelecionado.nomeAditivo);
     setAnoAditivo(documentoSelecionado.anoAditivo);
@@ -204,12 +204,26 @@ function CadastrarAditivo() {
     return `${dia}/${mes}/${ano}`;
   };
 
+  function converterDataFormato(dataISO) {
+    const dataObj = new Date(dataISO);
+  
+    // Obtém o dia, mês e ano da data
+    const dia = String(dataObj.getDate()).padStart(2, '0');
+    const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Os meses são indexados de 0 a 11
+    const ano = dataObj.getFullYear();
+  
+    // Monta a string no formato desejado
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+  
+    return dataFormatada;
+  }
+
   const handleDataChange = (event) => {
     setDataDocumetno(event.target.value);
   };
 
   const converterFormatoData = (data) => {
-    const [dia, mes, ano] = data.split("/");
+    const [dia, mes, ano] = converterDataFormato(data).split("/");
     return `${ano}-${mes}-${dia}`;
   };
 

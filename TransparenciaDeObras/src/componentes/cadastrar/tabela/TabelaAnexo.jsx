@@ -21,6 +21,19 @@ const TabelaAnexo = (props) =>{
     console.log("dados anexo", documentoSelecionado);
   };
 
+  function converterDataFormato(dataISO) {
+    const dataObj = new Date(dataISO);
+  
+    // Obtém o dia, mês e ano da data
+    const dia = String(dataObj.getDate()).padStart(2, '0');
+    const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Os meses são indexados de 0 a 11
+    const ano = dataObj.getFullYear();
+  
+    // Monta a string no formato desejado
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+  
+    return dataFormatada;
+  }
   
   const Adquirirdados = async (event) => {
     try {
@@ -59,7 +72,7 @@ const TabelaAnexo = (props) =>{
                     <ListarAnexo
                     id={data.id}
                     nomeAnexo={data.nome}
-                    dataAnexo={data.dataDocumento}
+                    dataAnexo={converterDataFormato(data.dataDocumento)}
                     descricaonexo={data.descricao}
                     onEditarClick={onEditarClick}
                     />)}))}

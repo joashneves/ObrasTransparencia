@@ -11,6 +11,20 @@ const DetalheAditivosObras =()=>{
     const [jsonData, setJsonData] = useState([]);
     const [obraSelecionada, setObraSelecionada] = useState({});
     const [loadig, setLoading] = useState(true);
+
+    function converterDataFormato(dataISO) {
+      const dataObj = new Date(dataISO);
+    
+      // Obtém o dia, mês e ano da data
+      const dia = String(dataObj.getDate()).padStart(2, '0');
+      const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Os meses são indexados de 0 a 11
+      const ano = dataObj.getFullYear();
+    
+      // Monta a string no formato desejado
+      const dataFormatada = `${dia}/${mes}/${ano}`;
+    
+      return dataFormatada;
+    }
   
     const Adquirirdados = async (event) => {
       try {
@@ -51,12 +65,13 @@ const DetalheAditivosObras =()=>{
                 <DetalheAditivosListaObras 
                 key={data.id}
                 id={data.id}
-                dataAssinatura={data.dataAssinatura}
+                dataAssinatura={converterDataFormato(data.assinaturaData)}
                 nome={data.nome}
                 ano={data.ano}
                 prazo={data.prazo}
                 valor={data.valorContratual}
                 tipo={data.casoAditivo}/>
+                
                 );
             })
             )}

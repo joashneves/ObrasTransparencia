@@ -42,3 +42,60 @@
     border-radius: 0px 0px 12px 0px;
 }
 
+@media (max-width: 414px) {
+    .background{
+    padding: 0px;    
+    }
+    .detalhesSobreObraIntroducaoTitulo {
+        width: 768px;
+        height: 100%;
+    }
+
+    .informacaoDetalheSobreObraListaIntroducao {
+        display: block;
+        display: none;
+    }
+    .obrasDetalhePrincipal {
+        margin: 0rem;
+    }
+    
+    .tituloPrincipalDetalheObras {
+        color: #cf0303;
+        margin: 0px;
+        border-radius: 6px 6px 0px 0px;
+        background-color: var(--titulo-do-topo-da-pesquisa);
+    }
+    
+    .detalhesSobreObraIntroducaoTitulo {
+        width: auto;
+        height: 3.875rem;
+        margin: 2px;
+        border-radius: 12px 12px 0px 0px;
+        background-color: rgba(67, 74, 84, 0.30);
+    }
+    
+    .detalhesSobreObraIntroducao {
+        align-self: center;
+        border: 1rem;
+        background-color: #D9D9D9;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+    
+    .informacaoDetalheSobreObraListaIntroducao {
+        padding: 0px;
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+    
+    .detalhesFundo,
+    .detalhesFundoFinalEsquerdo,
+    .detalhesFundoFinalDireito {
+        margin: 2px;
+        background-color: #fff;
+    }
+    
+    .detalhesFundoFinalEsquerdo,
+    .detalhesFundoFinalDireito {
+        border-radius: 0px;
+    }
+}

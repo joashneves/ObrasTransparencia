@@ -67,6 +67,20 @@ const SistemaListaDocumento = (props) =>{
     props.publicado,
     jsonData,
   ]); 
+
+  function converterDataFormato(dataISO) {
+    const dataObj = new Date(dataISO);
+  
+    // Obtém o dia, mês e ano da data
+    const dia = String(dataObj.getDate()).padStart(2, '0');
+    const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Os meses são indexados de 0 a 11
+    const ano = dataObj.getFullYear();
+  
+    // Monta a string no formato desejado
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+  
+    return dataFormatada;
+  }
   
 
     return (
@@ -88,7 +102,7 @@ const SistemaListaDocumento = (props) =>{
                     return(
                     <ListaDeDocumentosEditaveis
                     id={data.id}
-                    dataObras={data.publicacaoData}
+                    dataObras={converterDataFormato(data.publicacaoData)}
                     nomeObras={data.nomeDetalhe}
                     numeroObras={data.numeroDetalhe}
                     contratada={data.nomeContratadaDetalhe}

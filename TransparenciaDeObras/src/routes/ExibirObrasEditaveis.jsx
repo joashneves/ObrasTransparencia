@@ -13,48 +13,49 @@ const ExibirObrasEditaveis = () => {
   const [publicado, setPublicado] = useState();
   const history = useNavigate();
 
-    useEffect(() => {
-        
-        const AutenticarUser = async () =>{
+  useEffect(() => {
 
-        try{
-            const response = await axios.get('https://localhost:7067/User');
-            const dataUser = response.data;
+    const AutenticarUser = async () => {
 
-            const username = window.sessionStorage.getItem('username');
+      try {
+        const response = await axios.get('https://localhost:7067/User');
+        const dataUser = response.data;
 
-            const acharUser = dataUser.find((o) => o.nome == username);
+        const username = window.sessionStorage.getItem('username');
 
-            if(!acharUser){
-                history('/login');
-            }
-            console.log("logado");
-        }catch{
-            console.log("Erro no servidor ou na autenticação")
-            history('/login');
+        const acharUser = dataUser.find((o) => o.nome == username);
+
+        if (!acharUser) {
+          history('/login');
         }
+        console.log("logado");
+      } catch {
+        console.log("Erro no servidor ou na autenticação")
+        history('/login');
+      }
 
-        }
-        AutenticarUser();
-      }, [history]); 
+    }
+    AutenticarUser();
+  }, [history]);
 
-  return (
-    <>
-      <BotaoCriarObra />
-      <CampoParaBuscarObrasEditaveis
-        onBuscarChange={setBuscar}
-        onNumeroChange={setNumero}
-        onTipoDeObraChange={setTipoDeObra}
-        onContratadaChange={setContratada}
-        onPublicadoChange={setPublicado}
-      />
-      <SistemaListaDocumento nome={buscar}
-      empresaContratada={contratada}
-      numero={numero}
-      tipoDeObra={tipoDeObra}
-      publicado={publicado}/>
-    </>
-  );
-};
+  
+    return (
+      <>
+        <BotaoCriarObra />
+        <CampoParaBuscarObrasEditaveis
+          onBuscarChange={setBuscar}
+          onNumeroChange={setNumero}
+          onTipoDeObraChange={setTipoDeObra}
+          onContratadaChange={setContratada}
+          onPublicadoChange={setPublicado}
+        />
+        <SistemaListaDocumento nome={buscar}
+          empresaContratada={contratada}
+          numero={numero}
+          tipoDeObra={tipoDeObra}
+          publicado={publicado} />
+      </>
+    );
+  };
 
-export default ExibirObrasEditaveis;
+  export default ExibirObrasEditaveis;

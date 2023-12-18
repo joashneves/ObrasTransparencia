@@ -92,7 +92,6 @@ function CadastrarAnexo() {
   }
   const setEditarDocumento = (documentoSelecionado) => {
     const dataFormatada = converterFormatoData(documentoSelecionado.dataDocumento);
-
     setIdAnexo(documentoSelecionado.id);
     setNomeAnexo(documentoSelecionado.nome);
     setDescricaoAnexo(documentoSelecionado.descricao);
@@ -112,9 +111,8 @@ function CadastrarAnexo() {
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
-        const dadosAnexo = dadosRecebidos.find((obra) => obra.id_obra == id);
+        const dadosAnexo = dadosRecebidos.find((obra) => obra.id_obras == id);
 
-        console.log(dadosAnexo);
         if (dadosAnexo) {
           // Obtém o índice do último elemento
           const lastIndex = dadosRecebidos.length - 1;
@@ -183,9 +181,23 @@ function CadastrarAnexo() {
   };
 
   const converterFormatoData = (data) => {
-    const [dia, mes, ano] = data.split("/");
+    const [dia, mes, ano] = (data).split("/");
     return `${ano}-${mes}-${dia}`;
   };
+  
+  function converterDataFormato(dataISO) {
+    const dataObj = new Date(dataISO);
+  
+    // Obtém o dia, mês e ano da data
+    const dia = String(dataObj.getDate()).padStart(2, '0');
+    const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Os meses são indexados de 0 a 11
+    const ano = dataObj.getFullYear();
+  
+    // Monta a string no formato desejado
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+  
+    return dataFormatada;
+  }
 
   return (
     <article className={styles.fundoDeCadastro}>

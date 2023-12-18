@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import InformacaoDaObra from "../componentes/detalheExibir/InformacaoDaObra";
@@ -13,79 +13,79 @@ import DetalheFotoObras from "../componentes/detalheExibir/DetalheFotoObras";
 
 import axios from "axios";
 
-const ExibirOBras =  () =>{
+const ExibirOBras = () => {
 
-    const { id } = useParams();
+  const { id } = useParams();
 
-    const history = useNavigate();
+  const history = useNavigate();
 
-    const [jsonData, setJsonData] = useState([]);
-    const [obraSelecionada, setObraSelecionada] = useState({});
-    const [medicaoSelecionada, setMedicaoLiquido] = useState();
-    const [aditivioSelecionado, setAditivoSelecionado] = useState();
+  const [jsonData, setJsonData] = useState([]);
+  const [obraSelecionada, setObraSelecionada] = useState({});
+  const [medicaoSelecionada, setMedicaoLiquido] = useState();
+  const [aditivioSelecionado, setAditivoSelecionado] = useState();
 
-    const [aditivioPrazoInicial, setAditivoPrazoInicial] = useState();
-    const [aditivioPrazoTotal, setAditivoPrazoTotal] = useState();
-   
-    const [numeroDetalhe, setNumeroDetalhe] = useState();
-    const [valorEmpenhado, setValorEmpenhado] = useState();
-    const [valorLiquidado, setValorLiquidado] = useState();
+  const [aditivioPrazoInicial, setAditivoPrazoInicial] = useState();
+  const [aditivioPrazoTotal, setAditivoPrazoTotal] = useState();
 
-    useEffect(() => {
-      const Adquirirdados = async () => {
-        try {
-          const response = await axios.get('https://localhost:7067/Obra/');
-          const dadosRecebidos = response.data;
-          setJsonData(dadosRecebidos);
-  
-          const obraEncontrada = dadosRecebidos.find((obra) => obra.id == id);
-          
-          if (obraEncontrada) {
-            setObraSelecionada(obraEncontrada);
+  const [numeroDetalhe, setNumeroDetalhe] = useState();
+  const [valorEmpenhado, setValorEmpenhado] = useState();
+  const [valorLiquidado, setValorLiquidado] = useState();
 
-          } 
-          if (!obraEncontrada.publicadoDetalhe){
-            history("/");
-          }
-        } catch (err) {
-          console.log("Erro", err);
-          
+  useEffect(() => {
+    const Adquirirdados = async () => {
+      try {
+        const response = await axios.get('https://localhost:7067/Obra/');
+        const dadosRecebidos = response.data;
+        setJsonData(dadosRecebidos);
+
+        const obraEncontrada = dadosRecebidos.find((obra) => obra.id == id);
+
+        if (obraEncontrada) {
+          setObraSelecionada(obraEncontrada);
+
         }
-      };
+        if (!obraEncontrada.publicadoDetalhe) {
+          history("/");
+        }
+      } catch (err) {
+        console.log("Erro", err);
 
-      const SomarValores = async () =>{
-        try {
-          // Calcula valor
-          const responseAditivo = await axios.get('https://localhost:7067/Aditivo/');
-          const responseMecaoe = await axios.get('https://localhost:7067/Medicao/');
-          const dataAditivo = responseAditivo.data;
-          const dataMecaoe = responseMecaoe.data;
-          
-          const primeiraAditivo = dataAditivo.find((obra) => obra.id_obras == id && obra.prazo != 0) || 0;
-          
-          // calcula valor empenhado
-          let valorEmpenhadoAditivos = 0;
-          const AditivoEncontrada = dataAditivo.filter((obra) => obra.id_obras == id);
-          AditivoEncontrada.forEach(element => {
-            const valorContratual = parseFloat(element.valorContratual);
-            if (!isNaN(valorContratual)) {
-              valorEmpenhadoAditivos += valorContratual;
-              console.log("Valor empenhado em aditivo é :", valorContratual);
-            }
-          });
-          // calcula valor pago
-          let valorEmpenhadoMecaoes = 0;
-          const MecaoeEncontrada = dataMecaoe.filter((obra) => obra.id_obras == id);
-          MecaoeEncontrada.forEach((element) => {
-            const valorPago = parseFloat(element.valorPago);
-            if (!isNaN(valorPago)) {
-              valorEmpenhadoMecaoes += valorPago;
-              console.log("Valor empenhado em Mecaoe é :", valorPago);
-            }
-          });
+      }
+    };
 
-          // calcula valor liquidado 
-          let valorMedidoMecaoes = 0;
+    const SomarValores = async () => {
+      try {
+        // Calcula valor
+        const responseAditivo = await axios.get('https://localhost:7067/Aditivo/');
+        const responseMecaoe = await axios.get('https://localhost:7067/Medicao/');
+        const dataAditivo = responseAditivo.data;
+        const dataMecaoe = responseMecaoe.data;
+
+        const primeiraAditivo = dataAditivo.find((obra) => obra.id_obras == id && obra.prazo != 0) || 0;
+
+        // calcula valor empenhado
+        let valorEmpenhadoAditivos = 0;
+        const AditivoEncontrada = dataAditivo.filter((obra) => obra.id_obras == id);
+        AditivoEncontrada.forEach(element => {
+          const valorContratual = parseFloat(element.valorContratual);
+          if (!isNaN(valorContratual)) {
+            valorEmpenhadoAditivos += valorContratual;
+            console.log("Valor empenhado em aditivo é :", valorContratual);
+          }
+        });
+        // calcula valor pago
+        let valorEmpenhadoMecaoes = 0;
+        const MecaoeEncontrada = dataMecaoe.filter((obra) => obra.id_obras == id);
+        MecaoeEncontrada.forEach((element) => {
+          const valorPago = parseFloat(element.valorPago);
+          if (!isNaN(valorPago)) {
+            valorEmpenhadoMecaoes += valorPago;
+            console.log("Valor empenhado em Mecaoe é :", valorPago);
+          }
+        });
+
+        // calcula valor liquidado 
+        let valorMedidoMecaoes = 0;
         MecaoeEncontrada.forEach((element) => {
           const valorMedido = parseFloat(element.valorMedido);
           if (!isNaN(valorMedido)) {
@@ -93,68 +93,82 @@ const ExibirOBras =  () =>{
             console.log("Valor liquidado em Mecaoe é :", valorMedido);
           }
         });
-          // calcula prazos do dia 
-          let prazoDiasAditivos = 0;
-          // calcula valor empenhado
-          AditivoEncontrada.forEach(element => {
-              const Aditivodias = parseFloat(element.prazo);
-              if (!isNaN(Aditivodias)) {
-                prazoDiasAditivos += Aditivodias;
-                console.log("Valor empenhado em aditivo é :", Aditivodias);
-              }
-            }); 
+        // calcula prazos do dia 
+        let prazoDiasAditivos = 0;
+        // calcula valor empenhado
+        AditivoEncontrada.forEach(element => {
+          const Aditivodias = parseFloat(element.prazo);
+          if (!isNaN(Aditivodias)) {
+            prazoDiasAditivos += Aditivodias;
+            console.log("Valor empenhado em aditivo é :", Aditivodias);
+          }
+        });
 
-          // Valor Prazo
-          setAditivoPrazoTotal(prazoDiasAditivos)
-            
-          // Valor pago
-          setValorEmpenhado(valorEmpenhadoAditivos + valorEmpenhadoMecaoes);
+        // Valor Prazo
+        setAditivoPrazoTotal(prazoDiasAditivos)
 
-          //Valor liquido
-          setValorLiquidado(valorMedidoMecaoes);
+        // Valor pago
+        setValorEmpenhado(valorEmpenhadoAditivos + valorEmpenhadoMecaoes);
 
-          // Calcula prazo
-          setAditivoPrazoInicial(primeiraAditivo.prazo);
+        //Valor liquido
+        setValorLiquidado(valorMedidoMecaoes);
 
-        } catch (error) {
-          console.error("Erro na requisição:", error);
-        }
-      };
-      SomarValores();
-  
+        // Calcula prazo
+        setAditivoPrazoInicial(primeiraAditivo.prazo);
 
-      Adquirirdados();
-    }, [id]); // Adiciona título da obra como dependência
+      } catch (error) {
+        console.error("Erro na requisição:", error);
+      }
+    };
+    SomarValores();
 
-  return(
-      <>
-   
-       <DetalheSobreObras numeroDetalhes={obraSelecionada.numeroDetalhe}
-  situacaoDetalhes={obraSelecionada.situacaoDetalhe}
-  dataPublicacaoDetalhes={obraSelecionada.publicacaoData}
-    prefeituraObrasDetalhes={obraSelecionada.orgaoPublicoDetalhe}
-          tipoObraDetalhes={obraSelecionada.tipoObraDetalhe}
-            valorPagoObraDetalhes={valorEmpenhado}
-              contratadaObraDetalhes={obraSelecionada.nomeContratadaDetalhe}
-              
-              localizacaoObraDetalhes={obraSelecionada.localizacaoobraDetalhe}
-              nomeContratadaObraDetalhes={obraSelecionada.nomeContratadaDetalhe}
-              cnpjContratadaObraDetalhes={obraSelecionada.cnpjContratadaObraDetalhe}
-              licitacaoObraDetalhes={obraSelecionada.licitacao}
-              contratoObraDetalhes={obraSelecionada.contrato}
-              prazoInicialObraDetalhes={aditivioPrazoInicial}
-              prazoTotalObraDetalhes={aditivioPrazoTotal}
-              valorEmpenhadoObraDetalhes={valorEmpenhado}
-              valorLiquidadoObraDetalhes={valorLiquidado}
-              />
-              
-      <DetalheGestoresFiscaisObras/>
-      <DetalheAnexoObras/>
-      <DetalheMedicaoObras/>
-      <DetalheAditivosObras/>
-      <DetalheFotoObras/>
-      
-      </>
+
+    Adquirirdados();
+  }, [id]); // Adiciona título da obra como dependência
+
+  function converterDataFormato(dataISO) {
+    const dataObj = new Date(dataISO);
+
+    // Obtém o dia, mês e ano da data
+    const dia = String(dataObj.getDate()).padStart(2, '0');
+    const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Os meses são indexados de 0 a 11
+    const ano = dataObj.getFullYear();
+
+    // Monta a string no formato desejado
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+
+    return dataFormatada;
+  }
+
+  return (
+    <>
+
+      <DetalheSobreObras numeroDetalhes={obraSelecionada.numeroDetalhe}
+        situacaoDetalhes={obraSelecionada.situacaoDetalhe}
+        dataPublicacaoDetalhes={converterDataFormato(obraSelecionada.publicacaoData)}
+        prefeituraObrasDetalhes={obraSelecionada.orgaoPublicoDetalhe}
+        tipoObraDetalhes={obraSelecionada.tipoObraDetalhe}
+        valorPagoObraDetalhes={valorEmpenhado}
+        contratadaObraDetalhes={obraSelecionada.nomeContratadaDetalhe}
+
+        localizacaoObraDetalhes={obraSelecionada.localizacaoobraDetalhe}
+        nomeContratadaObraDetalhes={obraSelecionada.nomeContratadaDetalhe}
+        cnpjContratadaObraDetalhes={obraSelecionada.cnpjContratadaObraDetalhe}
+        licitacaoObraDetalhes={obraSelecionada.licitacao}
+        contratoObraDetalhes={obraSelecionada.contrato}
+        prazoInicialObraDetalhes={aditivioPrazoInicial}
+        prazoTotalObraDetalhes={aditivioPrazoTotal}
+        valorEmpenhadoObraDetalhes={valorEmpenhado}
+        valorLiquidadoObraDetalhes={valorLiquidado}
+      />
+
+      <DetalheGestoresFiscaisObras />
+      <DetalheAnexoObras />
+      <DetalheMedicaoObras />
+      <DetalheAditivosObras />
+      <DetalheFotoObras />
+
+    </>
   )
 }
 

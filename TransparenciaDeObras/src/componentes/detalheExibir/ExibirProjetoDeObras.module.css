@@ -107,7 +107,22 @@ h1, p ,a,nav, .linkDaObra{
 /* Adicione regras de mídia para dispositivos móveis */
 @media only screen and (max-width: 600px) {
     .projecaoDeObraInicial {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+        align-self: center;
+
         width: 100%;
+        font-size: larger;
+        flex-shrink: 0;
+
+        border-radius: 1rem;
+
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        background: rgba(217, 217, 217, 0.25);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
     }
 
     .fotoDaObra {
@@ -121,10 +136,28 @@ h1, p ,a,nav, .linkDaObra{
 
     .informacaoPreviasObras {
         flex-direction: column;
+        padding: auto;
+        border-left: none;
     }
 
+    .informacaoFixasObras{
+        margin: 4px;
+
+        width: 100%;
+        height: 100%;
+        flex-shrink: 0;
+    
+        color: #000;
+        font-family: Inter;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .informacaoFixasObrasStatus,
     .medicaoObras,
     .informacaoFixasObrasFixo {
         width: 100%;
+        height: 100%;
     }
 }
