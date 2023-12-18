@@ -21,7 +21,7 @@ const DetalheGestoresFiscaisObras = (props) => {
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
-        const dadosGestorFiscal = dadosRecebidos.filter((obra) => obra.id_obra == id);
+        const dadosGestorFiscal = dadosRecebidos.filter((obra) => obra.id_obras == id);
 
         console.log(dadosGestorFiscal);
         if (dadosGestorFiscal) {

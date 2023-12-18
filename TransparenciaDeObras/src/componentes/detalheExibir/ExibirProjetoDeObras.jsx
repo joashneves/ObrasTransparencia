@@ -1,86 +1,73 @@
 
 import styles from "./ExibirProjetoDeObras.module.css";
 
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 
 import axios from "axios";
 
-const ExibirProjetoDeObras = (props) =>{
+const ExibirProjetoDeObras = (props) => {
 
-    const [imagem, setImagem] = useState(null);
-    const [fotoId, setFotoId] = useState();
+  const [imagem, setImagem] = useState(null);
+  const [fotoId, setFotoId] = useState();
 
-    const [jsonData, setJsonData] = useState({});
+  const [jsonData, setJsonData] = useState({});
+  
+  useEffect(() => {
+    const VerificarSeTemNaObra = async () => {
+      try {
+        const response = await axios.get(`https://localhost:7067/Foto`);
+        const fotodata = response.data;
+        const idFoto = fotodata.find((o) => o.id_obras == props.id);
 
-    const Adquirirdados = async (event) => {
-        try {
-          const response = await axios.get('https://localhost:7067/Foto');
-    
-          const dadosRecebidos = response.data;
-    
-          console.log("Dados acessados", dadosRecebidos)
-          setJsonData(dadosRecebidos);
-          
-        } catch (err) {
-          console.log("Erro", err);
-        }
-      }
-      Adquirirdados();
-
-    useEffect(() => {
-      const carregarImagem = async () => {
-        try {
-           const fotolocalizada = jsonData.find((e) => e.id_obras == props.id);
-    
-          const response = await axios.get(`https://localhost:7067/Foto/${fotolocalizada.id}/download`, {
-            responseType: 'arraybuffer', // Configura responseType para 'arraybuffer' para tratar a resposta como um buffer de bytes
+        // Se a imagem existir na obra correspondente, carrega a imagem
+        if (idFoto) {
+          const responseImagem = await axios.get(`https://localhost:7067/Foto/Download/${idFoto.id}`, {
+            responseType: 'arraybuffer',
           });
-  
-          // Cria uma URL de dados para a imagem e a define como a fonte da tag <img>
+
           const base64Image = btoa(
-            new Uint8Array(response.data).reduce((data, byte) => data + String.fromCharCode(byte), '')
+            new Uint8Array(responseImagem.data).reduce((data, byte) => data + String.fromCharCode(byte), '')
           );
-          setImagem(`data:${response.headers['content-type'].toLowerCase()};base64,${base64Image}`);
-          
-        } catch (error) {
-          console.error('Erro ao carregar a imagem', error);
+          setImagem(`data:${responseImagem.headers['content-type'].toLowerCase()};base64,${base64Image}`);
         }
-      };
-  
-      carregarImagem();
-    }, [fotoId]);
+      } catch (error) {
+        console.error('Erro ao verificar e carregar a imagem', error);
+      }
+    };
 
-    return(
-           
-        <Link className={styles.projecaoDeObraInicial} to={`/exibir/${props.id}` }>
-        
-        <img src={imagem} 
-            alt="imagem" 
-                className={styles.fotoDaObra}/>
-        <h1 className={styles.textoTitulo}>{props.tituloObra}</h1>
-        <div className={styles.informacaoPreviasObras}>
-            <p className={styles.medicaoObras}>Medição {props.porcentagemMedicao}%</p>
-            <div className={styles.informacaoFixasObras}>
-            <p className={styles.informacaoFixasObrasFixo}>Situação :
-                <a className={styles.informacaoFixasObrasStatus}> {props.situacaoObra} </a></p>
-            <p className={styles.informacaoFixasObrasFixo}>Data de publicacação :
-                <a className={styles.informacaoFixasObrasStatus}> {props.dataPublicacao}</a></p>
-            <p className={styles.informacaoFixasObrasFixo}>Orgão publico :
-                <a className={styles.informacaoFixasObrasStatus}> {props.prefeituraObras}</a></p>
-            <p className={styles.informacaoFixasObrasFixo}>Tipo de Obra :
-                <a className={styles.informacaoFixasObrasStatus}> {props.tipoObra}</a></p>
-            <p className={styles.informacaoFixasObrasFixo}>Valor Pago : 
-                <a className={styles.informacaoFixasObrasStatus}> R${props.valorPagoObra}</a></p>
-            <p className={styles.informacaoFixasObrasFixo}>Contratada :
-                <a className={styles.informacaoFixasObrasStatus}> {props.contratadaObra}</a></p>
-            
-            </div>
+    VerificarSeTemNaObra();
+  }, [props.id]);
+
+  return (
+
+    <Link className={styles.projecaoDeObraInicial} to={`/exibir/${props.id}`}>
+
+      <img src={imagem}
+        alt="imagem"
+        className={styles.fotoDaObra} />
+      <h1 className={styles.textoTitulo}>{props.tituloObra}</h1>
+      <div className={styles.informacaoPreviasObras}>
+        <div className={styles.informacaoFixasObras}>
+          <p className={styles.informacaoFixasObrasFixo}>Situação :
+            <a className={styles.informacaoFixasObrasStatus}> {props.situacaoObra} </a></p>
+          <p className={styles.informacaoFixasObrasFixo}>Data de publicacação :
+            <a className={styles.informacaoFixasObrasStatus}> {props.dataPublicacao}</a></p>
+          <p className={styles.informacaoFixasObrasFixo}>Orgão publico :
+            <a className={styles.informacaoFixasObrasStatus}> {props.prefeituraObras}</a></p>
+          <p className={styles.informacaoFixasObrasFixo}>Tipo de Obra :
+            <a className={styles.informacaoFixasObrasStatus}> {props.tipoObra}</a></p>
+          <p className={styles.informacaoFixasObrasFixo}>Valor Pago :
+            <a className={styles.informacaoFixasObrasStatus}> R${props.valorPagoObra}</a></p>
+          <p className={styles.informacaoFixasObrasFixo}>Contratada :
+            <a className={styles.informacaoFixasObrasStatus}> {props.contratadaObra}</a></p>
+
         </div>
-        </Link>
-        
+      </div>
+    </Link>
 
-    )
+
+  )
 }
 
 export default ExibirProjetoDeObras;

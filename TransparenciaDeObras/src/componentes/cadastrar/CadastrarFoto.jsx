@@ -26,31 +26,31 @@ function CadastrarFoto() {
     const fileInput = inputRef.current;
     setArquivo(fileInput.files[0]);
 
-      // Recebe os dados do nome do usuario
-      const nomeUsuario = window.sessionStorage.getItem('username');
+    // Recebe os dados do nome do usuario
+    const nomeUsuario = window.sessionStorage.getItem('username');
     try {
       console.log("Valor do arquivo:", arquivo);
       const formData = new FormData();
       formData.append("id", idFoto);
       formData.append("id_obras", id);
       formData.append("nome", nomeFoto);
-      formData.append("FotoArquivo", arquivo);
+      formData.append("Photo", arquivo);
 
       console.log("dados arquivo", [...formData]);
       // Enviar as credenciais para a sua API usando o axios
       const response = await axios.post('https://localhost:7067/Foto', formData);
 
-              
-        //Criar um objeto em formato de json para a ação de criar do usuario logado
-        const dadosUsuario = {
-          "id": idLog,
-          "id_obra": id,
-          "nomeObra": nomeFoto,
-          "nome": "Atribuido Foto",
-          "nomePerfil": nomeUsuario,
-          "dataHora": now
-        }
-        const responseUser = await axios.post(`https://localhost:7067/Historico`, dadosUsuario);
+
+      //Criar um objeto em formato de json para a ação de criar do usuario logado
+      const dadosUsuario = {
+        "id": idLog,
+        "id_obras": id,
+        "nomeObra": nomeFoto,
+        "nome": "Atribuido Foto",
+        "nomePerfil": nomeUsuario,
+        "dataHora": now
+      }
+      const responseUser = await axios.post(`https://localhost:7067/Historico`, dadosUsuario);
 
 
       window.alert('Cadastrado');
@@ -74,7 +74,7 @@ function CadastrarFoto() {
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
-        const dadosFoto = dadosRecebidos.find((obra) => obra.id_obra == id);
+        const dadosFoto = dadosRecebidos.find((obra) => obra.id_obras == id);
         // Obtém o índice do último elemento
         const lastIndex = dadosRecebidos.length - 1;
 
@@ -95,7 +95,7 @@ function CadastrarFoto() {
     Adquirirdados();
   }, [id]); // Adiciona título da obra como dependência
 
-  
+
   // Achar ultimo ID de log e criar um mais novo
   useEffect(() => {
     const Adquirirdados = async () => {
@@ -128,7 +128,7 @@ function CadastrarFoto() {
     Adquirirdados();
   }, [idLog]); // Adiciona título da obra como dependência
 
-  
+
   return (
     <article className={styles.fundoDeCadastro}>
       <div className={styles.tituloDeCadastro}><h1>Fotos</h1></div>
@@ -148,11 +148,17 @@ function CadastrarFoto() {
       </form>
       <div className={styles.fotosDisponiveis}>
       </div>
-      {loading ? (<></>) : (Object.values(jsonData).map((data) => {
-        return (
-          <ExibirFoto fotoId={data.id} />
-        );
-      })
+      {loading ? (
+        <></>
+      ) : (
+        Object.values(jsonData).map((data) => {
+          // Verifica se o id_obras é igual ao parâmetro
+          if (data.id_obras == id) {
+            return <ExibirFoto key={data.id} fotoId={data.id} />;
+          } else {
+            return null; // Se não corresponder, retorna null para não renderizar nada
+          }
+        })
       )}
     </article>
   )

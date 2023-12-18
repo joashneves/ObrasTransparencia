@@ -9,7 +9,7 @@ function ExibirFoto({ fotoId }) {
   useEffect(() => {
     const carregarImagem = async () => {
       try {
-        const response = await axios.get(`https://localhost:7067/Foto/${fotoId}/download`, {
+        const response = await axios.get(`https://localhost:7067/Foto/Download/${fotoId}`, {
           responseType: 'arraybuffer',
         });
 

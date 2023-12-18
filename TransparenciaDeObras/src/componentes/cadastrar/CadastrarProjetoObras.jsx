@@ -27,7 +27,7 @@ function CadastrarProjetoObras() {
   const [nomeContratadaDetalhe, setNomeContratadaDetalhe] = useState();
   const [cnpjContratadaDetalhe, setCnpjContratadaDetalhe] = useState();
 
-  const [idLog , setIdLog] = useState(); // Id para config de log
+  const [idLog, setIdLog] = useState(); // Id para config de log
 
   // Adiquirir dados da API de obras 
   useEffect(() => {
@@ -96,7 +96,7 @@ function CadastrarProjetoObras() {
         // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto
         const dadosLog = dadosRecebidos.find((log) => log.id);
 
-        console.log("log de dados encontrado",dadosLog);
+        console.log("log de dados encontrado", dadosLog);
 
         if (dadosLog) {
           // Obtém o índice do último elemento
@@ -106,7 +106,7 @@ function CadastrarProjetoObras() {
           const ultimoObjeto = dadosRecebidos[lastIndex];
 
           setIdLog(ultimoObjeto.id + 1)
-          
+
         }
 
       } catch (err) {
@@ -135,7 +135,6 @@ function CadastrarProjetoObras() {
     console.log(publicacaoData);
     //Criar um objeto em formato de json para Obras
     const dado = {
-      "id": idObra,
       "nomeDetalhe": nomeDetalhe,
       "numeroDetalhe": numeroDetalhe,
       "situacaoDetalhe": situcaoDetalhe,
@@ -177,7 +176,7 @@ function CadastrarProjetoObras() {
         const responseUser = await axios.post(`https://localhost:7067/Historico/`, dadosUsuario);
 
         window.alert('Atualizado!');
-        setIdLog(idLog+1);
+        setIdLog(idLog + 1);
       } else {
         // Enviar as credenciais para a sua API usando o axios
         const response = await axios.post('https://localhost:7067/Obra/', dado);
@@ -240,6 +239,12 @@ function CadastrarProjetoObras() {
           className={styles.cadastrarTipoObra}
           value={tipoObraDetalhe}
           onChange={(e) => setTipoObraDetalhe(e.target.value)} /></label>
+        <label>Local <input type="text"
+          id="User"
+          name="Local"
+          className={styles.cadastrarLocal}
+          value={localDetalhe}
+          onChange={(e) => setLocalDetalhe(e.target.value)} /></label>
         <label>Ano <input type="number"
           id="User"
           name="Ano"
@@ -252,12 +257,6 @@ function CadastrarProjetoObras() {
           className={styles.cadastrarOrgãoPublico}
           value={orgaoPublicoDetalhe}
           onChange={(e) => setOrgaoPublicoDetalhe(e.target.value)} /></label>
-        <label>Local <input type="text"
-          id="User"
-          name="Local"
-          className={styles.cadastrarLocal}
-          value={localDetalhe}
-          onChange={(e) => setLocalDetalhe(e.target.value)} /></label>
         <label>Nome da Contratada *<input type="text"
           id="User"
           name="NomeContratada"
@@ -270,32 +269,31 @@ function CadastrarProjetoObras() {
           className={styles.cadastrarCNPJContratada}
           value={cnpjContratadaDetalhe}
           onChange={(e) => setCnpjContratadaDetalhe(e.target.value)} /></label>
-          <label>Contrato <input type="text"
+        <label>Contrato <input type="text"
           id="Contrato"
           name="Contrato"
           className={styles.cadastrarCNPJContratada}
           value={contrato}
           onChange={(e) => setContrato(e.target.value)} /></label>
-          <label>Licitação <input type="text"
+        <label>Licitação <input type="text"
           id="Licitação"
           name="Licitação"
           className={styles.cadastrarCNPJContratada}
           value={licitacao}
           onChange={(e) => setLicitacao(e.target.value)} /></label>
-          <label>Valor pago <input type="number"
+        <label>Valor pago <input type="number"
           id="User"
           name="valor pago"
           className={styles.cadastrarNumero}
           value={valorPagoDetalhe}
           onChange={(e) => setValorPagoDetalhe(e.target.value)} /></label>
-
-          <div>
-         <label>Publicado?</label> <input type="checkbox"
-          id="User"
-           name="Name" 
-           className={styles.cadastrarStatus}
-           checked={publicadoDetalhe}
-           onChange={(e) => setPublicadoDetalhe(e.target.checked)} /></div>
+        <div>
+          <label>Publicado?</label> <input type="checkbox"
+            id="User"
+            name="Name"
+            className={styles.cadastrarStatus}
+            checked={publicadoDetalhe}
+            onChange={(e) => setPublicadoDetalhe(e.target.checked)} /></div>
         <button type="submit" className={styles.salvarFormulario} >Cadastrar</button>
       </form>
     </article>

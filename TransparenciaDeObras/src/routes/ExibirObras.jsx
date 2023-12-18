@@ -27,6 +27,8 @@ const ExibirOBras = () =>{
     const [numeroDetalhe, setNumeroDetalhe] = useState();
     const [valorEmpenhado, setValorEmpenhado] = useState();
     const [valorLiquidado, setValorLiquidado] = useState();
+
+    
     
     useEffect(() => {
       const Adquirirdados = async () => {

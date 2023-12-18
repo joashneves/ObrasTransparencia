@@ -11,7 +11,7 @@ const DetalheMedicaoObras =(props)=>{
 
     const Adquirirdados = async (event) => {
         try {
-            const response = await axios.get('https://localhost:7031/api/Medicaos/');
+            const response = await axios.get('https://localhost:7067/Medicao');
 
             const dadosRecebidos = response.data;
 
@@ -34,15 +34,13 @@ const DetalheMedicaoObras =(props)=>{
     return(
         <article className={styles.obrasDetalhePrincipal}>
             <div className={styles.gestoresFiscaisTituloAzul}><h1>Mediçao</h1></div>
-        <div className={styles.porcentagemMedicao}>{props.porcentagemMedicao}%</div>
             <table>
                 <tr>
                     <th className={styles.tabelaMedicaoTopoEsquerdo}>Inicio</th>
                     <th className={styles.tabelaMedicaoTopo}>Final</th>
                     <th className={styles.tabelaMedicaoTopo}>Nome</th>
                     <th className={styles.tabelaMedicaoTopo}>Valor Pago</th>
-                    <th className={styles.tabelaMedicaoTopo}>Valor Medido</th>
-                    <th className={styles.tabelaMedicaoTopoDireito}>Detalhes</th>
+                    <th className={styles.tabelaMedicaoTopoDireito}>Valor Medido</th>
                 </tr>
                 {loadig ? (<></>) : (Object.values(jsonData).map((data) => {
                     return (

@@ -26,6 +26,9 @@ const RegistroLog = () =>{
             if(!acharUser){
                 history('/login');
             }
+            if(!acharUser.isAdm){
+                history('/login');
+            }
             console.log("logado");
         }catch{
             console.log("Erro no servidor ou na autenticação")

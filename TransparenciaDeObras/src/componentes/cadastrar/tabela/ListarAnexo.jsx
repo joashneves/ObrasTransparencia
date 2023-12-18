@@ -17,7 +17,7 @@ const ListarAnexo = (props) => {
   
     const Download = async () =>{
         try {
-            const response = await axios.get(`https://localhost:7067/Anexo/${props.id}/download`, {
+            const response = await axios.get(`https://localhost:7067/Anexo/Download/${props.id}`, {
                 responseType: 'arraybuffer', // Configura responseType para 'arraybuffer' para tratar a resposta como um buffer de bytes
             });
 
@@ -27,7 +27,7 @@ const ListarAnexo = (props) => {
 
             const a = document.createElement('a');
             a.href = url;
-            a.download = props.nomeAnexo; 
+            a.download = props.Anexo; 
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);

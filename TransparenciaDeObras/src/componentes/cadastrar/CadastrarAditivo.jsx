@@ -54,7 +54,7 @@ function CadastrarAditivo() {
       formData.append("dataAssinatura", dataFormatada);
       formData.append("tipo", tipoAditivo);
       formData.append("casoAditivo", tipoCaso);
-      formData.append("arquivo", arquivo);
+      formData.append("Aditivo", arquivo);
       formData.append("valorContratual", valorContratualAditivo);
       formData.append("prazo", prazoAditivo);
 
@@ -81,7 +81,7 @@ function CadastrarAditivo() {
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
           "id": idLog,
-          "id_obra": id,
+          "id_obras": id,
           "nomeObra": nomeAditivo,
           "nome": "Atualizado Aditivo",
           "nomePerfil": nomeUsuario,
@@ -100,7 +100,7 @@ function CadastrarAditivo() {
         //Criar um objeto em formato de json para a ação de criar do usuario logado
         const dadosUsuario = {
           "id": idLog,
-          "id_obra": id,
+          "id_obras": id,
           "nomeObra": nomeAditivo,
           "nome": "Criado Aditivo",
           "nomePerfil": nomeUsuario,

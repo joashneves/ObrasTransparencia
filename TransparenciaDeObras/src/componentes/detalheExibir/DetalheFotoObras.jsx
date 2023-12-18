@@ -10,9 +10,9 @@ const DetalheFotoObras = () => {
 
     const { id } = useParams(); // Captura o paramentro da pagina
     const [idFoto, setIdFoto] = useState(0); // Id do Foto
-  
+
     const inputRef = useRef();
-  
+
     const [jsonData, setJsonData] = useState({});
     const [loading, setLoading] = useState(true);
     const [listarFoto, setListaFoto] = useState([]);
@@ -21,19 +21,10 @@ const DetalheFotoObras = () => {
     useEffect(() => {
         const Adquirirdados = async () => {
             try {
-                const response = await axios.get('https://localhost:7031/api/Fotoes/');
+                const response = await axios.get('https://localhost:7067/Foto');
                 const dadosRecebidos = response.data;
+                console.log("Foto", dadosRecebidos)
                 setJsonData(dadosRecebidos);
-
-                const dadosFoto = dadosRecebidos.find((obra) => obra.id_obra == id);
-                // Obtém o índice do último elemento
-                const lastIndex = dadosRecebidos.length - 1;
-
-                // Acessa o último objeto
-                const ultimoObjeto = dadosRecebidos[lastIndex];
-
-                console.log("id do ultimo da foto", ultimoObjeto.id)
-                setListaFoto(dadosFoto);
                 setLoading(false);
 
             } catch (err) {
@@ -45,17 +36,24 @@ const DetalheFotoObras = () => {
         Adquirirdados();
     }, [id]); // Adiciona título da obra como dependência
 
+
     return (
         <>
             <article className={styles.obrasDetalhePrincipal}>
                 <div className={styles.gestoresFiscaisTituloAzul}><h1>Fotos</h1></div>
                 <div className={styles.fotoLista}>
-                {loading ? (<></>) : (Object.values(jsonData).map((data) => {
-                    return (
-                        <DetalheExibirFoto fotoId={data.id} />
-                    );
-                })
-                )}
+                    {loading ? (
+                        <></>
+                    ) : (
+                        Object.values(jsonData).map((data) => {
+                            // Verifica se o id_obras é igual ao parâmetro
+                            if (data.id_obras == id) {
+                                return <DetalheExibirFoto key={data.id} fotoId={data.id} />;
+                            } else {
+                                return null; // Se não corresponder, retorna null para não renderizar nada
+                            }
+                        })
+                    )}
                 </div>
             </article>
         </>

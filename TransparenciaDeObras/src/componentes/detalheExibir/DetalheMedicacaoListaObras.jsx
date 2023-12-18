@@ -8,7 +8,7 @@ const DetalheMedicaoListaObras = (props) =>{
         <td className={styles.tabelaMedicaoMeio}>{props.nome}</td>
         <td className={styles.tabelaMedicaoMeio}>{props.valorPago}</td>
         <td className={styles.tabelaMedicaoMeio}>{props.valorMedido}</td>
-        <td className={styles.tabelaMedicaoMeioVisualizar}><a>download</a></td>
+
     </tr>)
 }
 

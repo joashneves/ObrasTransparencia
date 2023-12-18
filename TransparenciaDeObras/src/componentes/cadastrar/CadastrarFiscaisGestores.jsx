@@ -27,7 +27,7 @@ function CadastrarFiscaisGestores() {
 
     const dado = {
       "id": idGestorFiscal,
-      "id_obra": id,
+      "id_obras": id,
       "nome": nome,
       "papel": papel,
       "secretaria": secretaria,
@@ -46,8 +46,7 @@ function CadastrarFiscaisGestores() {
 
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
-          "id": idLog,
-          "id_obra": id,
+          "id_obras": id,
           "nomeObra": nome,
           "nome": "Atualizado Gestor ou fiscal",
           "nomePerfil": nomeUsuario,
@@ -64,8 +63,7 @@ function CadastrarFiscaisGestores() {
         
         //Criar um objeto em formato de json para a ação de criar do usuario logado
         const dadosUsuario = {
-          "id": idLog,
-          "id_obra": id,
+          "id_obras": id,
           "nomeObra": nome,
           "nome": "Criado Gestor ou fiscal",
           "nomePerfil": nomeUsuario,
@@ -90,7 +88,7 @@ function CadastrarFiscaisGestores() {
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
-        const dadosGestorFiscal = dadosRecebidos.find((obra) => obra.id_obra == id);
+        const dadosGestorFiscal = dadosRecebidos.find((obra) => obra.id_obras == id);
 
         console.log(dadosGestorFiscal);
         if (dadosGestorFiscal) {

@@ -18,7 +18,7 @@ const ListarAditivo = (props) =>{
 
     const Download = async () =>{
         try {
-            const response = await axios.get(`https://localhost:7067/Aditivo/${props.id}/download`, {
+            const response = await axios.get(`https://localhost:7067/Aditivo/Download/${props.id}`, {
                 responseType: 'arraybuffer', // Configura responseType para 'arraybuffer' para tratar a resposta como um buffer de bytes
             });
 

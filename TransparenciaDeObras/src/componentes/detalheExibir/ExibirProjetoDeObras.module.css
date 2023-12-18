@@ -103,3 +103,28 @@ h1, p ,a,nav, .linkDaObra{
     line-height: normal;
     
 }
+
+/* Adicione regras de mídia para dispositivos móveis */
+@media only screen and (max-width: 600px) {
+    .projecaoDeObraInicial {
+        width: 100%;
+    }
+
+    .fotoDaObra {
+        display: none;
+    }
+
+    .textoTitulo {
+        width: 100%;
+        border-left: none;
+    }
+
+    .informacaoPreviasObras {
+        flex-direction: column;
+    }
+
+    .medicaoObras,
+    .informacaoFixasObrasFixo {
+        width: 100%;
+    }
+}

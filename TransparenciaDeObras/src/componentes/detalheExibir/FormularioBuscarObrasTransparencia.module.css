@@ -206,3 +206,24 @@ flex-shrink: 0;
     background: var(--com-mouse-cor);
     border-color: var(--com-mouse-cor);
 }
+@media only screen and (max-width: 600px) {
+    .corDeFundoDosInputs {
+      width: 100%;
+      height: auto;
+    }
+  
+    .buscarInput,
+    .situacaoInput,
+    .dataInicioInput,
+    .tipoDeObraInput,
+    .contratadaInput,
+    .dataFInalInput,
+    .orgaoPublicoInput,
+    .buttonDeBusca,
+    .botaoNormal {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    /* Adicione mais ajustes conforme necessário para os outros elementos */
+  }

@@ -36,12 +36,11 @@ function CadastrarAnexo() {
     try {
       console.log("Valor do arquivo: ANEXO", arquivo);
       const formData = new FormData();
-      formData.append("id", idAnexo);
       formData.append("id_obras", id);
       formData.append("nome", nomeAnexo);
       formData.append("descricao", descricaoAnexo);
       formData.append("dataDocumento", dataFormatada);
-      formData.append("arquivo", arquivo)
+      formData.append("Anexo", arquivo)
 
       console.log([...formData]);
 
@@ -62,8 +61,7 @@ function CadastrarAnexo() {
         
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
-          "id": idLog,
-          "id_obra": id,
+          "id_obras": id,
           "nomeObra": nomeAnexo,
           "nome": "Atualizado Anexo",
           "nomePerfil": nomeUsuario,
@@ -77,8 +75,7 @@ function CadastrarAnexo() {
       } else {
         const response = await axios.post('https://localhost:7067/Anexo', formData);
         const dadosUsuario = {
-          "id": idLog,
-          "id_obra": id,
+          "id_obras": id,
           "nomeObra": nomeAnexo,
           "nome": "Criado Anexo",
           "nomePerfil": nomeUsuario,

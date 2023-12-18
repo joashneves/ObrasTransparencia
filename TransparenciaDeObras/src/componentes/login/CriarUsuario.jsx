@@ -10,6 +10,13 @@ const CriarUsuario = () =>{
     const [nomeUsuario, setNomeUSuario] = useState();
     const [email, setEmail] = useState();
     const [senha, setSenha] = useState();
+    const [isAdm, setIsAdm] = useState(false);
+    const [isProjeto, setIsProjeto] = useState(false);
+    const [isAnexo, setIsAnexo] = useState(false);
+    const [isAditivo, setIsAditivo] = useState(false);
+    const [isMedicao, setIsMedicao] = useState(false);
+    const [isFoto, setIsFoto] = useState(false);
+    const [isOpcao, setIsOpcao] = useState(false);
       // Achar ultimo ID de log e criar um mais novo
   useEffect(() => {
     const Adquirirdados = async () => {
@@ -47,13 +54,19 @@ const CriarUsuario = () =>{
 
         //Criar um objeto em formato de json para Obras
         const dado = {
-            "id": idUser,
-            "nome": nomeUsuario,
-            "password": senha,
-            "nomeComplete": nomeCompleto,
-            "email": email
+          "nome": nomeUsuario,
+          "nomeCompleto": nomeCompleto,
+          "email": email,
+          "senha_hash": senha,
+          "isAdm": isAdm,
+          "isCadastrarProjeto": isProjeto,
+          "isCadastrarAnexo": isAnexo,
+          "isCadastrarAditivo": isAditivo,
+          "isCadastrarMedicao": isMedicao,
+          "isCadastrarFoto": isFoto,
+          "isCadastrarOpcao": isOpcao
         };
-
+        console.log(dado)
         try {
           const response = await axios.get('https://localhost:7067/User');
           const dadosRecebidos = response.data;
@@ -88,6 +101,13 @@ const CriarUsuario = () =>{
                 <label>Nome Usuario<input type="text" onChange={(e) => setNomeUSuario(e.target.value)}/></label>
                 <label>Email<input type="email" onChange={(e) => setEmail(e.target.value)}/></label>
                 <label>Senha<input type="password" onChange={(e) => setSenha(e.target.value)}/></label>
+                <label>Aministrador?<input type="checkbox" onChange={(e) => setIsAdm(e.target.checked)}/></label>
+                <label>Criar projeto?<input type="checkbox" onChange={(e) => setIsProjeto(e.target.checked)}/></label>
+                <label>Criar anexo?<input type="checkbox" onChange={(e) => setIsAnexo(e.target.checked)}/></label>
+                <label>Criar Aditivo?<input type="checkbox" onChange={(e) => setIsAditivo(e.target.checked)}/></label>
+                <label>Criar medição?<input type="checkbox" onChange={(e) => setIsMedicao(e.target.checked)}/></label>
+                <label>Criar Foto?<input type="checkbox" onChange={(e) => setIsFoto(e.target.checked)}/></label>
+                <label>Criar opção?<input type="checkbox" onChange={(e) => setIsOpcao(e.target.checked)}/></label>
                 <input className={styles.botaoNormal} type="submit" value={"Cadastrar"}/>
             </form>
         </article>
