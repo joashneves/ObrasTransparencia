@@ -71,6 +71,7 @@ function CadastrarProjetoObras() {
           setValorPagoDetalhe(obraExistente.valorPagoDetalhe)
           setTipoObraDetalhe(obraExistente.tipoObraDetalhe);
           setLocalDetalhe(obraExistente.localizacaoobraDetalhe);
+          setPublicadoDetalhe(obraExistente.publicadoDetalhe)
           setNomeContratadaDetalhe(obraExistente.nomeContratadaDetalhe);
           setCnpjContratadaDetalhe(obraExistente.cnpjContratadaObraDetalhe);
           setContrato(obraExistente.contrato);
@@ -123,13 +124,8 @@ function CadastrarProjetoObras() {
     // Obtém a data atual
     const now = new Date();
 
-    // Obtém o dia, mês e ano
-    const dia = now.getDate().toString().padStart(2, '0'); // adiciona zero à esquerda se for menor que 10
-    const mes = (now.getMonth() + 1).toString().padStart(2, '0'); // o mês é baseado em zero, por isso é necessário adicionar 1
-    const ano = now.getFullYear();
-
     // Formata a data como string no formato "dd/mm/aaaa"
-    const publicacaoData = `${dia}/${mes}/${ano}`;
+    const publicacaoData = now.toISOString();;
 
     // Envie a `formattedDate` para onde você precisar
     console.log(publicacaoData);
@@ -144,11 +140,11 @@ function CadastrarProjetoObras() {
       "tipoObraDetalhe": tipoObraDetalhe,
       "valorPagoDetalhe": valorPagoDetalhe,
       "nomeContratadaDetalhe": nomeContratadaDetalhe,
-      "localizacaoobraDetalhe": localDetalhe,
       "cnpjContratadaObraDetalhe": cnpjContratadaDetalhe,
       "anoDetalhe": anoDetalhe,
       "contrato": contrato,
-      "licitacao": licitacao
+      "licitacao": licitacao,
+      "localizacaoobraDetalhe": localDetalhe
     };
     // Recebe os dados do nome do usuario
     const nomeUsuario = window.sessionStorage.getItem('username');
@@ -161,13 +157,14 @@ function CadastrarProjetoObras() {
       const obraExistente = dadosRecebidos.find((obra) => obra.id == id);
 
       if (obraExistente) {
+        console.log("Obra PUT é ", dado)
         const response = await axios.put(`https://localhost:7067/Obra/${obraExistente.id}`, dado);
 
 
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
           "id": idLog,
-          "id_obra": idObra,
+          "id_obras": idObra,
           "nomeObra": nomeDetalhe,
           "nome": "Atualizado Obra",
           "nomePerfil": nomeUsuario,
@@ -179,12 +176,13 @@ function CadastrarProjetoObras() {
         setIdLog(idLog + 1);
       } else {
         // Enviar as credenciais para a sua API usando o axios
-        const response = await axios.post('https://localhost:7067/Obra/', dado);
+        console.log("ENVIAR USER", dado)
+        const response = await axios.post('https://localhost:7067/Obra', dado);
 
         //Criar um objeto em formato de json para a ação de criar do usuario logado
         const dadosUsuario = {
           "id": idLog,
-          "id_obra": idObra,
+          "id_obras": idObra,
           "nomeObra": nomeDetalhe,
           "nome": "Criado Obra",
           "nomePerfil": nomeUsuario,
@@ -200,6 +198,20 @@ function CadastrarProjetoObras() {
       console.log('Erro ao enviar!', error);
     }
 
+  };
+
+  const handleAnoChange = (e) => {
+    // Remove caracteres não numéricos
+    const numericValue = e.target.value.replace(/\D/g, '');
+  
+    // Limita o comprimento para 4 dígitos
+    const truncatedValue = numericValue.slice(0, 4);
+  
+    // Garante que o valor seja um número positivo
+    const positiveValue = Math.abs(parseInt(truncatedValue, 10));
+  
+    // Atualiza o estado
+    setAnoDetalhe(positiveValue);
   };
 
   return (
@@ -250,7 +262,7 @@ function CadastrarProjetoObras() {
           name="Ano"
           className={styles.cadastrarAno}
           value={anoDetalhe}
-          onChange={(e) => setAnoDetalhe(e.target.value)} /></label>
+          onChange={handleAnoChange} /></label>
         <label>Orgão Publico <input type="text"
           id="User"
           name="OrgaoPublico"

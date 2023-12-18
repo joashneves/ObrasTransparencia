@@ -56,7 +56,7 @@ const CadastrarMedicao = (props) => {
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
           "id": idLog,
-          "id_obra": id,
+          "id_obras": id,
           "nomeObra": nomeMedicao,
           "nome": "Atualizado Medição",
           "nomePerfil": nomeUsuario,
@@ -71,7 +71,7 @@ const CadastrarMedicao = (props) => {
         const response = await axios.post('https://localhost:7067/Medicao', dataMedicao);
         const dadosUsuario = {
           "id": idLog,
-          "id_obra": id,
+          "id_obras": id,
           "nomeObra": nomeMedicao,
           "nome": "Criado medicção",
           "nomePerfil": nomeUsuario,
@@ -109,7 +109,7 @@ const CadastrarMedicao = (props) => {
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
-        const dadosMedicao = dadosRecebidos.find((obra) => obra.id_obra == id);
+        const dadosMedicao = dadosRecebidos.find((obra) => obra.id_obras == id);
 
         console.log(dadosMedicao);
         if (dadosMedicao) {

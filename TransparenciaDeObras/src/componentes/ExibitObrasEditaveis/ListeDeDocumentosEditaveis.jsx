@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import {Link} from "react-router-dom";
 import styles from "./SistemaListaDocumento.module.css"
 
 const ListaDeDocumentosEditaveis = (props) =>{
 
+    const [isPublicado, setIsPublicado] = useState(props.publicadoObras);
+
+    console.log("Obra é publicada?", isPublicado);
     return(                
         <tr>
         <td className={styles.tabelaObrasMeio}>{props.dataObras}</td>
@@ -11,7 +14,7 @@ const ListaDeDocumentosEditaveis = (props) =>{
         <td className={styles.tabelaObrasMeio}>{props.numeroObras}</td>
         <td className={styles.tabelaObrasMeio}>{props.tipoObras}</td>
         <td className={styles.tabelaObrasMeio}>{props.contratada}</td>
-        <td className={styles.tabelaObrasMeio}>{props.publicadoObras}</td>
+        <td className={styles.tabelaObrasMeio}>{isPublicado ? (<>Publicado</>) : (<>Não Publicado</>)}</td>
         <td className={styles.tabelaObrasMeioLink}><Link to={`/cadastrar/${props.id}`}>Editar</Link></td>
         </tr>
         );
