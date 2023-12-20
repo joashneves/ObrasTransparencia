@@ -36,7 +36,7 @@ const DetalheAditivosObras =()=>{
         const dadosFiltrados = dadosRecebidos.filter((item) => item.id_obras == id);
         setJsonData(dadosFiltrados);
         setLoading(false); // Indica que os dados foram carregados
-        console.log("Dados filtrados aditivo:", dadosFiltrados);
+        
       } catch (err) {
         console.log("Erro", err);
         setLoading(false); // Indica que ocorreu um erro ao carregar os dados

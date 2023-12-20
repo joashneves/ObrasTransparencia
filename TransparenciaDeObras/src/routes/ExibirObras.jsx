@@ -49,7 +49,7 @@ const ExibirOBras = () => {
           history("/");
         }
       } catch (err) {
-        console.log("Erro", err);
+        console.log("OPS");
 
       }
     };
@@ -71,7 +71,7 @@ const ExibirOBras = () => {
           const valorContratual = parseFloat(element.valorContratual);
           if (!isNaN(valorContratual)) {
             valorEmpenhadoAditivos += valorContratual;
-            console.log("Valor empenhado em aditivo é :", valorContratual);
+            
           }
         });
         // calcula valor pago
@@ -81,7 +81,7 @@ const ExibirOBras = () => {
           const valorPago = parseFloat(element.valorPago);
           if (!isNaN(valorPago)) {
             valorEmpenhadoMecaoes += valorPago;
-            console.log("Valor empenhado em Mecaoe é :", valorPago);
+  
           }
         });
 
@@ -91,7 +91,7 @@ const ExibirOBras = () => {
           const valorMedido = parseFloat(element.valorMedido);
           if (!isNaN(valorMedido)) {
             valorMedidoMecaoes += valorMedido;
-            console.log("Valor liquidado em Mecaoe é :", valorMedido);
+            
           }
         });
         // calcula prazos do dia 
@@ -101,7 +101,7 @@ const ExibirOBras = () => {
           const Aditivodias = parseFloat(element.prazo);
           if (!isNaN(Aditivodias)) {
             prazoDiasAditivos += Aditivodias;
-            console.log("Valor empenhado em aditivo é :", Aditivodias);
+           
           }
         });
 
@@ -118,7 +118,7 @@ const ExibirOBras = () => {
         setAditivoPrazoInicial(primeiraAditivo.prazo);
 
       } catch (error) {
-        console.error("Erro na requisição:", error);
+        console.error("Erro na requisição:");
       }
     };
     SomarValores();

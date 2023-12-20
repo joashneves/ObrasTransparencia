@@ -27,7 +27,7 @@ const DetalheGestoresFiscaisObras = (props) => {
         if (dadosGestorFiscal) {
           setListaFiscalGestor(dadosGestorFiscal);
           setLoading(false);
-          console.log("Dados gestor filtrados:", listaFiscalGestor);
+         
         }
       } catch (err) {
         console.log("Erro", err);
