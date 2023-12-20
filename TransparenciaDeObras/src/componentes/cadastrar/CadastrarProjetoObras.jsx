@@ -245,13 +245,13 @@ function CadastrarProjetoObras() {
           className={styles.cadastrarNumero}
           value={numeroDetalhe}
           onChange={(e) => setNumeroDetalhe(e.target.value)} /></label>
-        <label>Tipo da Obra <input type="text"
+        <label>Tipo da Obra <input type="text" maxlength="255"
           id="User"
           name="TipoDaObra"
           className={styles.cadastrarTipoObra}
           value={tipoObraDetalhe}
           onChange={(e) => setTipoObraDetalhe(e.target.value)} /></label>
-        <label>Local <input type="text"
+        <label>Local <input type="text" maxlength="255"
           id="User"
           name="Local"
           className={styles.cadastrarLocal}
@@ -263,31 +263,31 @@ function CadastrarProjetoObras() {
           className={styles.cadastrarAno}
           value={anoDetalhe}
           onChange={handleAnoChange} /></label>
-        <label>Orgão Publico <input type="text"
+        <label>Orgão Publico <input type="text" maxlength="255"
           id="User"
           name="OrgaoPublico"
           className={styles.cadastrarOrgãoPublico}
           value={orgaoPublicoDetalhe}
           onChange={(e) => setOrgaoPublicoDetalhe(e.target.value)} /></label>
-        <label>Nome da Contratada *<input type="text"
+        <label>Nome da Contratada *<input type="text" maxlength="255"
           id="User"
           name="NomeContratada"
           className={styles.cadastrarNomeContratada}
           value={nomeContratadaDetalhe}
           onChange={(e) => setNomeContratadaDetalhe(e.target.value)} /></label>
-        <label>CNPJ da Contratada * <input type="text"
+        <label>CNPJ da Contratada * <input type="text" maxlength="255"
           id="User"
           name="CNPJContratada"
           className={styles.cadastrarCNPJContratada}
           value={cnpjContratadaDetalhe}
           onChange={(e) => setCnpjContratadaDetalhe(e.target.value)} /></label>
-        <label>Contrato <input type="text"
+        <label>Contrato <input type="text" maxlength="255"
           id="Contrato"
           name="Contrato"
           className={styles.cadastrarCNPJContratada}
           value={contrato}
           onChange={(e) => setContrato(e.target.value)} /></label>
-        <label>Licitação <input type="text"
+        <label>Licitação <input type="text" maxlength="255"
           id="Licitação"
           name="Licitação"
           className={styles.cadastrarCNPJContratada}

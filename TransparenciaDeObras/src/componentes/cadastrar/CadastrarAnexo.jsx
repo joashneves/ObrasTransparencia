@@ -203,11 +203,11 @@ function CadastrarAnexo() {
     <article className={styles.fundoDeCadastro}>
       <div className={styles.tituloDeCadastro}><h1>Anexo</h1></div>
       <form className={styles.formularioDeCadastro} onSubmit={handleSubmit}>
-        <label>Nome* <input type="text" id="Name" name="Name"
+        <label>Nome* <input type="text" id="Name" name="Name" maxlength="255"
           className={styles.cadastrarNomeAnexo}
           value={nomeAnexo}
           onChange={(e) => setNomeAnexo(e.target.value)} /></label>
-        <label>Descrição *<input type="text" id="Descicao" name="Descicao"
+        <label>Descrição *<input type="text" id="Descicao" name="Descicao" maxlength="255"
           className={styles.cadastrarDescricaoAnexo}
           value={descricaoAnexo}
           onChange={(e) => setDescricaoAnexo(e.target.value)} /></label>

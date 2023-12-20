@@ -195,7 +195,7 @@ const CadastrarMedicao = (props) => {
     <article className={styles.fundoDeCadastro}>
       <div className={styles.tituloDeCadastro}><h1>Medicao</h1></div>
       <form className={styles.formularioDeCadastro} onSubmit={handleSubmit}>
-        <label>Nome* <input type="text" id="Name" name="Name"
+        <label>Nome* <input type="text" id="Name" name="Name" maxlength="255"
           className={styles.cadastrarNomeMedicao}
           value={nomeMedicao}
           onChange={(e) => setNomeMedicao(e.target.value)} /></label>

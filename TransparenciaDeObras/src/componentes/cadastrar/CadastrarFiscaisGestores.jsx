@@ -158,13 +158,13 @@ function CadastrarFiscaisGestores() {
       <div className={styles.tituloDeCadastro}><h1>Gestores e Fiscais</h1></div>
       <form onSubmit={handleSubmit} className={styles.formularioDeCadastro}>
         <input type="hidden" value={idGestorFiscal}></input>
-        <label>Nome* <input type="text"
+        <label>Nome* <input type="text" maxlength="255"
           id="nome"
           name="Nome"
           className={styles.cadastrarNomePapelFiscalGestor}
           value={nome}
           onChange={(e) => setNome(e.target.value)} /></label>
-        <label>Papel *<select type="text"
+        <label>Papel *<select type="text" maxlength="255"
           id="papel"
           name="Papel"
           className={styles.cadastrarPapelFiscalGestor}
@@ -180,13 +180,13 @@ function CadastrarFiscaisGestores() {
           <option>Gestor Titular</option>
           <option>Gestor Substituto</option>
           <option>Outro Gestor</option></select></label>
-        <label>Secretaria <input type="text"
+        <label>Secretaria <input type="text" maxlength="255"
           id="secretaria"
           name="Secretaria"
           className={styles.cadastrarSecretariaPapelFiscalGestor}
           value={secretaria}
           onChange={(e) => setSecretaria(e.target.value)} /></label>
-        <label>E-mail <input type="email"
+        <label>E-mail <input type="email" maxlength="255"
           id="email"
           name="Email"
           className={styles.cadastrarEmailPapelFiscalGestor}

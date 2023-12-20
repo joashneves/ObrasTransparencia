@@ -308,22 +308,22 @@ function CadastrarAditivo() {
     <article className={styles.fundoDeCadastro}>
       <div className={styles.tituloDeCadastro}><h1>Aditivo</h1></div>
       <form className={styles.formularioDeCadastro} onSubmit={handleSubmit}>
-        <label>Nome* <input type="text" id="User"
+        <label>Nome* <input type="text" id="User" maxlength="255"  
           name="Name"
           onChange={(e) => setNomeAditivo(e.target.value)}
           value={nomeAditivo}
           className={styles.cadastrarNomeAditivo} /></label>
-        <label>Ano<input type="number" id="User"
+        <label>Ano<input type="number" id="User" 
           name="Ano"
           onChange={(e) => setAnoAditivo(e.target.value)}
           value={anoAditivo}
           className={styles.cadastrarAnoAditivo} /></label>
-        <label>Data da Assinatura <input type="date" id="User"
-          name="DataAssinatura"
+        <label>Data da Assinatura <input type="date" id="User" 
+          name="DataAssinatura" 
           onChange={handleDataChange}
           value={dataDocumento}
           className={styles.cadastrarDataAssinaturaAditivo} /></label>
-        <label>Tipo* <select type="text" id="User"
+        <label>Tipo* <select type="text" id="User" maxlength="255"
           name="Aditivo"
           onChange={(e) => setTipoAditivo(e.target.value)}
           value={tipoAditivo}
@@ -333,7 +333,7 @@ function CadastrarAditivo() {
           <option>Recisão</option>
           <option>Reajuste</option></select></label>
         {isAditivo ? (<div></div>) : (
-          <label>Tipo (caso aditivo) *<select type="text" id="User"
+          <label>Tipo (caso aditivo) *<select type="text" id="User" maxlength="255"
             name="Tipo"
             onChange={(e) => setTipoCaso(e.target.value)}
             value={tipoCaso}

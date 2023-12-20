@@ -134,7 +134,7 @@ function CadastrarFoto() {
       <div className={styles.tituloDeCadastro}><h1>Fotos</h1></div>
       <form onSubmit={handleSubmit} className={styles.organizacaoFoto}>
         <label>Nome* <input type="text" id="User"
-          name="Name"
+          name="Name" maxlength="255"
           onChange={(e) => setNomeFoto(e.target.value)}
           className={styles.cadastrarNomeFoto} /></label>
         <div>
