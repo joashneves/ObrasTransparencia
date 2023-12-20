@@ -3,6 +3,7 @@ import FormularioBuscarObrasTransparencia from "../componentes/detalheExibir/For
 import ExibirProjetoDeObras from "../componentes/detalheExibir/ExibirProjetoDeObras";
 import DetalheSobreObras from "../componentes/detalheExibir/DetalhesSobreObras";
 import axios from "axios";
+import LoadingBar from "../componentes/miscs/LoadingBar";
 
 
 const Home = () => {
@@ -19,6 +20,7 @@ const Home = () => {
   const [orgao, setOrgao]= useState();
 
   const Adquirirdados = async (event) => {
+    await new Promise(r => setTimeout(r, 6000));
     try {
       const response = await axios.get('https://localhost:7067/Obra/');
       const obrasData = response.data;
@@ -97,10 +99,9 @@ const Home = () => {
       onContratadaChange={setContratada}
       onOrgaoChange={setOrgao}
       />
-
       {loading ? (
         // Exibe um componente de carregamento enquanto os dados estão sendo carregados
-        <p>Carregando...</p>
+        <LoadingBar/>
       ) : (
         // Renderiza os dados quando eles estiverem prontos
         Object.values(jsonData).map((data)=>{

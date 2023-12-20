@@ -6,6 +6,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const SistemaListaDocumento = (props) =>{
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
   
   const [jsonData, setJsonData] = useState([]);
   const [obraSelecionada, setObraSelecionada] = useState({});
@@ -13,6 +17,7 @@ const SistemaListaDocumento = (props) =>{
   const [loadig, setLoading] = useState();
   
   const Adquirirdados = async (event) => {
+    await new Promise(r => setTimeout(r, 12000));
     try {
       const response = await axios.get('https://localhost:7067/Obra/');
 
@@ -34,7 +39,8 @@ const SistemaListaDocumento = (props) =>{
       (props.numero && props.numero.trim() !== "") ||
       (props.tipoDeObra && props.tipoDeObra.trim() !== "") ||
       (props.publicado !== undefined)
-    ) {
+      ) {
+      sleep(5000);
       const filtradoJson = jsonData.filter((obra) => {
         const nomeDetalheLowerCase = obra.nomeDetalhe ? obra.nomeDetalhe.toLowerCase() : "";
         const empresaContratadaLowerCase = obra.nomeContratadaDetalhe
@@ -54,7 +60,7 @@ const SistemaListaDocumento = (props) =>{
         );
       });
       setJsonData(filtradoJson);
-    } else {
+    } else{
       // Se os campos estiverem vazios, carrega todos os dados novamente
       Adquirirdados();
     }

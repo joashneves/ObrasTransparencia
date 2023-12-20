@@ -28,7 +28,7 @@ const DetalheAditivosObras =()=>{
   
     const Adquirirdados = async (event) => {
       try {
-        const response = await axios.get(`https://localhost:7067/Aditivo/Download/${props.id}`);
+        const response = await axios.get(`https://localhost:7067/Aditivo/`);
   
         const dadosRecebidos = response.data;
   

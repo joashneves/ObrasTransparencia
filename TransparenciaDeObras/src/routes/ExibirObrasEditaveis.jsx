@@ -18,7 +18,7 @@ const ExibirObrasEditaveis = () => {
     const AutenticarUser = async () => {
 
       try {
-        const response = await axios.get('https://localhost:7067/User');
+        const response = await axios.get('https://localhost:7067/User/public');
         const dataUser = response.data;
 
         const username = window.sessionStorage.getItem('username');

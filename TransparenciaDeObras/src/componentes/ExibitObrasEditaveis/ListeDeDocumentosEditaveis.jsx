@@ -6,7 +6,6 @@ const ListaDeDocumentosEditaveis = (props) =>{
 
     const [isPublicado, setIsPublicado] = useState(props.publicadoObras);
 
-    console.log("Obra é publicada?", isPublicado);
     return(                
         <tr>
         <td className={styles.tabelaObrasMeio}>{props.dataObras}</td>

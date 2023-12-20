@@ -34,6 +34,7 @@ const ExibirOBras = () => {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
+        await new Promise(r => setTimeout(r, 5000));
         const response = await axios.get('https://localhost:7067/Obra/');
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);

@@ -11,10 +11,17 @@ const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const config = {
+    headers: {
+      'Accept': 'text/plain',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIwIiwibmJmIjoxNzAzMDcxMjY4LCJleHAiOjE3MDMwODIwNjgsImlhdCI6MTcwMzA3MTI2OH0.jZTgYNxiyYFjNp07mayQDqCr_mOjfge-vXBSzpKZtNc',
+    },
+  };
+
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.get('https://localhost:7067/User');
+      const response = await axios.get('https://localhost:7067/User', config);
       const userData = response.data;
 
       const senha = userData.find((log) => log.nome == username);
