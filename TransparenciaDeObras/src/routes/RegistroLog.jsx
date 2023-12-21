@@ -11,12 +11,19 @@ const RegistroLog = () =>{
 
     const history = useNavigate();
 
+    const config = {
+        headers: {
+          'Accept': 'text/plain',
+         'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIwIiwibmJmIjoxNzAzMTc3NTIxLCJleHAiOjI1MzQwMjMwMDgwMCwiaWF0IjoxNzAzMTc3NTIxfQ.7_rODWG4ERRJLKyISjI7VXSHdPlMBxZI9DCT5hBxhOs",
+        },
+      };
+
     useEffect(() => {
         
         const AutenticarUser = async () =>{
 
         try{
-            const response = await axios.get('https://localhost:7067/User/public');
+            const response = await axios.get('https://localhost:7067/User/public', config);
             const dataUser = response.data;
 
             const username = window.sessionStorage.getItem('username');

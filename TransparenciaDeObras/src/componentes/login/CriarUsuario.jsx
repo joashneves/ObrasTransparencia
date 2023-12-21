@@ -18,6 +18,14 @@ const CriarUsuario = () =>{
     const [isFoto, setIsFoto] = useState(false);
     const [isOpcao, setIsOpcao] = useState(false);
       // Achar ultimo ID de log e criar um mais novo
+
+      const config = {
+        headers: {
+          'Accept': 'text/plain',
+         'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIwIiwibmJmIjoxNzAzMTc3NTIxLCJleHAiOjI1MzQwMjMwMDgwMCwiaWF0IjoxNzAzMTc3NTIxfQ.7_rODWG4ERRJLKyISjI7VXSHdPlMBxZI9DCT5hBxhOs",
+        },
+      };
+
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
@@ -68,20 +76,20 @@ const CriarUsuario = () =>{
         };
         console.log(dado)
         try {
-          const response = await axios.get('https://localhost:7067/User');
+          const response = await axios.get('https://localhost:7067/User/public');
           const dadosRecebidos = response.data;
     
           //Verificar se tem a obra
           const existente = dadosRecebidos.find((obra) => obra.id == idUser);
     
           if (existente) {
-            const response = await axios.put(`https://localhost:7067/User/${existente.id}`, dado);
+            const response = await axios.put(`https://localhost:7067/User/${existente.id}`, dado, config);
     
             window.alert('Atualizado!');
             setIdUser(idUser+1);
           } else {
             // Enviar as credenciais para a sua API usando o axios
-            const response = await axios.post('https://localhost:7067/User', dado);
+            const response = await axios.post('https://localhost:7067/User', dado, config);
     
             window.alert('Cadastrado');
             window.location.reload();
