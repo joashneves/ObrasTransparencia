@@ -5,6 +5,7 @@ import DetalheSobreObras from "../componentes/detalheExibir/DetalhesSobreObras";
 import axios from "axios";
 import LoadingBar from "../componentes/miscs/LoadingBar";
 
+let chamado = 0;
 
 const Home = () => {
   // Estado para armazenar os dados recebidos
@@ -18,16 +19,18 @@ const Home = () => {
   const [contratada, setContratada] = useState();
   const [dataFinal, setDataFinal] = useState();
   const [orgao, setOrgao]= useState();
+  const [responseAPI, setResponseAPI] = useState({});
+
 
   const Adquirirdados = async (event) => {
-    await new Promise(r => setTimeout(r, 6000));
     try {
       const response = await axios.get('https://localhost:7067/Obra/');
       const obrasData = response.data;
       const dadosRecebidos = obrasData.filter((o) => o.publicadoDetalhe == true);
-
+      setResponseAPI(response);
       setJsonData(dadosRecebidos);
       setLoading(false); // Indica que os dados foram carregados
+      console.log("Status AXios", responseAPI.status);
     } catch (err) {
       console.log("Erro", err);
       setLoading(false); // Indica que ocorreu um erro ao carregar os dados
@@ -36,6 +39,7 @@ const Home = () => {
 
   // Efeito para carregar os dados ao montar o componente
   useEffect(() => {
+    
     if (
       (buscar && buscar.trim() !== "") ||
       (contratada && contratada.trim() !== "") ||
@@ -64,7 +68,10 @@ const Home = () => {
       setJsonData(filtradoJson);
     } else {
       // Se os campos estiverem vazios, carrega todos os dados novamente
+      if(responseAPI.status != 200){
       Adquirirdados();
+
+      }
     }
   }, [
     buscar,

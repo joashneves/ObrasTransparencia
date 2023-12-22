@@ -4,6 +4,7 @@ import ListaDeDocumentosEditaveis from "./ListeDeDocumentosEditaveis";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
+import LoadingBar from "../miscs/LoadingBar";
 
 const SistemaListaDocumento = (props) =>{
 
@@ -12,18 +13,20 @@ const SistemaListaDocumento = (props) =>{
 }
   
   const [jsonData, setJsonData] = useState([]);
-  const [obraSelecionada, setObraSelecionada] = useState({});
+
+  const [responseAPI, setResponseAPI] = useState({});
   
   const [loadig, setLoading] = useState();
   
   const Adquirirdados = async (event) => {
-    await new Promise(r => setTimeout(r, 12000));
+    
     try {
       const response = await axios.get('https://localhost:7067/Obra/');
 
       const dadosRecebidos = response.data;
 
       console.log("Dados acessados", dadosRecebidos)
+      setResponseAPI(response);
       setJsonData(dadosRecebidos);
       setLoading(false); // Indica que os dados foram carregados
     } catch (err) {
@@ -40,7 +43,6 @@ const SistemaListaDocumento = (props) =>{
       (props.tipoDeObra && props.tipoDeObra.trim() !== "") ||
       (props.publicado !== undefined)
       ) {
-      sleep(5000);
       const filtradoJson = jsonData.filter((obra) => {
         const nomeDetalheLowerCase = obra.nomeDetalhe ? obra.nomeDetalhe.toLowerCase() : "";
         const empresaContratadaLowerCase = obra.nomeContratadaDetalhe
@@ -61,8 +63,11 @@ const SistemaListaDocumento = (props) =>{
       });
       setJsonData(filtradoJson);
     } else{
+
+      if(responseAPI.status != 200){
       // Se os campos estiverem vazios, carrega todos os dados novamente
       Adquirirdados();
+      }
     }
   }, [
     props.nome,
@@ -103,7 +108,7 @@ const SistemaListaDocumento = (props) =>{
                     <th className={styles.tabelaObrasTopo}>Publicado?</th>
                     <th className={styles.tabelaObrasTopoDireito}></th>
                 </tr>
-                {loadig ? (<></>):(
+                {loadig ? (<><LoadingBar/></>):(
                 Object.values(jsonData).map((data)=>{
                     return(
                     <ListaDeDocumentosEditaveis

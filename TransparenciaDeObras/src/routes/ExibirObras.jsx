@@ -31,16 +31,20 @@ const ExibirOBras = () => {
   const [valorEmpenhado, setValorEmpenhado] = useState();
   const [valorLiquidado, setValorLiquidado] = useState();
 
+  const [responseAPI, setResponseAPI] = useState({}); // verifica se o status da Api foi sucesso 
+
+  let chamado = 0;
   useEffect(() => {
+    if (responseAPI.status != 200){
     const Adquirirdados = async () => {
       try {
-        await new Promise(r => setTimeout(r, 5000));
         const response = await axios.get('https://localhost:7067/Obra/');
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
         const obraEncontrada = dadosRecebidos.find((obra) => obra.id == id);
 
+        setResponseAPI(response);
         if (obraEncontrada) {
           setObraSelecionada(obraEncontrada);
 
@@ -116,15 +120,20 @@ const ExibirOBras = () => {
 
         // Calcula prazo
         setAditivoPrazoInicial(primeiraAditivo.prazo);
+      
 
       } catch (error) {
         console.error("Erro na requisição:");
       }
+   
+
     };
     SomarValores();
 
 
     Adquirirdados();
+  } // Fim da verificação de Status
+  
   }, [id]); // Adiciona título da obra como dependência
 
   function converterDataFormato(dataISO) {

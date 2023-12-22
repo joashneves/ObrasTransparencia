@@ -13,7 +13,10 @@ const ExibirObrasEditaveis = () => {
   const [publicado, setPublicado] = useState();
   const history = useNavigate();
 
+  const [responseAPI, setResponseAPI] = useState({});
+
   useEffect(() => {
+    if(responseAPI != 200){
 
     const AutenticarUser = async () => {
 
@@ -24,6 +27,8 @@ const ExibirObrasEditaveis = () => {
         const username = window.sessionStorage.getItem('username');
 
         const acharUser = dataUser.find((o) => o.nome == username);
+
+        setResponseAPI(response);
 
         if (!acharUser) {
           history('/login');
@@ -36,6 +41,8 @@ const ExibirObrasEditaveis = () => {
 
     }
     AutenticarUser();
+  }
+
   }, [history]);
 
   

@@ -29,7 +29,7 @@ const CriarUsuario = () =>{
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7067/User');
+        const response = await axios.get('https://localhost:7067/User/', config);
         const dadosRecebidos = response.data;
 
         // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto
