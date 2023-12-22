@@ -8,6 +8,7 @@ import CadastrarAditivo from "../componentes/cadastrar/CadastrarAditivo";
 import CadastrarObraOpcao from "../componentes/cadastrar/CadastrarObraOpcao";
 import CadastrarFoto from "../componentes/cadastrar/CadastrarFoto";
 import CadastrarMedicao from "../componentes/cadastrar/CadastrarMedicao";
+import imagem from "../assets/carregando.gif";
 import axios from "axios";
 
 const CadastrarObras = () =>{
