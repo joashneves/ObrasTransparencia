@@ -40,7 +40,7 @@ function CadastrarAnexo() {
       formData.append("nome", nomeAnexo);
       formData.append("descricao", descricaoAnexo);
       formData.append("dataDocumento", dataFormatada);
-      formData.append("Anexo", arquivo)
+      formData.append("Anexo", arquivo);
 
       console.log([...formData]);
 
@@ -51,13 +51,12 @@ function CadastrarAnexo() {
 
       if (dadosExistente) { // se existir atualiza
         const dataPut = {
-          "id": idAnexo,
           "nome": nomeAnexo,
           "descricao": descricaoAnexo,
           "dataDocumento": dataFormatada
         }
         // Enviar as credenciais para a sua API usando o axios
-        const respondePut = await axios.put(`https://localhost:7067/Anexo/${idAnexo}`, dataPut);
+        const respondePut = await axios.put(`https://localhost:7067/Anexo/${idAnexo}`, formData);
         
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {

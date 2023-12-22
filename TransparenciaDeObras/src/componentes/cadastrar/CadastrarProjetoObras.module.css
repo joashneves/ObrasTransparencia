@@ -76,6 +76,9 @@ a{
 
     border-radius: 12px;
     background: rgba(0, 122, 255, 0.45);
+
+    align-self: center;
+    justify-self: center;
 }
 .salvarFormulario:hover{
 

@@ -35,11 +35,11 @@ const CadastrarMedicao = (props) => {
       const dataMedicao = {
         "id": idMedicao,
         "id_obras": id,
+        "nome": nomeMedicao,
         "dataInicio": dataFormatadaInicio,
         "dataFinal": dataFormatadaFinal,
         "valorPago": valorPago,
-        "valorMedido": valorMedido,
-        "nome": nomeMedicao
+        "valorMedido": valorMedido
       }
       console.log("Valor do arquivo: Medicao", dataMedicao);
 
