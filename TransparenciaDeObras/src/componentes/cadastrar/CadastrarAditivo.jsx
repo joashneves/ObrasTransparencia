@@ -70,7 +70,7 @@ function CadastrarAditivo() {
           "id_obras": id,
           "nome": nomeAditivo,
           "ano": anoAditivo,
-          "dataAssinatura": dataFormatada,
+          "dataAssinatura": converterParaFormatoISO(dataFormatada),
           "tipo": tipoAditivo,
           "casoAditivo": tipoCaso,
           "valorContratual": valorContratualAditivo,
@@ -226,6 +226,19 @@ function CadastrarAditivo() {
     const [dia, mes, ano] = converterDataFormato(data).split("/");
     return `${ano}-${mes}-${dia}`;
   };
+
+  function converterParaFormatoISO(dataString) {
+    // Divida a string em dia, mês e ano
+    const [dia, mes, ano] = dataString.split('/');
+  
+    // Crie um objeto de data com os componentes
+    const data = new Date(`${ano}-${mes}-${dia}T00:00:00`);
+  
+    // Converta a data para uma string no formato ISO
+    const formatoISO = data.toISOString();
+  
+    return formatoISO;
+  }
 
   useEffect(() => {
     console.log("tipo é ", tipoAditivo);

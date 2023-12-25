@@ -53,10 +53,11 @@ function CadastrarAnexo() {
         const dataPut = {
           "nome": nomeAnexo,
           "descricao": descricaoAnexo,
-          "dataDocumento": dataFormatada
+          "dataDocumento": converterParaFormatoISO(dataFormatada)
         }
+        console.log("data",dataPut)
         // Enviar as credenciais para a sua API usando o axios
-        const respondePut = await axios.put(`https://localhost:7067/Anexo/${idAnexo}`, formData);
+        const respondePut = await axios.put(`https://localhost:7067/Anexo/${idAnexo}`, dataPut);
         
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
@@ -178,6 +179,19 @@ function CadastrarAnexo() {
   const handleDataChange = (event) => {
     setDataDocumetno(event.target.value);
   };
+
+  function converterParaFormatoISO(dataString) {
+    // Divida a string em dia, mês e ano
+    const [dia, mes, ano] = dataString.split('/');
+  
+    // Crie um objeto de data com os componentes
+    const data = new Date(`${ano}-${mes}-${dia}T00:00:00`);
+  
+    // Converta a data para uma string no formato ISO
+    const formatoISO = data.toISOString();
+  
+    return formatoISO;
+  }
 
   const converterFormatoData = (data) => {
     const [dia, mes, ano] = (data).split("/");

@@ -36,8 +36,8 @@ const CadastrarMedicao = (props) => {
         "id": idMedicao,
         "id_obras": id,
         "nome": nomeMedicao,
-        "dataInicio": dataFormatadaInicio,
-        "dataFinal": dataFormatadaFinal,
+        "dataInicio": converterParaFormatoISO(dataFormatadaInicio),
+        "dataFinal": converterParaFormatoISO(dataFormatadaFinal),
         "valorPago": valorPago,
         "valorMedido": valorMedido
       }
@@ -173,6 +173,30 @@ const CadastrarMedicao = (props) => {
     return `${ano}-${mes}-${dia}`;
   };
 
+  function converterParaFormatoISO(dataString) {
+    // Divida a string em dia, mês e ano
+    const [dia, mes, ano] = dataString.split('/');
+  
+    // Crie um objeto de data com os componentes
+    const data = new Date(`${ano}-${mes}-${dia}T00:00:00`);
+  
+    // Converta a data para uma string no formato ISO
+    const formatoISO = data.toISOString();
+  
+    return formatoISO;
+  }
+  function converterParaFormatoISO(dataString) {
+  // Divida a string em dia, mês e ano
+  const [dia, mes, ano] = dataString.split('/');
+
+  // Crie um objeto de data com os componentes
+  const data = new Date(`${ano}-${mes}-${dia}T00:00:00`);
+
+  // Converta a data para uma string no formato ISO
+  const formatoISO = data.toISOString();
+
+  return formatoISO;
+}
   const converterFormatoDataFinal = (data) => {
     const [dia, mes, ano] = data.split("/");
     return `${ano}-${mes}-${dia}`;
