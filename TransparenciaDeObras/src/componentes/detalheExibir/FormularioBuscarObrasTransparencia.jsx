@@ -22,11 +22,14 @@ function FormularioBuscarObrasTransparencia ({
          id="Situacao"
          onChange={(e) => onSituacaoChange(e.target.value)}
             >
-            <option className={styles.situacaoInput}></option>
-            <option className={styles.situacaoInput}>Concluída</option>
-            <option className={styles.situacaoInput}>Parado</option>
-            <option className={styles.situacaoInput}>Em andamento</option>
-            <option className={styles.situacaoInput}>Execução</option></select>
+            <option value=""></option>
+            <option value="Não iniciada">Não iniciada</option>
+            <option value="Inicio">Inicio</option>
+            <option value="Paralisada">Paralisada</option>
+            <option value="Reinicio">Reinicio</option>
+            <option value="Paralisada por recisão contratual">Paralisada por recisão contratual</option>
+            <option value="Concluída">Concluída</option>
+            <option value="Concluída e recebida provisoriamente">Concluída e recebida provisoriamente</option></select>
             </div>
         <div><label>Data Inicio</label>
         <input type="date" className={styles.dataInicioInput} id="DataInicio" onChange={(e) => onDataChange(e.target.value)}></input></div>

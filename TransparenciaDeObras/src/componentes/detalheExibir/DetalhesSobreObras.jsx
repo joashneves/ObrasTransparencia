@@ -14,7 +14,7 @@ const DetalheSobreObras = (props) => {
             <div className={styles.detalhesFundo}>Data de Publicação</div> <div className={styles.detalhesFundo}>{props.dataPublicacaoDetalhes}</div>
             <div className={styles.detalhesFundo}>Orgão publico</div> <div className={styles.detalhesFundo}>{props.prefeituraObrasDetalhes}</div>
             <div className={styles.detalhesFundo}>Tipo de obra</div> <div className={styles.detalhesFundo}>{props.tipoObraDetalhes}</div>
-            <div className={styles.detalhesFundo}>Valor pago</div> <div className={styles.detalhesFundo}> R$ {props.valorPagoObraDetalhes}</div>
+            <div className={styles.detalhesFundo}>Valor Inicial</div> <div className={styles.detalhesFundo}> R$ {props.valorPagoObraDetalhes}</div>
             <div className={styles.detalhesFundoFinalEsquerdo}>Nome da Contratada</div> <div className={styles.detalhesFundoFinalDireito}>{props.contratadaObraDetalhes}</div>
             </div>
             </div>

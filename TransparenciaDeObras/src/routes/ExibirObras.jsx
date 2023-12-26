@@ -167,6 +167,7 @@ const ExibirOBras = () => {
         licitacaoObraDetalhes={obraSelecionada.licitacao}
         contratoObraDetalhes={obraSelecionada.contrato}
         prazoInicialObraDetalhes={aditivioPrazoInicial}
+        
         prazoTotalObraDetalhes={aditivioPrazoTotal}
         valorEmpenhadoObraDetalhes={valorEmpenhado}
         valorLiquidadoObraDetalhes={valorLiquidado}

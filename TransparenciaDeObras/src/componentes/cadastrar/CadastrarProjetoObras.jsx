@@ -293,7 +293,7 @@ function CadastrarProjetoObras() {
           className={styles.cadastrarCNPJContratada}
           value={licitacao}
           onChange={(e) => setLicitacao(e.target.value)} /></label>
-        <label>Valor pago <input type="number"
+        <label>Valor Inicial <input type="number"
           id="User"
           name="valor pago"
           className={styles.cadastrarNumero}
