@@ -20,8 +20,7 @@ function FormularioBuscarObrasTransparencia ({
         <div><label>Situação</label>
         <select className={styles.situacaoInput}
          id="Situacao"
-         onChange={(e) => onSituacaoChange(e.target.value)}
-            >
+         onChange={(e) => onSituacaoChange(e.target.value)}>
             <option value=""></option>
             <option value="Não iniciada">Não iniciada</option>
             <option value="Inicio">Inicio</option>

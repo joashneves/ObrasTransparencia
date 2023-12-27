@@ -40,9 +40,12 @@ const Login = (props) => {
       const senha = userData.find((log) => log.nome == username);
       console.log(`senha ${senha.senha_hash} == password ${senhaCripto}`)
       // Aqui você deve verificar as propriedades corretas na resposta da API
-      if (senha.senha_hash == senhaCripto) {
-        window.sessionStorage.setItem('username', username);
+      if (senha.senha_hash == senhaCripto && senha.isCadastrarOpcao === false) {
         history('/ProcurarObra');
+        window.sessionStorage.setItem('username', username);
+      } else if (senha.senha_hash == senhaCripto) {
+        window.sessionStorage.setItem('username', username);
+        window.location.reload();
       } else {
         window.alert('Senha incorreta');
       }

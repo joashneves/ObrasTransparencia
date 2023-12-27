@@ -14,6 +14,7 @@ const CriarUsuario = () =>{
     const [isProjeto, setIsProjeto] = useState(false);
     const [isAnexo, setIsAnexo] = useState(false);
     const [isAditivo, setIsAditivo] = useState(false);
+    const [isFiscalGestor, setIsFiscalGestor] = useState(false);
     const [isMedicao, setIsMedicao] = useState(false);
     const [isFoto, setIsFoto] = useState(false);
     const [isOpcao, setIsOpcao] = useState(false);
@@ -70,6 +71,7 @@ const CriarUsuario = () =>{
           "isCadastrarProjeto": isProjeto,
           "isCadastrarAnexo": isAnexo,
           "isCadastrarAditivo": isAditivo,
+          "isCadastrarFiscalGestor": isFiscalGestor,
           "isCadastrarMedicao": isMedicao,
           "isCadastrarFoto": isFoto,
           "isCadastrarOpcao": isOpcao
@@ -113,6 +115,7 @@ const CriarUsuario = () =>{
                 <label>Criar projeto?<input type="checkbox" onChange={(e) => setIsProjeto(e.target.checked)}/></label>
                 <label>Criar anexo?<input type="checkbox" onChange={(e) => setIsAnexo(e.target.checked)}/></label>
                 <label>Criar Aditivo?<input type="checkbox" onChange={(e) => setIsAditivo(e.target.checked)}/></label>
+                <label>Criar Fiscal Gestor?<input type="checkbox" onChange={(e) => setIsFiscalGestor(e.target.checked)}/></label>
                 <label>Criar medição?<input type="checkbox" onChange={(e) => setIsMedicao(e.target.checked)}/></label>
                 <label>Criar Foto?<input type="checkbox" onChange={(e) => setIsFoto(e.target.checked)}/></label>
                 <label>Criar opção?<input type="checkbox" onChange={(e) => setIsOpcao(e.target.checked)}/></label>

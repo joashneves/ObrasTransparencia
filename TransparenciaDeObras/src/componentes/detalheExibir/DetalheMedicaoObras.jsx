@@ -53,7 +53,8 @@ const DetalheMedicaoObras =(props)=>{
                     <th className={styles.tabelaMedicaoTopo}>Final</th>
                     <th className={styles.tabelaMedicaoTopo}>Nome</th>
                     <th className={styles.tabelaMedicaoTopo}>Valor Pago</th>
-                    <th className={styles.tabelaMedicaoTopoDireito}>Valor Medido</th>
+                    <th className={styles.tabelaMedicaoTopo}>Valor Medido</th>
+                    <th className={styles.tabelaMedicaoTopoDireito}>Arquivo</th>
                 </tr>
                 {loadig ? (<></>) : (Object.values(jsonData).map((data) => {
                     return (
