@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import styles from "./CadastrarMedicao.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ListarMedicao from "./tabela/ListarMedicao";
 import TabelaMedicao from "./tabela/TabelaMedicao";
 
