@@ -68,7 +68,7 @@ const LoginAlterar = (props) => {
 
     try {
       if(password == passwordEqual){
-        setIsOpcao(false);
+      setIsOpcao(false);
       //Criar um objeto em formato de json para Obras
       const dado = {
         "nome": nomeUsuario,

@@ -16,6 +16,9 @@ const CadastrarMedicao = (props) => {
   const [porcentagem, setPorcentagem] = useState();
   const [valorPago, setValorPago] = useState();
   const [valorMedido, setValorMedido] = useState();
+  const [medicao, setMedicao] = useState(null);
+
+  const inputRef = useRef();
 
   const [jsonData, setJsonData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -32,16 +35,17 @@ const CadastrarMedicao = (props) => {
     // Recebe os dados do nome do usuario
     const nomeUsuario = window.sessionStorage.getItem('username');
     try {
-      const dataMedicao = {
-        "id": idMedicao,
-        "id_obras": id,
-        "nome": nomeMedicao,
-        "dataInicio": converterParaFormatoISO(dataFormatadaInicio),
-        "dataFinal": converterParaFormatoISO(dataFormatadaFinal),
-        "valorPago": valorPago,
-        "valorMedido": valorMedido
-      }
-      console.log("Valor do arquivo: Medicao", dataMedicao);
+      const formData = new FormData();
+      formData.append("id", idMedicao);
+      formData.append("id_obras", id);
+      formData.append("nome", nomeMedicao);
+      formData.append("dataInicio", converterParaFormatoISO(dataFormatadaInicio));
+      formData.append("dataFinal", converterParaFormatoISO(dataFormatadaFinal));
+      formData.append("valorPago", valorPago);
+      formData.append("valorMedido", valorMedido);
+      formData.append("Medicao", medicao);
+      
+      console.log("Valor do arquivo: Medicao", formData);
 
       const responseGet = await axios.get('https://localhost:7067/Medicao');
       const dadosRecebidos = responseGet.data // Pega os dado da api
@@ -50,6 +54,15 @@ const CadastrarMedicao = (props) => {
 
       if (dadosExistente) { // se existir atualiza
 
+        const dataMedicao = {
+          "id": idMedicao,
+          "id_obras": id,
+          "nome": nomeMedicao,
+          "dataInicio": converterParaFormatoISO(dataFormatadaInicio),
+          "dataFinal": converterParaFormatoISO(dataFormatadaFinal),
+          "valorPago": valorPago,
+          "valorMedido": valorMedido
+        }
         // Enviar as credenciais para a sua API usando o axios
         const respondePut = await axios.put(`https://localhost:7067/Medicao/${idMedicao}`, dataMedicao);
 
@@ -68,7 +81,7 @@ const CadastrarMedicao = (props) => {
         setIdLog(idLog + 1);
         window.location.reload();
       } else {
-        const response = await axios.post('https://localhost:7067/Medicao', dataMedicao);
+        const response = await axios.post('https://localhost:7067/Medicao', formData);
         const dadosUsuario = {
           "id": idLog,
           "id_obras": id,
@@ -100,6 +113,12 @@ const CadastrarMedicao = (props) => {
     setValorPago(documentoSelecionado.valorPago);
     setValorMedido(documentoSelecionado.valorMedido);
   }
+
+  const handleFileChange = (e) => {
+    if (e.target.files) {
+      setMedicao(e.target.files[0]);
+    }
+  };
 
   // Adiquirir dados da API das medições e filtra
   useEffect(() => {
@@ -241,6 +260,12 @@ const CadastrarMedicao = (props) => {
           onChange={(e) => setValorMedido(e.target.value)} /></label>
 
         <div className={styles.enviarFormulario}>
+        <input type="file"
+            id="file"
+            name="file"
+            ref={inputRef}
+            onChange={handleFileChange}
+            accept=".pdf" className={styles.esconderBotao} />
 
           <button type="submit" name="botaoSalvar" value="Salvar" className={styles.salvarFormulario}>Salvar</button></div>
       </form>
