@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./BotaoBaixarAPI.module.css";
 import axios from "axios";
 
 const BotaoBaixarAPI = () => {
@@ -42,7 +43,11 @@ const BotaoBaixarAPI = () => {
     }
     return (
         <>
-            <input type="button" onClick={baixarJSON} />
+        <div>
+            <i class="bi bi-download"></i>
+            <input className={styles.botaoBaixarAPI} type="button" onClick={baixarJSON}>
+            </input>
+            </div>
         </>
     )
 }
