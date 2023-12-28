@@ -13,7 +13,7 @@ const DetalheAnexoListaObras = (props) =>{
                 responseType: 'arraybuffer', // Configura responseType para 'arraybuffer' para tratar a resposta como um buffer de bytes
             });
     
-            const blob = new Blob([response.data], { type: 'application/pdf' }); // Substitua 'application/pdf' pelo tipo MIME correto se necessário
+            const blob = new Blob([response.data], { type: 'application/pdf' }); 
     
             const url = window.URL.createObjectURL(blob);
     

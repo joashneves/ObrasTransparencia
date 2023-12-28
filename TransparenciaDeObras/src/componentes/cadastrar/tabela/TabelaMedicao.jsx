@@ -67,6 +67,7 @@ const TabelaMedicao = (props) => {
                     <th className={styles.tabelaMedicaoTopo}>Nome</th>
                     <th className={styles.tabelaMedicaoTopo}>Valor pago</th>
                     <th className={styles.tabelaMedicaoTopo}>Valor medido</th>
+                    <th className={styles.tabelaMedicaoTopo}>Arquivo</th>
                     <th className={styles.tabelaMedicaoTopoDireito}></th>
                 </tr>
                 {loading ? (<p></p>):(Object.values(jsonData).map((data) =>{

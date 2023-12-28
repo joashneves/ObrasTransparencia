@@ -43,7 +43,6 @@ background: rgba(67, 74, 84, 0.30);
 .tabelaAnexoMeioDownload:hover{
     color: #EDEDED;
     background: var(--titulo-do-topo-da-pesquisa);
-
 }
 .tabelaAnexoMeioLink{
     color: #EDEDED;

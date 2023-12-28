@@ -62,7 +62,15 @@ table {
 
     border-radius: 0rem 0rem 0rem 0.75rem;
     background: #EDEDED;
-
+}
+.tabelaMedicaoMeioDownload{
+    color: #EDEDED;
+    background: var(--cor-de-fundo-visualizar);
+    cursor: pointer;
+}
+.tabelaMedicaoMeioDownload:hover{
+    color: #EDEDED;
+    background: var(--titulo-do-topo-da-pesquisa);
 
 }
 

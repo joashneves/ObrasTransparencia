@@ -33,9 +33,6 @@ const Fazerlogin = () => {
       if(dataUsuario){
       setNovaSenha(dataUsuario.isCadastrarOpcao);
       console.log(`nome: ${dataUsuario.nome}, nova senha ${novaSenha}`);
-      if(novaSenha == false){
-        
-      }
     }
 
     } catch (error) {

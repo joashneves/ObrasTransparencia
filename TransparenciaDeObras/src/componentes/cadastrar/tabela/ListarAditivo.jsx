@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./TabelaAditivo.module.css";
 
+import axios from "axios";
 const ListarAditivo = (props) =>{
 
     const handleEditarClick = () => {
@@ -22,7 +23,7 @@ const ListarAditivo = (props) =>{
                 responseType: 'arraybuffer', // Configura responseType para 'arraybuffer' para tratar a resposta como um buffer de bytes
             });
 
-            const blob = new Blob([response.data], { type: 'application/pdf' }); // Substitua 'application/pdf' pelo tipo MIME correto se necessário
+            const blob = new Blob([response.data], { type: 'application/pdf' }); //  'application/pdf' 
 
             const url = window.URL.createObjectURL(blob);
 
@@ -46,7 +47,7 @@ const ListarAditivo = (props) =>{
         <td className={styles.tabelaAditivoMeio}>{props.nomeAditivo}</td>
         <td className={styles.tabelaAditivoMeio}>{props.tipoAditivo}</td>
         <td className={styles.tabelaAditivoMeio}>{props.tipoCasoAditivo}</td>
-        <td className={styles.tabelaAditivoMeioDownload} onclick={Download}>Download</td>
+        <td className={styles.tabelaAditivoMeioDownload} onClick={Download}>Download</td>
         <td className={styles.tabelaAditivoMeioLink} onClick={handleEditarClick}>Editar</td>
         </tr>
         </>
