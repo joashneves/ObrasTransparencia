@@ -6,6 +6,7 @@ import BuscarLog from "../componentes/registroLog/BuscarLog";
 import ListaLog from "../componentes/registroLog/ListaLog";
 import CriarPerfil from "../componentes/Perfis/CriarPerfil";
 import CriarUsuario from "../componentes/login/CriarUsuario";
+import BuscarUsuario from "../componentes/Perfis/BuscarUsuario";
 
 const RegistroLog = () =>{
 

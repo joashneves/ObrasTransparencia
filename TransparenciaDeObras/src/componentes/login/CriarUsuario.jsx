@@ -118,7 +118,7 @@ const CriarUsuario = () =>{
                 <label>Criar Fiscal Gestor?<input type="checkbox" onChange={(e) => setIsFiscalGestor(e.target.checked)}/></label>
                 <label>Criar medição?<input type="checkbox" onChange={(e) => setIsMedicao(e.target.checked)}/></label>
                 <label>Criar Foto?<input type="checkbox" onChange={(e) => setIsFoto(e.target.checked)}/></label>
-                <label>Criar opção?<input type="checkbox" onChange={(e) => setIsOpcao(e.target.checked)}/></label>
+                <label>Criar senha?<input type="checkbox" onChange={(e) => setIsOpcao(e.target.checked)}/></label>
                 <input className={styles.botaoNormal} type="submit" value={"Cadastrar"}/>
             </form>
         </article>
