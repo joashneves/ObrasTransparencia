@@ -63,8 +63,10 @@ const ExibirOBras = () => {
         // Calcula valor
         const responseAditivo = await axios.get('https://localhost:7067/Aditivo/');
         const responseMecaoe = await axios.get('https://localhost:7067/Medicao/');
+        const responseObra = await axios.get('https://localhost:7067/Obra/');
         const dataAditivo = responseAditivo.data;
         const dataMecaoe = responseMecaoe.data;
+        const dataAObra = responseObra.data;
 
         const primeiraAditivo = dataAditivo.find((obra) => obra.id_obras == id && obra.prazo != 0) || 0;
 
@@ -88,6 +90,9 @@ const ExibirOBras = () => {
   
           }
         });
+        // Econtra a obra
+        const obraEncontrada = dataAObra.find((obra) => obra.id == id);
+
 
         // calcula valor liquidado 
         let valorMedidoMecaoes = 0;
@@ -113,7 +118,8 @@ const ExibirOBras = () => {
         setAditivoPrazoTotal(prazoDiasAditivos)
 
         // Valor pago
-        setValorEmpenhado(valorEmpenhadoAditivos + valorEmpenhadoMecaoes);
+        const somaDosValoresPago = valorEmpenhadoAditivos + valorEmpenhadoMecaoes + obraEncontrada.valorPagoDetalhe;
+        setValorEmpenhado(somaDosValoresPago);
 
         //Valor liquido
         setValorLiquidado(valorMedidoMecaoes);
@@ -128,10 +134,10 @@ const ExibirOBras = () => {
    
 
     };
+    Adquirirdados();
     SomarValores();
 
 
-    Adquirirdados();
   } // Fim da verificação de Status
   
   }, [id]); // Adiciona título da obra como dependência
@@ -158,7 +164,7 @@ const ExibirOBras = () => {
         dataPublicacaoDetalhes={converterDataFormato(obraSelecionada.publicacaoData)}
         prefeituraObrasDetalhes={obraSelecionada.orgaoPublicoDetalhe}
         tipoObraDetalhes={obraSelecionada.tipoObraDetalhe}
-        valorPagoObraDetalhes={valorEmpenhado}
+        valorPagoObraDetalhes={obraSelecionada.valorPagoDetalhe}
         contratadaObraDetalhes={obraSelecionada.nomeContratadaDetalhe}
 
         localizacaoObraDetalhes={obraSelecionada.localizacaoobraDetalhe}
