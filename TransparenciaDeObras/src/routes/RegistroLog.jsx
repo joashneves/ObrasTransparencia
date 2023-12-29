@@ -7,6 +7,9 @@ import ListaLog from "../componentes/registroLog/ListaLog";
 import CriarPerfil from "../componentes/Perfis/CriarPerfil";
 import CriarUsuario from "../componentes/login/CriarUsuario";
 import BuscarUsuario from "../componentes/Perfis/BuscarUsuario";
+import CarregarLog from "../componentes/registroLog/CarregarLog";
+import CarregarUsuario from "../componentes/login/CarregarUsuario";
+import ExibirUsuario from "../componentes/login/ExibirUsuario";
 
 const RegistroLog = () =>{
 
@@ -49,8 +52,10 @@ const RegistroLog = () =>{
 
     return (
         <>
-        <BuscarLog/>
         <CriarUsuario/>
+        <BuscarUsuario/>
+        <ExibirUsuario/>
+        <BuscarLog/>
         <ListaLog/>
         </>
     )
