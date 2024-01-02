@@ -87,7 +87,7 @@ const ExibirOBras = () => {
         dataPublicacaoDetalhes={converterDataFormato(obraSelecionada.publicacaoData)}
         prefeituraObrasDetalhes={obraSelecionada.orgaoPublicoDetalhe}
         tipoObraDetalhes={obraSelecionada.tipoObraDetalhe}
-        valorPagoObraDetalhes={obraSelecionada.valorPagoDetalhe}
+        valorPagoObraDetalhes={obraSelecionada.valorEmpenhado}
         contratadaObraDetalhes={obraSelecionada.nomeContratadaDetalhe}
 
         localizacaoObraDetalhes={obraSelecionada.localizacaoobraDetalhe}
