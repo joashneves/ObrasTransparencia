@@ -138,8 +138,11 @@ function CadastrarProjetoObras() {
       "publicacaoData": publicacaoData,
       "orgaoPublicoDetalhe": orgaoPublicoDetalhe,
       "tipoObraDetalhe": tipoObraDetalhe,
-      "valorPagoDetalhe": valorPagoDetalhe,
       "nomeContratadaDetalhe": nomeContratadaDetalhe,
+      "prazoInicial":0,
+      "prazoFinal": 0,
+      "valorEmpenhado": 0,
+      "valorLiquidado": valorPagoDetalhe,
       "cnpjContratadaObraDetalhe": cnpjContratadaDetalhe,
       "anoDetalhe": anoDetalhe,
       "contrato": contrato,
@@ -293,7 +296,7 @@ function CadastrarProjetoObras() {
           className={styles.cadastrarCNPJContratada}
           value={licitacao}
           onChange={(e) => setLicitacao(e.target.value)} /></label>
-        <label>Valor Inicial <input type="number"
+        <label>Valor Liquidado <input type="number"
           id="User"
           name="valor pago"
           className={styles.cadastrarNumero}

@@ -58,84 +58,7 @@ const ExibirOBras = () => {
       }
     };
 
-    const SomarValores = async () => {
-      try {
-        // Calcula valor
-        const responseAditivo = await axios.get('https://localhost:7067/Aditivo/');
-        const responseMecaoe = await axios.get('https://localhost:7067/Medicao/');
-        const responseObra = await axios.get('https://localhost:7067/Obra/');
-        const dataAditivo = responseAditivo.data;
-        const dataMecaoe = responseMecaoe.data;
-        const dataAObra = responseObra.data;
-
-        const primeiraAditivo = dataAditivo.find((obra) => obra.id_obras == id && obra.prazo != 0) || 0;
-
-        // calcula valor empenhado
-        let valorEmpenhadoAditivos = 0;
-        const AditivoEncontrada = dataAditivo.filter((obra) => obra.id_obras == id);
-        AditivoEncontrada.forEach(element => {
-          const valorContratual = parseFloat(element.valorContratual);
-          if (!isNaN(valorContratual)) {
-            valorEmpenhadoAditivos += valorContratual;
-            
-          }
-        });
-        // calcula valor pago
-        let valorEmpenhadoMecaoes = 0;
-        const MecaoeEncontrada = dataMecaoe.filter((obra) => obra.id_obras == id);
-        MecaoeEncontrada.forEach((element) => {
-          const valorPago = parseFloat(element.valorPago);
-          if (!isNaN(valorPago)) {
-            valorEmpenhadoMecaoes += valorPago;
-  
-          }
-        });
-        // Econtra a obra
-        const obraEncontrada = dataAObra.find((obra) => obra.id == id);
-
-
-        // calcula valor liquidado 
-        let valorMedidoMecaoes = 0;
-        MecaoeEncontrada.forEach((element) => {
-          const valorMedido = parseFloat(element.valorMedido);
-          if (!isNaN(valorMedido)) {
-            valorMedidoMecaoes += valorMedido;
-            
-          }
-        });
-        // calcula prazos do dia 
-        let prazoDiasAditivos = 0;
-        // calcula valor empenhado
-        AditivoEncontrada.forEach(element => {
-          const Aditivodias = parseFloat(element.prazo);
-          if (!isNaN(Aditivodias)) {
-            prazoDiasAditivos += Aditivodias;
-           
-          }
-        });
-
-        // Valor Prazo
-        setAditivoPrazoTotal(prazoDiasAditivos)
-
-        // Valor pago
-        const somaDosValoresPago = valorEmpenhadoAditivos + valorEmpenhadoMecaoes + obraEncontrada.valorPagoDetalhe;
-        setValorEmpenhado(somaDosValoresPago);
-
-        //Valor liquido
-        setValorLiquidado(valorMedidoMecaoes);
-
-        // Calcula prazo
-        setAditivoPrazoInicial(primeiraAditivo.prazo);
-      
-
-      } catch (error) {
-        console.error("Erro na requisição:");
-      }
-   
-
-    };
     Adquirirdados();
-    SomarValores();
 
 
   } // Fim da verificação de Status
@@ -172,11 +95,11 @@ const ExibirOBras = () => {
         cnpjContratadaObraDetalhes={obraSelecionada.cnpjContratadaObraDetalhe}
         licitacaoObraDetalhes={obraSelecionada.licitacao}
         contratoObraDetalhes={obraSelecionada.contrato}
-        prazoInicialObraDetalhes={aditivioPrazoInicial}
+        prazoInicialObraDetalhes={obraSelecionada.prazoInicial}
         
-        prazoTotalObraDetalhes={aditivioPrazoTotal}
-        valorEmpenhadoObraDetalhes={valorEmpenhado}
-        valorLiquidadoObraDetalhes={valorLiquidado}
+        prazoTotalObraDetalhes={obraSelecionada.prazoFinal}
+        valorEmpenhadoObraDetalhes={obraSelecionada.valorEmpenhado}
+        valorLiquidadoObraDetalhes={obraSelecionada.valorLiquidado}
       />
 
       <DetalheGestoresFiscaisObras />

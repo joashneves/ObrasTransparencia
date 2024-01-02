@@ -123,7 +123,7 @@ const Home = () => {
               dataPublicacao={converterDataFormato(data.publicacaoData)}
               prefeituraObras={data.orgaoPublicoDetalhe}
               tipoObra={data.tipoObraDetalhe}
-              valorPagoObra={data.valorPagoDetalhe}
+              valorPagoObra={data.valorEmpenhado}
               contratadaObra={data.nomeContratadaDetalhe}
             />
           );
