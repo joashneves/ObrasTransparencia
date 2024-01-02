@@ -9,7 +9,7 @@ Separadas em pastas a sessão de cadastro esta separada para que o usuario mexa 
  - [Visual studio code](https://code.visualstudio.com/)
  - [Vite + React](https://vitejs.dev/)
  - [react-router-dom](https://reactrouter.com/en/main)
-
+ - [vite-plugin-svgr](https://www.npmjs.com/package/vite-plugin-svgr)
 
 ## Token da .env
 

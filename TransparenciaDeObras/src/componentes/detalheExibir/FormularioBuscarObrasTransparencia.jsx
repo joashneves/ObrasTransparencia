@@ -1,6 +1,8 @@
 
 import React, {useEffect, useState} from "react";
 import styles from "./FormularioBuscarObrasTransparencia.module.css";
+import BotaoBaixarAPI from "../miscs/BotaoBaixarAPI";
+import BotaoBaixarAPIExcel from "../miscs/BotaoBaixarAPIExcel";
 
 function FormularioBuscarObrasTransparencia ({
     onBuscarChange,
@@ -12,10 +14,10 @@ function FormularioBuscarObrasTransparencia ({
 
     return(
     <article className={styles.corDeFundoDosInputs}>
-        <header className={styles.tituloDeFundo}><a>Buscar Obras</a></header>
+        <header className={styles.tituloDeFundo}><a className={styles.tituloBuscar}>Buscar Obras</a> <BotaoBaixarAPIExcel/> <BotaoBaixarAPI/></header>
         <form className={styles.organizarInputs}>
         
-        <div><label>Buscar</label>
+        <div><label>Buscar</label> 
         <input className={styles.buscarInput} id="Buscar" onChange={(e) => onBuscarChange(e.target.value)}></input></div>
         <div><label>Situação</label>
         <select className={styles.situacaoInput}

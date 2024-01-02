@@ -1,9 +1,10 @@
 .botaoBaixarAPI{
-    background-color: var(--cor-de-fundo-visualizar);
+
     width: 3rem;
     height: 3rem;
+
 }
 .botaoBaixarAPI:hover{
-    background-color: var(--titulo-do-topo-da-pesquisa);
+
     cursor: pointer;
 }

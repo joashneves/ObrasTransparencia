@@ -1,9 +1,9 @@
 import React from "react";
-import DownloadIcon from '../../assets/downloadIcon.svg';
+import DownloadIcon from '../../assets/downloadexcel.svg';
 import styles from "./BotaoBaixarAPI.module.css";
 import axios from "axios";
 
-const BotaoBaixarAPI = () => {
+const BotaoBaixarAPIExcel = () => {
     const baixarJSON = async () => {
         try {
             // Faz a solicitação GET à API
@@ -51,4 +51,4 @@ const BotaoBaixarAPI = () => {
     )
 }
 
-export default BotaoBaixarAPI;
+export default BotaoBaixarAPIExcel;

@@ -48,6 +48,7 @@ a{
     padding: 1rem;
 }
 .tituloDeFundo{
+    display: flex;
 
     color: #FFF;
     font-family: Inter;
@@ -56,13 +57,16 @@ a{
     font-weight: 400;
     line-height: normal;
     
-    height: 43px;
+    height: 4rem;
     flex-shrink: 0;
 
     border-radius: 6px 6px 0px 0px;
     background-color: var(--titulo-do-topo-da-pesquisa);
 
     
+}
+.tituloBuscar{
+    font-size: 3rem;
 }
 .corDeFundoDosInputs{
     display: block;

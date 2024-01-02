@@ -4,7 +4,6 @@ import ExibirProjetoDeObras from "../componentes/detalheExibir/ExibirProjetoDeOb
 import DetalheSobreObras from "../componentes/detalheExibir/DetalhesSobreObras";
 import axios from "axios";
 import LoadingBar from "../componentes/miscs/LoadingBar";
-import BotaoBaixarAPI from "../componentes/miscs/BotaoBaixarAPI";
 
 let chamado = 0;
 
@@ -100,7 +99,7 @@ const Home = () => {
 
   return (
     <>
-      <BotaoBaixarAPI/>
+      
       <FormularioBuscarObrasTransparencia  
       onBuscarChange={setBuscar}
       onSituacaoChange={setSituacao}
