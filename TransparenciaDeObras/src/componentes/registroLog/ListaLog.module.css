@@ -112,3 +112,27 @@ table{
     border-radius: 0rem 0rem 0.75rem 0rem;
     background: var(--cor-de-fundo-visualizar)
 }
+.botaoes{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.botao{
+    height: 2rem;
+    width: 2rem;
+}
+.botao:hover{
+    cursor: pointer;
+}
+.contador{
+    font-size: 1rem;
+    color: #D9D9D9;
+    height: 1rem;
+    width: 1rem;
+    align-items: center;
+    justify-self: center;
+    margin: 1rem;
+    border-radius: 12px;
+    background-color: var(--titulo-do-topo-da-pesquisa) ;
+}

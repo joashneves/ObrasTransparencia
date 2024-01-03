@@ -3,6 +3,9 @@ import FormularioBuscarObrasTransparencia from "../componentes/detalheExibir/For
 import ExibirProjetoDeObras from "../componentes/detalheExibir/ExibirProjetoDeObras";
 import DetalheSobreObras from "../componentes/detalheExibir/DetalhesSobreObras";
 import axios from "axios";
+import LeftCarret from "../assets/leftCarret.svg";
+import RigthCarret from "../assets/rigthCarret.svg";
+import styles from '../componentes/login/User.module.css';
 import LoadingBar from "../componentes/miscs/LoadingBar";
 
 let chamado = 0;
@@ -21,11 +24,17 @@ const Home = () => {
   const [orgao, setOrgao]= useState();
   const [responseAPI, setResponseAPI] = useState({});
 
+  const [dados, setDados] = useState([]);
+  const [paginaAtual, setPaginaAtual] = useState(0);
+  const itensPorPagina = 15; // Defina a quantidade desejada de itens por página
 
+  let UltimaPagina = paginaAtual;
+ 
   const Adquirirdados = async (event) => {
     try {
-      const response = await axios.get('https://localhost:7067/Obra/');
+      const response = await axios.get(`https://localhost:7067/Obra/public?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`);
       const obrasData = response.data;
+      console.log(obrasData);
       const dadosRecebidos = obrasData.filter((o) => o.publicadoDetalhe == true);
       setResponseAPI(response);
       setJsonData(dadosRecebidos);
@@ -37,9 +46,11 @@ const Home = () => {
     }
   }
 
+
+
   // Efeito para carregar os dados ao montar o componente
   useEffect(() => {
-    
+
     if (
       (buscar && buscar.trim() !== "") ||
       (contratada && contratada.trim() !== "") ||
@@ -68,10 +79,9 @@ const Home = () => {
       setJsonData(filtradoJson);
     } else {
       // Se os campos estiverem vazios, carrega todos os dados novamente
-      if(responseAPI.status != 200){
+    if(responseAPI.status != 200){
       Adquirirdados();
-
-      }
+      } 
     }
   }, [
     buscar,
@@ -82,6 +92,11 @@ const Home = () => {
     orgao,
     jsonData,
   ]); 
+
+    
+  useEffect(() => {
+    Adquirirdados();
+  }, [paginaAtual])
 
   function converterDataFormato(dataISO) {
     const dataObj = new Date(dataISO);
@@ -128,8 +143,12 @@ const Home = () => {
             />
           );
         })
-
       )}
+              <div className={styles.botaoes}>            {/* Adicione controles de paginação, por exemplo: */}
+            <img src={LeftCarret} alt="LeftCarret" className={styles.botao} onClick={() => setPaginaAtual((prevPage) => prevPage > 0 ? prevPage - 1 : prevPage)}/>
+            <div className={styles.contador}>{paginaAtual}</div>
+            <img src={RigthCarret} alt="RigthCarret" className={styles.botao} onClick={() => setPaginaAtual((prevPage) => prevPage + 1 )}/>
+        </div>
 
     </>
   );

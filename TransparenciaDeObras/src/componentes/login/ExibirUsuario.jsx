@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./User.module.css";
+import LeftCarret from "../../assets/leftCarret.svg";
+import RigthCarret from "../../assets/rigthCarret.svg";
 import CarregarUsuario from "./CarregarUsuario";
 
 const ExibirUsuario = (props) =>{
@@ -12,7 +14,7 @@ const ExibirUsuario = (props) =>{
 
     const [dados, setDados] = useState([]);
     const [paginaAtual, setPaginaAtual] = useState(0);
-    const itensPorPagina = 10; // Defina a quantidade desejada de itens por página
+    const itensPorPagina = 30; // Defina a quantidade desejada de itens por página
 
     const onEditarClick = (dadosDocumento) => {
         setDocumentoSelecionado(dadosDocumento);
@@ -73,10 +75,10 @@ const ExibirUsuario = (props) =>{
               ))
           )}
         </table>
-        <div>            {/* Adicione controles de paginação, por exemplo: */}
-            <button onClick={() => setPaginaAtual((prevPage) => prevPage - 1)}>Página Anterior</button>
-            <span>Página {paginaAtual}</span>
-            <button onClick={() => setPaginaAtual((prevPage) => prevPage + 1)}>Próxima Página</button>
+        <div className={styles.botaoes}>            {/* Adicione controles de paginação, por exemplo: */}
+            <img src={LeftCarret} alt="LeftCarret" className={styles.botao} onClick={() => setPaginaAtual((prevPage) => prevPage > 0 ? prevPage - 1 : prevPage)}/>
+            <div className={styles.contador}>{paginaAtual}</div>
+            <img src={RigthCarret} alt="RigthCarret" className={styles.botao} onClick={() => setPaginaAtual((prevPage) => prevPage + 1)}/>
         </div>
       </div>
     )
