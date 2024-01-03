@@ -20,6 +20,11 @@ const CriarUsuario = () =>{
     const [isOpcao, setIsOpcao] = useState(false);
       // Achar ultimo ID de log e criar um mais novo
 
+      
+  const [dados, setDados] = useState([]);
+  const [paginaAtual, setPaginaAtual] = useState(0);
+  const itensPorPagina = 10; // Defina a quantidade desejada de itens por página
+
       const config = {
         headers: {
           'Accept': 'text/plain',
@@ -27,13 +32,13 @@ const CriarUsuario = () =>{
         },
       };
 
+
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7067/User/', config);
+        const response = await axios.get(`https://localhost:7067/User?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`, config);
         const dadosRecebidos = response.data;
-
-        // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto
+        // Verificar o ultimo ID da API e coloca mais um quando criar um objeto
         const dadosLog = dadosRecebidos.find((log) => log.id);
 
         console.log("log de dados encontrado", dadosLog);

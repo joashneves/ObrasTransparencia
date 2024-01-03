@@ -9,7 +9,7 @@ const BotaoBaixarAPIExcel = () => {
     const baixarExcel = async () => {
         try {
             // Faz a solicitação GET à API
-            const response = await axios.get('https://localhost:7067/Obra/');
+            const response = await axios.get('https://localhost:7067/Obra/public');
 
             // Obtém os dados da resposta
             const data = response.data;

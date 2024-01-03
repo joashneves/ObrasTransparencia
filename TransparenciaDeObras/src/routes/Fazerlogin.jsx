@@ -13,18 +13,22 @@ const Fazerlogin = () => {
   
   const [jsonData, setJsonData] = useState({});
 
+  const [dados, setDados] = useState([]);
+  const [paginaAtual, setPaginaAtual] = useState(0);
+  const itensPorPagina = 10; // Defina a quantidade desejada de itens por página
+
   useEffect(() => {
     const config = {
       headers: {
         'Accept': 'text/plain',
-       'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIwIiwibmJmIjoxNzAzMTc3NTIxLCJleHAiOjI1MzQwMjMwMDgwMCwiaWF0IjoxNzAzMTc3NTIxfQ.7_rODWG4ERRJLKyISjI7VXSHdPlMBxZI9DCT5hBxhOs",
+       'Authorization': "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIwIiwibmJmIjoxNzA0MjgyMzgwLCJleHAiOjI1MzQwMjMwMDgwMCwiaWF0IjoxNzA0MjgyMzgwfQ.CKaGP3lQ-CxVB08_Zuyo-Vl_Pg0HxfMEmUG1Fn-K7TE",
       },
     };
 
   const verificarUser = async () => {
 
     try {
-      const response = await axios.get('https://localhost:7067/User', config);
+      const response = await axios.get(`https://localhost:7067/User?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`, config);
       const userData = response.data;
       setJsonData(jsonData);
       const nomeUsuario = window.sessionStorage.getItem('username');

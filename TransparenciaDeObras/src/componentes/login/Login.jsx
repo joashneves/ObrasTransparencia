@@ -1,5 +1,5 @@
 // Login.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./Login.module.css";
@@ -11,10 +11,15 @@ const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [dados, setDados] = useState([]);
+  const [paginaAtual, setPaginaAtual] = useState(0);
+  const itensPorPagina = 1; // Defina a quantidade desejada de itens por página
+
+
   const config = {
     headers: {
       'Accept': 'text/plain',
-     'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIwIiwibmJmIjoxNzAzMTc3NTIxLCJleHAiOjI1MzQwMjMwMDgwMCwiaWF0IjoxNzAzMTc3NTIxfQ.7_rODWG4ERRJLKyISjI7VXSHdPlMBxZI9DCT5hBxhOs",
+     'Authorization': "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIwIiwibmJmIjoxNzA0MjgyMzgwLCJleHAiOjI1MzQwMjMwMDgwMCwiaWF0IjoxNzA0MjgyMzgwfQ.CKaGP3lQ-CxVB08_Zuyo-Vl_Pg0HxfMEmUG1Fn-K7TE",
     },
   };
 
@@ -31,30 +36,41 @@ const Login = (props) => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
-    try {
-      const senhaCripto = await calcularMD5(password);
-      const response = await axios.get('https://localhost:7067/User', config);
-      const userData = response.data;
-
-      const senha = userData.find((log) => log.nome == username);
-      console.log(`senha ${senha.senha_hash} == password ${senhaCripto}`)
-      // Aqui você deve verificar as propriedades corretas na resposta da API
-      if (senha.senha_hash == senhaCripto && senha.isCadastrarOpcao === false) {
-        history('/ProcurarObra');
-        window.sessionStorage.setItem('username', username);
-      } else if (senha.senha_hash == senhaCripto) {
-        window.sessionStorage.setItem('username', username);
-        window.location.reload();
-      } else {
-        window.alert('Senha incorreta');
-      }
-    } catch (error) {
-      console.error('Erro ao fazer a requisição:', error);
-      window.alert('Erro ao processar a requisição');
+    const senhaCripto = await calcularMD5(password);
+    console.log(dados)
+    const senha = dados.find((log) => log.nome == username);
+    
+    console.log(`senha ${senha.senha_hash} == password ${senhaCripto}`)
+    // Aqui você deve verificar as propriedades corretas na resposta da API
+    if (senha.senha_hash == senhaCripto && senha.isCadastrarOpcao === false) {
+      history('/ProcurarObra');
+      window.alert('redirecionanado obras');
+      window.sessionStorage.setItem('username', username);
+    } else if (senha.senha_hash == senhaCripto) {
+      window.sessionStorage.setItem('username', username);
+      window.alert('redirecionanado');
+      window.location.reload();
+    } else {
+      window.alert('Senha incorreta');
     }
+  }
+    
+    useEffect(() => {
+      const carregarDados = async () => {
+        try {
+          const response = await axios.get(`https://localhost:7067/User?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`, config);
+          console.log(response.data);
+        setDados(response.data);
+        
+        console.error('Erro ao fazer a requisição:', error);
+        window.alert('Erro ao processar a requisição');
+      
+    } catch (error) {
+      console.error('Erro ao carregar dados:', error.message);
   };
-
+}
+  carregarDados();
+}, [username]); // Certifique-se de incluir paginaAtual como uma dependência do useEffect
   
   return (
     <div>

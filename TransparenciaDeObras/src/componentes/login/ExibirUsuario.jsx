@@ -10,7 +10,10 @@ const ExibirUsuario = (props) =>{
     
     const [documentoSelecionado, setDocumentoSelecionado] = useState(null);
 
-    
+    const [dados, setDados] = useState([]);
+    const [paginaAtual, setPaginaAtual] = useState(0);
+    const itensPorPagina = 10; // Defina a quantidade desejada de itens por página
+
     const onEditarClick = (dadosDocumento) => {
         setDocumentoSelecionado(dadosDocumento);
         props.onEditarClick(documentoSelecionado);
@@ -20,14 +23,16 @@ const ExibirUsuario = (props) =>{
     const Adquirirdados = async (event) => {
       try {
         const config = {
-            headers: {
-              'Accept': 'text/plain',
-             'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIwIiwibmJmIjoxNzAzMTc3NTIxLCJleHAiOjI1MzQwMjMwMDgwMCwiaWF0IjoxNzAzMTc3NTIxfQ.7_rODWG4ERRJLKyISjI7VXSHdPlMBxZI9DCT5hBxhOs",
-            },
-          };
-        const response = await axios.get('https://localhost:7067/User', config);
+          headers: {
+            'Accept': 'text/plain',
+           'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIwIiwibmJmIjoxNzAzMTc3NTIxLCJleHAiOjI1MzQwMjMwMDgwMCwiaWF0IjoxNzAzMTc3NTIxfQ.7_rODWG4ERRJLKyISjI7VXSHdPlMBxZI9DCT5hBxhOs",
+          },
+        };
+  
+        const response = await axios.get(`https://localhost:7067/User?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`, config);
   
         const dadosRecebidos = response.data;
+        setDados(dadosRecebidos);
   
         console.log("Dados acessados", dadosRecebidos)
         setJsonData(dadosRecebidos);
@@ -40,7 +45,7 @@ const ExibirUsuario = (props) =>{
   
     useEffect(() => {
       Adquirirdados();
-    }, [])
+    }, [paginaAtual])
   
     return (
       <div>
@@ -68,6 +73,11 @@ const ExibirUsuario = (props) =>{
               ))
           )}
         </table>
+        <div>            {/* Adicione controles de paginação, por exemplo: */}
+            <button onClick={() => setPaginaAtual((prevPage) => prevPage - 1)}>Página Anterior</button>
+            <span>Página {paginaAtual}</span>
+            <button onClick={() => setPaginaAtual((prevPage) => prevPage + 1)}>Próxima Página</button>
+        </div>
       </div>
     )
   }
