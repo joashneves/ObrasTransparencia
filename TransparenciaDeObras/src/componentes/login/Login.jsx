@@ -44,11 +44,9 @@ const Login = (props) => {
     // Aqui você deve verificar as propriedades corretas na resposta da API
     if (senha.senha_hash == senhaCripto && senha.isCadastrarOpcao === false) {
       history('/ProcurarObra');
-      window.alert('redirecionanado obras');
       window.sessionStorage.setItem('username', username);
     } else if (senha.senha_hash == senhaCripto) {
       window.sessionStorage.setItem('username', username);
-      window.alert('redirecionanado');
       window.location.reload();
     } else {
       window.alert('Senha incorreta');

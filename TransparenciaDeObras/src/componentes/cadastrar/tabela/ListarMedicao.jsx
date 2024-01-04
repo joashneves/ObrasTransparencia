@@ -11,7 +11,6 @@ const ListarMedicao = (props) => {
       nomeMedicao: props.nomeMedicao,
       dataInicio: props.dataInicio,
       dataFinal: props.dataFinal,
-      porcentagem: props.porcentagem,
       valorPago: props.valorPago,
       valorMedido: props.valorMedido
       // ... outras props

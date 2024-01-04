@@ -63,6 +63,7 @@ const CadastrarMedicao = (props) => {
           "valorPago": valorPago,
           "valorMedido": valorMedido
         }
+        console.log("medicao existe: Medicao", dataMedicao);
         // Enviar as credenciais para a sua API usando o axios
         const respondePut = await axios.put(`https://localhost:7067/Medicao/${idMedicao}`, dataMedicao);
 
@@ -100,7 +101,7 @@ const CadastrarMedicao = (props) => {
     }
   }
   const setEditarDocumento = (documentoSelecionado) => {
-    const dataFormatadadataInicio = converterFormatoData(documentoSelecionado.dataInicio);
+    const dataFormatadadataInicio = converterFormatoDataFinal(documentoSelecionado.dataInicio);
     const dataFormatadadataFinal = converterFormatoDataFinal(documentoSelecionado.dataFinal);
 
     console.log("data final", documentoSelecionado.dataFinal);

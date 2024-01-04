@@ -77,7 +77,6 @@ const TabelaMedicao = (props) => {
                     nomeMedicao={data.nome}
                     dataInicio={converterDataFormato(data.dataInicio)}
                     dataFinal={converterDataFormato(data.dataFinal)}
-                    porcentagem={data.porcentagem}
                     valorPago={data.valorPago}
                     valorMedido={data.valorMedido}
                     onEditarClick={onEditarClick}
