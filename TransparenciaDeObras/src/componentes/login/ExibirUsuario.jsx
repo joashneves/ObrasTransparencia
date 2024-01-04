@@ -17,6 +17,7 @@ const ExibirUsuario = (props) =>{
     const itensPorPagina = 30; // Defina a quantidade desejada de itens por página
 
     const onEditarClick = (dadosDocumento) => {
+       console.log("Usuario selecionado", dadosDocumento)
         setDocumentoSelecionado(dadosDocumento);
         props.onEditarClick(documentoSelecionado);
         console.log("dados user", documentoSelecionado);
@@ -67,6 +68,7 @@ const ExibirUsuario = (props) =>{
               .reverse() // Reverte a ordem do array
               .map((data) => (
                 <CarregarUsuario
+                  id={data.id}
                   nomeCompleto={data.nomeCompleto}
                   nome={data.nome}
                   email={data.email}

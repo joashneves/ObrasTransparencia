@@ -68,7 +68,7 @@ function CadastrarProjetoObras() {
           setNumeroDetalhe(obraExistente.numeroDetalhe);
           setOrgaoPublicoDetalhe(obraExistente.orgaoPublicoDetalhe);
           setAnoDetalhe(obraExistente.anoDetalhe);
-          setValorPagoDetalhe(obraExistente.valorPagoDetalhe)
+          setValorPagoDetalhe(obraExistente.valorLiquidado)
           setTipoObraDetalhe(obraExistente.tipoObraDetalhe);
           setLocalDetalhe(obraExistente.localizacaoobraDetalhe);
           setPublicadoDetalhe(obraExistente.publicadoDetalhe)

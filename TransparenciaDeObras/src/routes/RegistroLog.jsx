@@ -53,8 +53,6 @@ const RegistroLog = () =>{
     return (
         <>
         <CriarUsuario/>
-        <BuscarUsuario/>
-        <ExibirUsuario/>
         <BuscarLog/>
         <ListaLog/>
         </>

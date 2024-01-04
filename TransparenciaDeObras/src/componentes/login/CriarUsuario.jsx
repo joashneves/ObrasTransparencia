@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./CriarUsuario.module.css"
+import BuscarLog from "../registroLog/BuscarLog";
+import BuscarUsuario from "../Perfis/BuscarUsuario";
+import ExibirUsuario from "./ExibirUsuario";
 
 const CriarUsuario = () =>{
 
@@ -127,6 +130,8 @@ const CriarUsuario = () =>{
                 <input className={styles.botaoNormal} type="submit" value={"Cadastrar"}/>
             </form>
         </article>
+        <BuscarUsuario/>
+        <ExibirUsuario/>
         </>
     )
 }
