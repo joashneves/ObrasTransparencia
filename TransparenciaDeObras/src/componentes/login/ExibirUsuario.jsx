@@ -72,6 +72,14 @@ const ExibirUsuario = (props) =>{
                   nomeCompleto={data.nomeCompleto}
                   nome={data.nome}
                   email={data.email}
+                  isAdm={data.isAdm}
+                  isCadastrarProjeto={data.isCadastrarProjeto}
+                  isCadastrarAnexo={data.isCadastrarAnexo}
+                  isCadastrarAditivo={data.isCadastrarAditivo}
+                  isCadastrarFiscalGestor={data.isCadastrarFiscalGestor}
+                  isCadastrarMedicao={data.isCadastrarMedicao}
+                  isCadastrarFoto={data.isCadastrarFoto}
+                  isCadastrarOpcao={data.isCadastrarOpcao}
                   onEditarClick={onEditarClick}
                 />
               ))

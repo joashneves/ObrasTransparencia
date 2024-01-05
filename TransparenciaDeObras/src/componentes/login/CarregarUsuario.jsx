@@ -9,7 +9,14 @@ const CarregarUsuario = (props) =>{
           nomeCompleto: props.nomeCompleto,
           nome: props.nome,
           email: props.email,
-
+          isAdm : props.isAdm,
+          isCadastrarProjeto : props.isCadastrarProjeto,
+          isCadastrarAnexo : props.isCadastrarAnexo,
+          isCadastrarAditivo : props.isCadastrarAditivo,
+          isCadastrarFiscalGestor : props.isCadastrarFiscalGestor,
+          isCadastrarMedicao : props.isCadastrarMedicao,
+          isCadastrarFoto : props.isCadastrarFoto,
+          isCadastrarOpcao : props.isCadastrarOpcao
         });
       };
 

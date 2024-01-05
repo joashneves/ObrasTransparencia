@@ -238,7 +238,7 @@ function CadastrarProjetoObras() {
             <option value="Inicio">Inicio</option>
             <option value="Paralisada">Paralisada</option>
             <option value="Reinicio">Reinicio</option>
-            <option value="Paralisada por recisão contratual">Paralisada por recisão contratual</option>
+            <option value="Paralisada por recisão contratual">Paralisada por rescisão contratual</option>
             <option value="Concluída">Concluída</option>
             <option value="Concluída e recebida provisoriamente">Concluída e recebida provisoriamente</option></select>
         </label>
