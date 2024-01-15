@@ -27,7 +27,8 @@ const CadastrarObras = () =>{
         const AutenticarUser = async () =>{
 
         try{
-            const response = await axios.get('https://localhost:7067/User/public');
+            const urlApiObras = `${import.meta.env.VITE_REACT_APP_API_URL_OBRA_PUBLICAS}`
+            const response = await axios.get(urlApiObras);
             const dataUser = response.data;
 
             const username = window.sessionStorage.getItem('username');

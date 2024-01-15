@@ -19,7 +19,8 @@ const ListarMedicao = (props) => {
 
   const Download = async () =>{
     try {
-        const response = await axios.get(`https://localhost:7067/Medicao/Download/${props.idMedicao}`, {
+        const urlApiMedicao = `${import.meta.env.VITE_REACT_APP_API_URL_MEDICAO}/Download/${props.idMedicao}`
+        const response = await axios.get(urlApiMedicao, {
             responseType: 'arraybuffer', // Configura responseType para 'arraybuffer' para tratar a resposta como um buffer de bytes
         });
 

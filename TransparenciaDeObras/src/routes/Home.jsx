@@ -32,7 +32,9 @@ const Home = () => {
  
   const Adquirirdados = async (event) => {
     try {
-      const response = await axios.get(`https://localhost:7067/Obra/public?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`);
+      const apiUrlObras = `${import.meta.env.VITE_REACT_APP_API_URL_OBRA_PUBLICADAS}?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`
+      console.log(apiUrlObras);
+      const response = await axios.get(apiUrlObras);
       const obrasData = response.data;
       console.log(obrasData);
       const dadosRecebidos = obrasData.filter((o) => o.publicadoDetalhe == true);

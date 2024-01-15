@@ -21,7 +21,7 @@ const Fazerlogin = () => {
     const config = {
       headers: {
         'Accept': 'text/plain',
-       'Authorization': "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIwIiwibmJmIjoxNzA0MjgyMzgwLCJleHAiOjI1MzQwMjMwMDgwMCwiaWF0IjoxNzA0MjgyMzgwfQ.CKaGP3lQ-CxVB08_Zuyo-Vl_Pg0HxfMEmUG1Fn-K7TE",
+        'Authorization': `${import.meta.env.VITE_API_TOKEN}`,
       },
     };
 

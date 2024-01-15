@@ -47,7 +47,8 @@ const CadastrarMedicao = (props) => {
       
       console.log("Valor do arquivo: Medicao", formData);
 
-      const responseGet = await axios.get('https://localhost:7067/Medicao');
+      const urlApiMedicao = `${import.meta.env.VITE_REACT_APP_API_URL_MEDICAO}`
+      const responseGet = await axios.get(urlApiMedicao);
       const dadosRecebidos = responseGet.data // Pega os dado da api
 
       const dadosExistente = dadosRecebidos.find((dados) => dados.id == idMedicao); // Verifica se na lista possui um id parecido 
