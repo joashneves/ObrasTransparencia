@@ -44,7 +44,7 @@ function CadastrarAnexo() {
 
       console.log([...formData]);
 
-      const responseGet = await axios.get('https://localhost:7067/Anexo');
+      const responseGet = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_ANEXO}`); // Url Anexo
       const dadosRecebidos = responseGet.data // Pega os dado da api
 
       const dadosExistente = dadosRecebidos.find((dados) => dados.id == idAnexo); // Verifica se na lista possui um id parecido 
@@ -57,7 +57,7 @@ function CadastrarAnexo() {
         }
         console.log("data",dataPut)
         // Enviar as credenciais para a sua API usando o axios
-        const respondePut = await axios.put(`https://localhost:7067/Anexo/${idAnexo}`, dataPut);
+        const respondePut = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_ANEXO}/${idAnexo}`, dataPut); // url Anexo
         
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
@@ -67,13 +67,13 @@ function CadastrarAnexo() {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`https://localhost:7067/Historico`, dadosUsuario);
+        const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // Url Historico
 
         window.alert('Atualizado!');
         setIdLog(idLog + 1);
         window.location.reload();
       } else {
-        const response = await axios.post('https://localhost:7067/Anexo', formData);
+        const response = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_ANEXO}`, formData); // Url Anexo
         const dadosUsuario = {
           "id_obras": id,
           "nomeObra": nomeAnexo,
@@ -81,7 +81,7 @@ function CadastrarAnexo() {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`https://localhost:7067/Historico`, dadosUsuario);
+        const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // url Historico
 
         window.alert('Cadastrado');
         window.location.reload();
@@ -107,7 +107,7 @@ function CadastrarAnexo() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7067/Anexo');
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_ANEXO}`); // Url Anexo
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
@@ -139,7 +139,7 @@ function CadastrarAnexo() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7067/Historico');
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`);
         const dadosRecebidos = response.data;
 
         // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto

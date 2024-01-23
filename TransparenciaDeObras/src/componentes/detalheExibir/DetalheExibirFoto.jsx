@@ -9,7 +9,7 @@ function DetalheExibirFoto({ fotoId }) {
   useEffect(() => {
     const carregarImagem = async () => {
       try {
-        const response = await axios.get(`https://localhost:7067/Foto/Download/${fotoId}`, {
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FOTO}/Download/${fotoId}`, {
           responseType: 'arraybuffer',
         });
 

@@ -36,13 +36,13 @@ function CadastrarFiscaisGestores() {
     // Recebe os dados do nome do usuario
     const nomeUsuario = window.sessionStorage.getItem('username');
     try {
-      const responseGet = await axios.get('https://localhost:7067/FiscalGestor/');
+      const responseGet = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FISCALGESTOR}`); // Url Fiscal Gestor
       const dadosRecebidos = responseGet.data // Pega os dado da api
 
       const dadosExistente = dadosRecebidos.find((dados) => dados.id == idGestorFiscal); // Verifica se na lista possui um id parecido 
 
       if (dadosExistente) { // se existir atualiza
-        const respondePut = await axios.put(`https://localhost:7067/FiscalGestor/${idGestorFiscal}`, dado);
+        const respondePut = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_FISCALGESTOR}/${idGestorFiscal}`, dado); // Url Fiscal Gestor
 
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
@@ -52,14 +52,14 @@ function CadastrarFiscaisGestores() {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`https://localhost:7067/Historico`, dadosUsuario);
+        const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // UrlHistorico
 
         window.alert('Atualizado!');
         setIdLog(idLog + 1);
         window.location.reload();
       } else {
         // Enviar as credenciais para a sua API usando o axios
-        const responsePost = await axios.post('https://localhost:7067/FiscalGestor/', dado);
+        const responsePost = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_FISCALGESTOR}`, dado); // Url Gestor Fiscal
         
         //Criar um objeto em formato de json para a ação de criar do usuario logado
         const dadosUsuario = {
@@ -69,7 +69,7 @@ function CadastrarFiscaisGestores() {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`https://localhost:7067/Historico`, dadosUsuario);
+        const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // Url Historico
 
         window.alert('Cadastrado');
         window.location.reload();
@@ -84,7 +84,7 @@ function CadastrarFiscaisGestores() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7067/FiscalGestor/');
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`); // Url Historico
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
@@ -116,7 +116,7 @@ function CadastrarFiscaisGestores() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7067/Historico');
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FISCALGESTOR}`); // Url Fiscal Gestor
         const dadosRecebidos = response.data;
 
         // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto

@@ -26,7 +26,7 @@ const SistemaListaDocumento = (props) => {
   const Adquirirdados = async (event) => {
 
     try {
-      const response = await axios.get(`https://localhost:7067/Obra/Pag?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`);
+      const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_OBRA}/Pag?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`);
 
       const dadosRecebidos = response.data;
 

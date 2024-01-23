@@ -33,7 +33,7 @@ const LoginAlterar = (props) => {
   const config = {
     headers: {
       'Accept': 'text/plain',
-      'Authorization': "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIwIiwibmJmIjoxNzA0MjgyMzgwLCJleHAiOjI1MzQwMjMwMDgwMCwiaWF0IjoxNzA0MjgyMzgwfQ.CKaGP3lQ-CxVB08_Zuyo-Vl_Pg0HxfMEmUG1Fn-K7TE",
+      'Authorization': `${import.meta.env.VITE_API_TOKEN}`,
     },
   };
   useEffect(() => {
@@ -41,7 +41,7 @@ const LoginAlterar = (props) => {
     const verificarUser = async () => {
 
       try {
-        const response = await axios.get(`https://localhost:7067/User?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`, config);
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER}?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`, config);
         const data = response.data;
         setUsername(window.sessionStorage.getItem('username'));
         const json = data.find((o) => o.nome == username);
@@ -90,7 +90,7 @@ const LoginAlterar = (props) => {
         "isCadastrarOpcao": isOpcao
       };
       console.log(dado)
-      const response = await axios.put(`https://localhost:7067/User/${userData.id}`, dado, config);
+      const response = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_USER}/${userData.id}`, dado, config);
       window.location.reload();
     } else {
       window.alert('As senhas devem ser iguais');

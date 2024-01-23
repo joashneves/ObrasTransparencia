@@ -7,7 +7,7 @@ const DetalheAditivosListaObras = (props) =>{
     
     const Download = async () =>{
         try {
-            const response = await axios.get(`https://localhost:7067/Aditivo/Download/${props.id}`, {
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_ADITIVO}/Download/${props.id}`, { // url aditivo
                 responseType: 'arraybuffer', // Configura responseType para 'arraybuffer' para tratar a resposta como um buffer de bytes
             });
     

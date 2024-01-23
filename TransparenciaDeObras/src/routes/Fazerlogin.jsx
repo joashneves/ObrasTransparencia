@@ -28,7 +28,7 @@ const Fazerlogin = () => {
   const verificarUser = async () => {
 
     try {
-      const response = await axios.get(`https://localhost:7067/User?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`, config);
+      const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER}?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`, config);
       const userData = response.data;
       setJsonData(jsonData);
       const nomeUsuario = window.sessionStorage.getItem('username');

@@ -16,7 +16,8 @@ const ListaLog = (props) => {
 
   const Adquirirdados = async (event) => {
     try {
-      const response = await axios.get(`https://localhost:7067/Historico?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`);
+      const url = `${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`
+      const response = await axios.get(url);
 
       const dadosRecebidos = response.data;
 

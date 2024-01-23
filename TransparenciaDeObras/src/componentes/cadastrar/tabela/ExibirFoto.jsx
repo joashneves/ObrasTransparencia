@@ -9,7 +9,7 @@ function ExibirFoto({ fotoId }) {
   useEffect(() => {
     const carregarImagem = async () => {
       try {
-        const response = await axios.get(`https://localhost:7067/Foto/Download/${fotoId}`, {
+        const response = await axios.get(`${import.meta.url.VITE_REACT_APP_API_URL_FOTO}/Download/${fotoId}`, { 
           responseType: 'arraybuffer',
         });
 
@@ -29,7 +29,7 @@ function ExibirFoto({ fotoId }) {
   {
     console.log("Nops")
     try{
-      const response = await axios.delete(`https://localhost:7031/api/Fotoes/${fotoId}`);
+      const response = await axios.delete(`${import.meta.url.VITE_REACT_APP_API_URL_FOTO}/${fotoId}`);
       window.alert('Apagado');
       window.location.reload();
     } catch (error){

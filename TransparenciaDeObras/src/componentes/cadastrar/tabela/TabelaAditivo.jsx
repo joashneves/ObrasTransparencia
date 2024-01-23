@@ -24,7 +24,7 @@ const TabelaAditivo = (props) =>{
 
   const Adquirirdados = async (event) => {
     try {
-      const response = await axios.get('https://localhost:7067/Aditivo');
+      const response = await axios.get(`${import.meta.url.VITE_REACT_APP_API_URL_ADITIVO}`); // url Aditivo
 
       const dadosRecebidos = response.data;
 

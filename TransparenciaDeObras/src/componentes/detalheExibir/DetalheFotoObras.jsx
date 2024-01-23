@@ -21,7 +21,7 @@ const DetalheFotoObras = () => {
     useEffect(() => {
         const Adquirirdados = async () => {
             try {
-                const response = await axios.get('https://localhost:7067/Foto');
+                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FOTO}`); // url foto
                 const dadosRecebidos = response.data;
                 console.log("Foto", dadosRecebidos)
                 setJsonData(dadosRecebidos);

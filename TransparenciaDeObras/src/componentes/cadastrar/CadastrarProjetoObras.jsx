@@ -33,7 +33,7 @@ function CadastrarProjetoObras() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7067/Obra/');
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_OBRA}`);
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
@@ -91,10 +91,10 @@ function CadastrarProjetoObras() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7067/Historico/');
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`); // Historico
         const dadosRecebidos = response.data;
 
-        // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto
+        // Verificar o ultimo ID da API e coloca mais um quando criar um objeto
         const dadosLog = dadosRecebidos.find((log) => log.id);
 
         console.log("log de dados encontrado", dadosLog);
@@ -153,7 +153,7 @@ function CadastrarProjetoObras() {
     const nomeUsuario = window.sessionStorage.getItem('username');
     console.log("Nome de usuario é", nomeUsuario);
     try {
-      const response = await axios.get('https://localhost:7067/Obra/');
+      const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_OBRA}`); // Url Obra
       const dadosRecebidos = response.data;
 
       //Verificar se tem a obra
@@ -161,7 +161,7 @@ function CadastrarProjetoObras() {
 
       if (obraExistente) {
         console.log("Obra PUT é ", dado)
-        const response = await axios.put(`https://localhost:7067/Obra/${obraExistente.id}`, dado);
+        const response = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_OBRA}/${obraExistente.id}`, dado); // UrlObra
 
 
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
@@ -173,14 +173,14 @@ function CadastrarProjetoObras() {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`https://localhost:7067/Historico/`, dadosUsuario);
+        const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // urlHistorico
 
         window.alert('Atualizado!');
         setIdLog(idLog + 1);
       } else {
         // Enviar as credenciais para a sua API usando o axios
         console.log("ENVIAR USER", dado)
-        const response = await axios.post('https://localhost:7067/Obra', dado);
+        const response = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_OBRA}`, dado); // UrlObra
 
         //Criar um objeto em formato de json para a ação de criar do usuario logado
         const dadosUsuario = {
@@ -191,7 +191,7 @@ function CadastrarProjetoObras() {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`https://localhost:7067/Historico/`, dadosUsuario);
+        const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // UrlHistorico
 
         window.alert('Cadastrado');
         history('/procurarObra');

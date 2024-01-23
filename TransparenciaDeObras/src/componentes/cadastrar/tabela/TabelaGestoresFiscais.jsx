@@ -23,7 +23,7 @@ const TabelaGestoresFiscais = (props) =>{
   
   const Adquirirdados = async (event) => {
     try {
-      const response = await axios.get('https://localhost:7067/FiscalGestor/');
+      const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FISCALGESTOR}`); // url Fiscal Gestor
 
       const dadosRecebidos = response.data;
 

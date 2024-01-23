@@ -19,7 +19,7 @@ const Login = (props) => {
   const config = {
     headers: {
       'Accept': 'text/plain',
-     'Authorization': "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIwIiwibmJmIjoxNzA0MjgyMzgwLCJleHAiOjI1MzQwMjMwMDgwMCwiaWF0IjoxNzA0MjgyMzgwfQ.CKaGP3lQ-CxVB08_Zuyo-Vl_Pg0HxfMEmUG1Fn-K7TE",
+      'Authorization': `${import.meta.env.VITE_API_TOKEN}`,
     },
   };
 
@@ -56,7 +56,7 @@ const Login = (props) => {
     useEffect(() => {
       const carregarDados = async () => {
         try {
-          const response = await axios.get(`https://localhost:7067/User?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`, config);
+          const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER}?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`, config);
           console.log(response.data);
         setDados(response.data);
         

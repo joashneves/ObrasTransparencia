@@ -56,7 +56,7 @@ const CriarUsuario = () => {
   const config = {
     headers: {
       'Accept': 'text/plain',
-      'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIwIiwibmJmIjoxNzAzMTc3NTIxLCJleHAiOjI1MzQwMjMwMDgwMCwiaWF0IjoxNzAzMTc3NTIxfQ.7_rODWG4ERRJLKyISjI7VXSHdPlMBxZI9DCT5hBxhOs",
+      'Authorization': `${import.meta.env.VITE_API_TOKEN}`,
     },
   };
 
@@ -76,7 +76,7 @@ const CriarUsuario = () => {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get(`https://localhost:7067/User?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`, config);
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER}?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`, config);
         const dadosRecebidos = response.data;
         // Verificar o ultimo ID da API e coloca mais um quando criar um objeto
         const dadosLog = dadosRecebidos.find((log) => log.id);
@@ -123,20 +123,20 @@ const CriarUsuario = () => {
     };
     console.log(dado)
     try {
-      const response = await axios.get('https://localhost:7067/User/public');
+      const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER_PUBLICADAS}`);
       const dadosRecebidos = response.data;
 
       //Verificar se tem a obra
       const existente = dadosRecebidos.find((user) => user.id == idUser);
       console.log("obra existe", existente);
       if (existente) {
-        const response = await axios.put(`https://localhost:7067/User/${existente.id}`, dado, config);
+        const response = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_USER}/${existente.id}`, dado, config);
 
         window.alert('Atualizado!');
         window.location.reload();
       } else {
         // Enviar as credenciais para a sua API usando o axios
-        const response = await axios.post('https://localhost:7067/User', dado, config);
+        const response = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_USER}`, dado, config);
 
         window.alert('Cadastrado');
         window.location.reload();

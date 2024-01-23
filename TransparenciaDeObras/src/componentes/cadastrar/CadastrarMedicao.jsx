@@ -66,7 +66,7 @@ const CadastrarMedicao = (props) => {
         }
         console.log("medicao existe: Medicao", dataMedicao);
         // Enviar as credenciais para a sua API usando o axios
-        const respondePut = await axios.put(`https://localhost:7067/Medicao/${idMedicao}`, dataMedicao);
+        const respondePut = await axios.put(`${import.meta.url.VITE_REACT_APP_API_URL_MEDICAO}/${idMedicao}`, dataMedicao); // Url medição
 
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
@@ -77,13 +77,13 @@ const CadastrarMedicao = (props) => {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`https://localhost:7067/Historico`, dadosUsuario);
+        const responseUser = await axios.post(`${import.meta.url.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // url historico
 
         window.alert('Atualizado!');
         setIdLog(idLog + 1);
         window.location.reload();
       } else {
-        const response = await axios.post('https://localhost:7067/Medicao', formData);
+        const response = await axios.post(`${import.meta.url.VITE_REACT_APP_API_URL_MEDICAO}`, formData); // url medição
         const dadosUsuario = {
           "id": idLog,
           "id_obras": id,
@@ -92,7 +92,7 @@ const CadastrarMedicao = (props) => {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`https://localhost:7067/Historico`, dadosUsuario);
+        const responseUser = await axios.post(`${import.meta.url.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // url historico
 
         window.alert('Cadastrado');
         window.location.reload();
@@ -126,7 +126,7 @@ const CadastrarMedicao = (props) => {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7067/Medicao');
+        const response = await axios.get(`${import.meta.url.VITE_REACT_APP_API_URL_MEDICAO}`); // Url Medição
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
@@ -156,7 +156,7 @@ const CadastrarMedicao = (props) => {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get('https://localhost:7067/Historico');
+        const response = await axios.get(`${import.meta.url.VITE_REACT_APP_API_URL_HISTORICO}`); // url Historico
         const dadosRecebidos = response.data;
 
         // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto

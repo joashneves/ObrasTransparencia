@@ -11,7 +11,7 @@ const DetalheMedicaoObras =(props)=>{
 
     const Adquirirdados = async (event) => {
         try {
-            const response = await axios.get('https://localhost:7067/Medicao');
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_MEDICAO}`); // url medição
 
             const dadosRecebidos = response.data;
 
