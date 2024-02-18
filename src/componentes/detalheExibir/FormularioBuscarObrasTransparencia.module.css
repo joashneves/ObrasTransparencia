@@ -1,0 +1,233 @@
+:root{
+    --titulo-do-topo-da-pesquisa: #405875;
+    --cor-de-fundo-da-pesquisa: #D9D9D9;
+    --cor-de-branco-mesmo: #FFF;
+}
+label{
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+div{
+    display: flex;
+    flex-direction: column;
+
+    padding: 1rem;
+}
+input{
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border-radius: 4px;
+    border: 1px solid #AB9A9A;
+
+    background: var(--cor-de-branco-mesmo);
+
+}
+a{
+    padding: 12px;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 24px;
+
+}
+.organizarInputs{
+    align-self: center;
+
+    display: flex;
+    flex-direction: inherit;
+    flex-wrap: wrap;
+    
+    padding: 1rem;
+}
+.tituloDeFundo{
+    display: flex;
+
+    color: #FFF;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    
+    height: 4rem;
+    flex-shrink: 0;
+
+    border-radius: 6px 6px 0px 0px;
+    background-color: var(--titulo-do-topo-da-pesquisa);
+
+    
+}
+.tituloBuscar{
+    font-size: 3rem;
+}
+.corDeFundoDosInputs{
+    display: block;
+    align-self: center;
+    border: 1rem;
+
+    width: 78rem;
+    height: 22rem;
+    flex-shrink: 0;
+
+    background-color: var(--cor-de-fundo-da-pesquisa);
+
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    
+}
+.buscarInput{
+
+
+    width: 485px;
+    height: 35px;
+    flex-shrink: 0;
+}
+.situacaoInput{
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border-radius: 4px;
+    border: 1px solid #AB9A9A;
+
+    background: var(--cor-de-branco-mesmo);
+
+    width: 289px;
+    height: 39px;
+    flex-shrink: 0;
+}
+.situacaoInput option{
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border-radius: 4px;
+    border: 1px solid #AB9A9A;
+
+    background: var(--cor-de-branco-mesmo);
+
+}
+.dataInicioInput{
+
+
+    width: 280px;
+height: 37px;
+flex-shrink: 0;
+}
+.tipoDeObraInput{
+
+
+    width: 417px;
+height: 35px;
+flex-shrink: 0;
+}
+.contratadaInput{
+
+
+    width: 354px;
+height: 35px;
+flex-shrink: 0;
+}
+.dataFInalInput{
+
+    width: 280px;
+    height: 37px;
+    flex-shrink: 0;
+}
+.orgaoPublicoInput{
+
+
+    width: 799px;
+    height: 35px;
+    flex-shrink: 0;
+}
+
+.buttonDeBusca{
+    color: #FFF;
+    
+
+    font-family: Inter;
+    font-size: normal;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    width: 326px;
+    height: 37px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border-color: var(--sem-mouse-cor) ;
+    background: var(--sem-mouse-cor);
+}
+.buttonDeBusca:hover{
+    color: #0f0f0f;
+
+    cursor: pointer;
+    border-radius: 6px;
+    background: var(--com-mouse-cor);
+    border-color: var(--com-mouse-cor);
+}
+
+:root{
+    --sem-mouse-cor:  rgba(173, 173, 173, 0.76);
+    --com-mouse-cor: rgba(244, 244, 244, 0.76);
+}
+
+.botaoNormal{
+    color: #FFF;
+    
+    font-family: Inter;
+    font-size: normal;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    width: 326px;
+    height: 37px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border-color: var(--sem-mouse-cor) ;
+    background: var(--sem-mouse-cor);
+}
+.botaoNormal:hover{
+    color: #0f0f0f;
+
+    cursor: pointer;
+    border-radius: 6px;
+    background: var(--com-mouse-cor);
+    border-color: var(--com-mouse-cor);
+}
+@media only screen and (max-width: 600px) {
+    .corDeFundoDosInputs {
+      width: 100%;
+      height: auto;
+    }
+  
+    .buscarInput,
+    .situacaoInput,
+    .dataInicioInput,
+    .tipoDeObraInput,
+    .contratadaInput,
+    .dataFInalInput,
+    .orgaoPublicoInput,
+    .buttonDeBusca,
+    .botaoNormal {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    /* Adicione mais ajustes conforme necessário para os outros elementos */
+  }

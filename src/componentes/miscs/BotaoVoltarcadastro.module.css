@@ -1,0 +1,11 @@
+.botaoVoltar{
+    width: 12rem;
+    height: 2rem;
+    align-self: initial;
+    text-align: center;
+    border-radius: 12px;
+    background-color: #ff7b7b;
+}.botaoVoltar:hover{
+    cursor: pointer;
+    background-color: #ff0000;
+}

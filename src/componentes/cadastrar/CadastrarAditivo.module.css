@@ -1,0 +1,134 @@
+:root{
+    --titulo-do-topo-da-pesquisa: #405875;
+    --cor-de-fundo-da-pesquisa: #D9D9D9;
+    --cor-de-branco-mesmo: #FFF;
+}
+label{
+    display: flex;
+    flex-direction: column;
+    color: #000;
+    font-family: serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+div{
+    display: flex;
+    flex-direction: column;
+
+    padding: 1rem;
+}
+input{
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border-radius: 4px;
+    border: 1px solid #AB9A9A;
+
+    background: var(--cor-de-branco-mesmo);
+
+}
+a{
+    padding: 12px;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 24px;
+
+}
+.enviarDocumento{
+    font-family: Inter;
+    font-size: normal;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    text-align: center;
+    
+    width: 223px;
+    height: 35px;
+    flex-shrink: 0;
+
+    border-radius: 12px;
+    background: rgba(255, 0, 0, 0.45);
+}
+.esconderBotao{
+    display: unset;
+}
+.salvarFormulario{
+    font-family: Inter;
+    font-size: normal;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    cursor: pointer;
+
+    width: 223px;
+    height: 35px;
+    flex-shrink: 0;
+
+    border-radius: 12px;
+    background: rgba(0, 122, 255, 0.45);
+}
+.salvarFormulario:hover{
+
+    cursor: pointer;
+    border-radius: 6px;
+    background: #007AFF;
+    border-color:  #007AFF;;
+}
+.tituloDeCadastro{
+    color: var(--cor-de-branco-mesmo);
+    
+    border-radius: 0.375rem 0.375rem 0rem 0rem;
+    background-color: var(--titulo-do-topo-da-pesquisa);
+}
+.fundoDeCadastro{
+    width: 84rem;
+    
+    margin: 1rem;
+    
+    align-self: center;
+    
+    background: #D9D9D9;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.formularioDeCadastro{
+    display: grid;
+    grid-template-columns: auto auto ;
+}
+.cadastrarNomeAditivo{
+    width: 570px;
+    height: 35px;
+    flex-shrink: 0;
+}
+.cadastrarAnoAditivo{
+    width: 570px;
+    height: 35px;
+    flex-shrink: 0;
+}
+.cadastrarDataAssinaturaAditivo{
+    width: 570px;
+    height: 35px;
+    flex-shrink: 0;
+}
+.cadastrarTipoAditivo{
+    width: 570px;
+    height: 35px;
+    flex-shrink: 0;
+}
+.cadastrarTipoDoAditivoAditivo{
+    width: 570px;
+    height: 35px;
+    flex-shrink: 0;
+}
+.enviarFormulario{
+    display: flex;
+    align-items: center;
+    flex-direction: initial;
+}
