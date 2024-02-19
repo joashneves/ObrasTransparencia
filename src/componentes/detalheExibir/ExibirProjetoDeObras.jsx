@@ -16,13 +16,13 @@ const ExibirProjetoDeObras = (props) => {
   useEffect(() => {
     const VerificarSeTemNaObra = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FOTO}/Foto`);
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FOTO}`);
         const fotodata = response.data;
         const idFoto = fotodata.find((o) => o.id_obras == props.id);
 
         // Se a imagem existir na obra correspondente, carrega a imagem
         if (idFoto) {
-          const responseImagem = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FOTO}/Foto/Download/${idFoto.id}`, {
+          const responseImagem = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FOTO}/Download/${idFoto.id}`, {
             responseType: 'arraybuffer',
           });
 
