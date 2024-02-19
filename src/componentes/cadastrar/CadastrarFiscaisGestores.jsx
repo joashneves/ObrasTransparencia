@@ -84,7 +84,7 @@ function CadastrarFiscaisGestores() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FISCALGESTOR}`); // Url Historico
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FISCALGESTOR}`); // Url DO FISCAL PARA EXIBIR NA TABELA
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
