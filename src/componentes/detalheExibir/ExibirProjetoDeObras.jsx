@@ -16,7 +16,7 @@ const ExibirProjetoDeObras = (props) => {
   useEffect(() => {
     const VerificarSeTemNaObra = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FOTO}`);
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FOTO}`); // conecta na api da foto
         const fotodata = response.data;
         const idFoto = fotodata.find((o) => o.id_obras == props.id);
 
