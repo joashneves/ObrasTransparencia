@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 import styles from "./Login.module.css";
 import axios from "axios";
 
@@ -18,34 +19,38 @@ const Login = (props) => {
 
   const config = {
     headers: {
-      'Accept': 'text/plain',
-      'Authorization': `${import.meta.env.VITE_API_TOKEN}`,
+      'Accept': 'text/plain'
     },
   };
 
-  async function calcularMD5(password) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(password);
-    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-    console.log("Cryptografou", hashHex);
-    
-    return hashHex;
-  }
-
   const handleLogin = async (event) => {
     event.preventDefault();
-    const senhaCripto = await calcularMD5(password);
+    const data = {
+      "id": 0,
+      "nome": username,
+      "nomeCompleto": "string",
+      "email": "string",
+      "senha_hash": password,
+      "isAdm": true,
+      "isCadastrarProjeto": true,
+      "isCadastrarAnexo": true,
+      "isCadastrarAditivo": true,
+      "isCadastrarFiscalGestor": true,
+      "isCadastrarMedicao": true,
+      "isCadastrarFoto": true,
+      "isCadastrarOpcao": true
+    }
+
     console.log(dados)
     const senha = dados.find((log) => log.nome == username);
     
-    console.log(`senha ${senha.senha_hash} == password ${senhaCripto}`)
+    const response = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_USER}/login`,data, config);
+    console.log(`${response.status}`)
     // Aqui você deve verificar as propriedades corretas na resposta da API
-    if (senha.senha_hash == senhaCripto && senha.isCadastrarOpcao === false) {
+    if (response.status == 200) {
       history('/ProcurarObra');
       window.sessionStorage.setItem('username', username);
-    } else if (senha.senha_hash == senhaCripto) {
+    } else if (response.status == 201) {
       window.sessionStorage.setItem('username', username);
       window.location.reload();
     } else {
