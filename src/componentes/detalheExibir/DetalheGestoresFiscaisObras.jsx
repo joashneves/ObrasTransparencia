@@ -17,7 +17,7 @@ const DetalheGestoresFiscaisObras = (props) => {
   useEffect(() => {
     const AdquirirdadosGestoresFiscais = async () => {
       try {
-        const response = await axios.get(`${import.meta.url.VITE_REACT_APP_API_URL_FISCALGESTOR}`); // url fiscal Gestor
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FISCALGESTOR}`); // url fiscal Gestor
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
