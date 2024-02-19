@@ -59,7 +59,7 @@ function CadastrarAditivo() {
       formData.append("prazo", prazoAditivo);
 
       console.log("dados arquivo", formData);
-      const responseGet = await axios.get(`${import.meta.url.VITE_REACT_APP_API_URL_ADITIVO}`); // Url Aditivo
+      const responseGet = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_ADITIVO}`); // Url Aditivo
       const dadosRecebidos = responseGet.data // Pega os dado da api
 
       const dadosExistente = dadosRecebidos.find((dados) => dados.id == idAditivo); // Verifica se na lista possui um id parecido 
@@ -77,7 +77,7 @@ function CadastrarAditivo() {
           "prazo": prazoAditivo
         }
         // Enviar as credenciais para a sua API usando o axios
-        const respondePut = await axios.put(`${import.meta.url.VITE_REACT_APP_API_URL_ADITIVO}/${idAditivo}`, dataPut); // Url Aditivo
+        const respondePut = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_ADITIVO}/${idAditivo}`, dataPut); // Url Aditivo
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
           "id": idLog,
@@ -88,14 +88,14 @@ function CadastrarAditivo() {
           "dataHora": now
         }
         
-        const responseUser = await axios.post(`${import.meta.url.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // Url Historico
+        const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // Url Historico
 
         window.alert('Atualizado!');
         setIdLog(idLog + 1);
         window.location.reload();
       } else {
         // Enviar as credenciais para a sua API usando o axios
-        const response = await axios.post(`${import.meta.url.VITE_REACT_APP_API_URL_ADITIVO}`, formData); // Url Aditivo
+        const response = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_ADITIVO}`, formData); // Url Aditivo
         
         //Criar um objeto em formato de json para a ação de criar do usuario logado
         const dadosUsuario = {
@@ -106,7 +106,7 @@ function CadastrarAditivo() {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        const responseUser = await axios.post(`${import.meta.url.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // url Historico
+        const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // url Historico
 
         window.alert('Cadastrado');
         window.location.reload();
@@ -139,7 +139,7 @@ function CadastrarAditivo() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get(`${import.meta.url.VITE_REACT_APP_API_URL_ADITIVO}`); // Url Aditivo
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_ADITIVO}`); // Url Aditivo
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
@@ -168,7 +168,7 @@ function CadastrarAditivo() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get(`${import.meta.url.VITE_REACT_APP_API_URL_HISTORICO}`); // Url Historico
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`); // Url Historico
         const dadosRecebidos = response.data;
 
         // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto

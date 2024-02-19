@@ -38,7 +38,7 @@ function CadastrarFoto() {
 
       console.log("dados arquivo", [...formData]);
       // Enviar as credenciais para a sua API usando o axios
-      const response = await axios.post(`${import.meta.url.VITE_REACT_APP_API_URL_FOTO}`, formData);
+      const response = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_FOTO}`, formData);
 
 
       //Criar um objeto em formato de json para a ação de criar do usuario logado
@@ -50,7 +50,7 @@ function CadastrarFoto() {
         "nomePerfil": nomeUsuario,
         "dataHora": now
       }
-      const responseUser = await axios.post(`${import.meta.url.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // url historico
+      const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // url historico
 
 
       window.alert('Cadastrado');
@@ -70,7 +70,7 @@ function CadastrarFoto() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get(`${import.meta.url.VITE_REACT_APP_API_URL_FOTO}`); // url Foto
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FOTO}`); // url Foto
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
@@ -100,7 +100,7 @@ function CadastrarFoto() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get(`${import.meta.url.VITE_REACT_APP_API_URL_HISTORICO}`); // url historico
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`); // url historico
         const dadosRecebidos = response.data;
 
         // Verificar o ultimo ID da API e coloca mais um quanod criar um objeto
