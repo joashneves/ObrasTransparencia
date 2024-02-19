@@ -84,13 +84,14 @@ function CadastrarFiscaisGestores() {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`); // Url Historico
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_FISCALGESTOR}`); // Url DO FISCAL PARA EXIBIR NA TABELA
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
 
         const dadosGestorFiscal = dadosRecebidos.find((obra) => obra.id_obras == id);
 
-        console.log(dadosGestorFiscal);
+        console.log(dadosRecebidos);
+        console.log(loading);
         if (dadosGestorFiscal) {
           // Obtém o índice do último elemento
           const lastIndex = dadosRecebidos.length - 1;

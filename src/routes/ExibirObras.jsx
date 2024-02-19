@@ -38,7 +38,7 @@ const ExibirOBras = () => {
     if (responseAPI.status != 200){
     const Adquirirdados = async () => {
       try {
-        const urlApiObras = `${import.meta.env.VITE_REACT_APP_API_URL_USER}`
+        const urlApiObras = `${import.meta.env.VITE_REACT_APP_API_URL_OBRA}`
         const response = await axios.get(urlApiObras);
         const dadosRecebidos = response.data;
         setJsonData(dadosRecebidos);
