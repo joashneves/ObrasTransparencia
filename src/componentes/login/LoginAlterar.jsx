@@ -41,7 +41,7 @@ const LoginAlterar = (props) => {
     const verificarUser = async () => {
 
       try {
-        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER}?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`, config);
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER}`, config);
         const data = response.data;
         setUsername(window.sessionStorage.getItem('username'));
         const json = data.find((o) => o.nome == username);

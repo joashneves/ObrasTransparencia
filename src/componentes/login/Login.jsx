@@ -42,55 +42,62 @@ const Login = (props) => {
 
     console.log(dados)
     const senha = dados.find((log) => log.nome == username);
-    
-    const response = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_USER}/login`,data, config);
-    console.log(`${response.status}`)
-    // Aqui você deve verificar as propriedades corretas na resposta da API
-    if (response.status == 200) {
-      history('/ProcurarObra');
-      window.sessionStorage.setItem('username', username);
-    } else if (response.status == 201) {
-      window.sessionStorage.setItem('username', username);
-      window.location.reload();
-    } else {
-      window.alert('Senha incorreta');
+
+    try {
+      const response = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_USER}/login`, data, config);
+      console.log(`${response.status}`)
+      // Aqui você deve verificar as propriedades corretas na resposta da API
+      if (response.status == 200) {
+        history('/ProcurarObra');
+        window.sessionStorage.setItem('username', username);
+      }
+    } catch (err) {
+      console.log(err)
+      if (err.message == 'Request failed with status code 400') {
+        window.alert('Usuário ou senha inválidos.');
+      }
+      else if (err.message == 'Network Error') {
+        window.alert('Erro com servidor');
+      }  else {
+        window.alert('ERRO!');
+      }
     }
   }
-    
-    useEffect(() => {
-      const carregarDados = async () => {
-        try {
-          console.log(`${import.meta.env.VITE_REACT_APP_API_URL_USER}`);
-          const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER}`, config);
-          console.log(response.data);
+
+  useEffect(() => {
+    const carregarDados = async () => {
+      try {
+        console.log(`${import.meta.env.VITE_REACT_APP_API_URL_USER}`);
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER}`, config);
+        console.log(response.data);
         setDados(response.data);
-        
+
         console.error('Erro ao fazer a requisição:', error);
         window.alert('Erro ao processar a requisição');
-      
-    } catch (error) {
-      console.error('Erro ao carregar dados:', error.message);
-  };
-}
-  carregarDados();
-}, [username]); // Certifique-se de incluir paginaAtual como uma dependência do useEffect
-  
+
+      } catch (error) {
+        console.error('Erro ao carregar dados:', error.message);
+      };
+    }
+    carregarDados();
+  }, [username]); // Certifique-se de incluir paginaAtual como uma dependência do useEffect
+
   return (
     <div>
       <form className={styles.formularioLogin}>
-        <label className={styles.usuarioInput}>Usuario 
-        <input
-          name="nome"
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        /></label>
+        <label className={styles.usuarioInput}>Usuario
+          <input
+            name="nome"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          /></label>
         <label className={styles.senhaInput}>Senha
-        <input
-          name="senha"
-          type="password"
-          onChange={(e) => setPassword((e.target.value))}
-        /></label>
+          <input
+            name="senha"
+            type="password"
+            onChange={(e) => setPassword((e.target.value))}
+          /></label>
         <input type="submit" onClick={handleLogin} className={styles.botaoLogin}>
         </input>
       </form>

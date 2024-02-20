@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import '../App.css'
 import axios from "axios";
 import BotaoCriarObra from "../componentes/ExibitObrasEditaveis/botaoCriarObra";
 import CampoParaBuscarObrasEditaveis from "../componentes/ExibitObrasEditaveis/CampoParaBuscarObrasEditaveis";
 import SistemaListaDocumento from "../componentes/ExibitObrasEditaveis/SistemaListaDocumentos";
+import EnviarAdm from "../componentes/ExibitObrasEditaveis/EnviarAdm";
 
 const ExibirObrasEditaveis = () => {
   const [buscar, setBuscar] = useState();
@@ -49,7 +51,10 @@ const ExibirObrasEditaveis = () => {
   
     return (
       <>
+        <div className="menu">
         <BotaoCriarObra />
+        <EnviarAdm />
+        </div>
         <CampoParaBuscarObrasEditaveis
           onBuscarChange={setBuscar}
           onNumeroChange={setNumero}
