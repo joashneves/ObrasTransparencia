@@ -27,12 +27,11 @@ const ExibirUsuario = (props) =>{
       try {
         const config = {
           headers: {
-            'Accept': 'text/plain',
-           'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIwIiwibmJmIjoxNzAzMTc3NTIxLCJleHAiOjI1MzQwMjMwMDgwMCwiaWF0IjoxNzAzMTc3NTIxfQ.7_rODWG4ERRJLKyISjI7VXSHdPlMBxZI9DCT5hBxhOs",
+            'Accept': 'text/plain'
           },
         };
   
-        const response = await axios.get(`https://localhost:7067/User?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`, config);
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER}/public?page=${paginaAtual}&pageSize=${itensPorPagina}`, config);
   
         const dadosRecebidos = response.data;
         setDados(dadosRecebidos);
