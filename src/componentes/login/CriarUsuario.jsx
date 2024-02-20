@@ -76,7 +76,7 @@ const CriarUsuario = () => {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER}?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`, config);
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER_PUBLICADAS}public?page=${paginaAtual}&pageSize=${itensPorPagina}`, config);
         const dadosRecebidos = response.data;
         // Verificar o ultimo ID da API e coloca mais um quando criar um objeto
         const dadosLog = dadosRecebidos.find((log) => log.id);
@@ -126,9 +126,9 @@ const CriarUsuario = () => {
       const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER_PUBLICADAS}`);
       const dadosRecebidos = response.data;
 
-      //Verificar se tem a obra
+      //Verificar se tem o usuario
       const existente = dadosRecebidos.find((user) => user.id == idUser);
-      console.log("obra existe", existente);
+      console.log("usuario existe", existente);
       if (existente) {
         const response = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_USER}/${existente.id}`, dado, config);
 
@@ -143,6 +143,14 @@ const CriarUsuario = () => {
       }
 
     } catch (error) {
+      if(error.response && error.response.status === 409){
+        window.alert("Usuario ja existe, escolha outro nome!");
+      }else if(error.response && error.response.status == 500)
+      {
+        window.alert("erro no servidor!");
+      }else{
+        window.alert("erro!");
+      }
       console.log('Erro ao enviar!', error);
     }
 
