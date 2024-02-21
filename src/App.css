@@ -1,9 +1,32 @@
+:root {
+  --cor-azul-com-mouse: #404675;
+  --cor-azul-sem-mouse: #406875;
+}
 .menu{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+.menuAPI{
+  align-self: center;
 
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+  padding: 1rem;
+}
+.opcaoAPI{
+  margin-left: 1rem;
+  background-color: var(--cor-azul-com-mouse);
+
+  border-radius: 1rem;
+}
+.opcaoAPI:hover{
+  background-color: var( --cor-azul-sem-mouse);
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
 .card {
   padding: 2em;
 }

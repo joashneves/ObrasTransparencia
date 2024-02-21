@@ -3,10 +3,13 @@ import FormularioBuscarObrasTransparencia from "../componentes/detalheExibir/For
 import ExibirProjetoDeObras from "../componentes/detalheExibir/ExibirProjetoDeObras";
 import DetalheSobreObras from "../componentes/detalheExibir/DetalhesSobreObras";
 import axios from "axios";
+import '../App.css'
 import LeftCarret from "../assets/leftCarret.svg";
 import RigthCarret from "../assets/rigthCarret.svg";
 import styles from '../componentes/login/User.module.css';
 import LoadingBar from "../componentes/miscs/LoadingBar";
+import BotaoBaixarAPIExcel from "../componentes/miscs/BotaoBaixarAPIExcel";
+import BotaoBaixarAPI from "../componentes/miscs/BotaoBaixarAPI";
 
 let chamado = 0;
 
@@ -32,7 +35,7 @@ const Home = () => {
  
   const Adquirirdados = async (event) => {
     try {
-      const apiUrlObras = `${import.meta.env.VITE_REACT_APP_API_URL_OBRA_PUBLICADAS}?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`
+      const apiUrlObras = `${import.meta.env.VITE_REACT_APP_API_URL_OBRA_PUBLICADAS}?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`;
       console.log(apiUrlObras);
       const response = await axios.get(apiUrlObras);
       const obrasData = response.data;
@@ -116,7 +119,7 @@ const Home = () => {
 
   return (
     <>
-      
+      <div className="menuAPI">  <div className="opcaoAPI"><BotaoBaixarAPIExcel/></div>  <div className="opcaoAPI"><BotaoBaixarAPI/></div> </div>
       <FormularioBuscarObrasTransparencia  
       onBuscarChange={setBuscar}
       onSituacaoChange={setSituacao}

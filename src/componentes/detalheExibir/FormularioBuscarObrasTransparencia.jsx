@@ -14,7 +14,7 @@ function FormularioBuscarObrasTransparencia ({
 
     return(
     <article className={styles.corDeFundoDosInputs}>
-        <header className={styles.tituloDeFundo}><a className={styles.tituloBuscar}>Buscar Obras</a> <BotaoBaixarAPIExcel/> <BotaoBaixarAPI/></header>
+        <header className={styles.tituloDeFundo}><a className={styles.tituloBuscar}>Buscar Obras</a></header>
         <form className={styles.organizarInputs}>
         
         <div><label>Buscar</label> 

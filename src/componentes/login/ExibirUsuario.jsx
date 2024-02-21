@@ -14,7 +14,7 @@ const ExibirUsuario = (props) =>{
 
     const [dados, setDados] = useState([]);
     const [paginaAtual, setPaginaAtual] = useState(0);
-    const itensPorPagina = 30; // Defina a quantidade desejada de itens por página
+    const itensPorPagina = 15; // Defina a quantidade desejada de itens por página
 
     const onEditarClick = (dadosDocumento) => {
        console.log("Usuario selecionado", dadosDocumento)
