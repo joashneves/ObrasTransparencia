@@ -48,7 +48,6 @@ const Login = (props) => {
       console.log(`${response.status}`)
       // Aqui você deve verificar as propriedades corretas na resposta da API
       if (response.status == 200) {
-        history('/ProcurarObra');
         window.sessionStorage.setItem('username', username);
       }
     } catch (err) {

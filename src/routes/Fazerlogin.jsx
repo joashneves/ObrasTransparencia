@@ -37,8 +37,10 @@ const Fazerlogin = () => {
       if(dataUsuario){
       setNovaSenha(dataUsuario.isCadastrarOpcao);
       console.log(`nome: ${dataUsuario.nome}, nova senha ${novaSenha}`);
-    }
-
+      if(!dataUsuario.isCadastrarOpcao){
+        history('/ProcurarObra');
+      }
+      }
     } catch (error) {
       console.error('Erro ao fazer a requisição:', error);
 
