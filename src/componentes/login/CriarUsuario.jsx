@@ -171,7 +171,7 @@ const CriarUsuario = () => {
           <label>Criar Fiscal Gestor?<input type="checkbox" checked={isFiscalGestor} onChange={(e) => setIsFiscalGestor(e.target.checked)} /></label>
           <label>Criar medição?<input type="checkbox" checked={isMedicao} onChange={(e) => setIsMedicao(e.target.checked)} /></label>
           <label>Criar Foto?<input type="checkbox" checked={isFoto} onChange={(e) => setIsFoto(e.target.checked)} /></label>
-          <label>Criar senha?<input type="checkbox" checked={isOpcao} onChange={(e) => setIsOpcao(e.target.checked)} /></label>
+          <label>Alterar senha?<input type="checkbox" checked={isOpcao} onChange={(e) => setIsOpcao(e.target.checked)} /></label>
           <input className={styles.botaoNormal} type="submit" value={"Cadastrar"} />
           {excluir ? (<ExcluirUsuario id={idUser}/>):(<></>)}
         </form>
