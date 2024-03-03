@@ -49,6 +49,7 @@ const Login = (props) => {
       // Aqui você deve verificar as propriedades corretas na resposta da API
       if (response.status == 200) {
         window.sessionStorage.setItem('username', username);
+        window.location.reload();
       }
     } catch (err) {
       console.log(err)

@@ -65,19 +65,8 @@ function CadastrarAditivo() {
       const dadosExistente = dadosRecebidos.find((dados) => dados.id == idAditivo); // Verifica se na lista possui um id parecido 
 
       if (dadosExistente) { // se existir atualiza
-        const dataPut = {
-          "id": idAditivo,
-          "id_obras": id,
-          "nome": nomeAditivo,
-          "ano": anoAditivo,
-          "dataAssinatura": converterParaFormatoISO(dataFormatada),
-          "tipo": tipoAditivo,
-          "casoAditivo": tipoCaso,
-          "valorContratual": valorContratualAditivo,
-          "prazo": prazoAditivo
-        }
         // Enviar as credenciais para a sua API usando o axios
-        const respondePut = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_ADITIVO}/${idAditivo}`, dataPut); // Url Aditivo
+        const respondePut = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_ADITIVO}/${idAditivo}`, formData); // Url Aditivo
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
           "id": idLog,

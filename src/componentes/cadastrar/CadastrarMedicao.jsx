@@ -54,19 +54,9 @@ const CadastrarMedicao = (props) => {
       const dadosExistente = dadosRecebidos.find((dados) => dados.id == idMedicao); // Verifica se na lista possui um id parecido 
 
       if (dadosExistente) { // se existir atualiza
-
-        const dataMedicao = {
-          "id": idMedicao,
-          "id_obras": id,
-          "nome": nomeMedicao,
-          "dataInicio": converterParaFormatoISO(dataFormatadaInicio),
-          "dataFinal": converterParaFormatoISO(dataFormatadaFinal),
-          "valorPago": valorPago,
-          "valorMedido": valorMedido
-        }
         console.log("medicao existe: Medicao", dataMedicao);
         // Enviar as credenciais para a sua API usando o axios
-        const respondePut = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_MEDICAO}/${idMedicao}`, dataMedicao); // Url medição
+        const respondePut = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_MEDICAO}/${idMedicao}`, formData); // Url medição
 
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
