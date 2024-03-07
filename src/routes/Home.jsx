@@ -45,6 +45,10 @@ const Home = () => {
       setJsonData(dadosRecebidos);
       setLoading(false); // Indica que os dados foram carregados
       console.log("Status AXios", responseAPI.status);
+      console.log("lista vazia", jsonData.length);
+      if(jsonData.length === 0){
+        setPaginaAtual(0);
+      }
     } catch (err) {
       console.log("Erro", err);
       setLoading(false); // Indica que ocorreu um erro ao carregar os dados
@@ -152,7 +156,7 @@ const Home = () => {
               <div className={styles.botaoes}>            {/* Adicione controles de paginação, por exemplo: */}
             <img src={LeftCarret} alt="LeftCarret" className={styles.botao} onClick={() => setPaginaAtual((prevPage) => prevPage > 0 ? prevPage - 1 : prevPage)}/>
             <div className={styles.contador}>{paginaAtual}</div>
-            <img src={RigthCarret} alt="RigthCarret" className={styles.botao} onClick={() => setPaginaAtual((prevPage) => prevPage + 1 )}/>
+            <img src={RigthCarret} alt="RigthCarret" className={styles.botao} onClick={() => setPaginaAtual((prevPage) => jsonData.length === 0 ? prevPage + 1 : prevPage = 0)}/>
         </div>
 
     </>
