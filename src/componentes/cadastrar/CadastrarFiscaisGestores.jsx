@@ -58,21 +58,32 @@ function CadastrarFiscaisGestores() {
         setIdLog(idLog + 1);
         window.location.reload();
       } else {
-        // Enviar as credenciais para a sua API usando o axios
-        const responsePost = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_FISCALGESTOR}`, dado); // Url Gestor Fiscal
-        
-        //Criar um objeto em formato de json para a ação de criar do usuario logado
-        const dadosUsuario = {
-          "id_obras": id,
-          "nomeObra": nome,
-          "nome": "Criado Gestor ou fiscal",
-          "nomePerfil": nomeUsuario,
-          "dataHora": now
-        }
-        const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // Url Historico
+        try {
+          // Enviar as credenciais para a sua API usando o axios
+          const responsePost = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_FISCALGESTOR}`, dado); // Url Gestor Fiscal
 
-        window.alert('Cadastrado');
-        window.location.reload();
+          //Criar um objeto em formato de json para a ação de criar do usuario logado
+          const dadosUsuario = {
+            "id_obras": id,
+            "nomeObra": nome,
+            "nome": "Criado Gestor ou fiscal",
+            "nomePerfil": nomeUsuario,
+            "dataHora": now
+          }
+          const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // Url Historico
+
+          window.alert('Cadastrado');
+          window.location.reload();
+        } catch (err) {
+          if (err.response.status == 400) {
+            window.alert('Preencha todas as informações');
+          }
+          else if (err.response.message == 'Network Error') {
+            window.alert('Erro com servidor');
+          }
+          console.log('Erro ao enviar!', error);
+
+        }
       }
     } catch (error) {
       console.log('Erro ao enviar!', error);

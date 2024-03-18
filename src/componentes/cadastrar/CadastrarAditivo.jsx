@@ -76,29 +76,41 @@ function CadastrarAditivo() {
           "nomePerfil": nomeUsuario,
           "dataHora": now
         }
-        
+
         const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // Url Historico
 
         window.alert('Atualizado!');
         setIdLog(idLog + 1);
         window.location.reload();
       } else {
-        // Enviar as credenciais para a sua API usando o axios
-        const response = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_ADITIVO}`, formData); // Url Aditivo
-        
-        //Criar um objeto em formato de json para a ação de criar do usuario logado
-        const dadosUsuario = {
-          "id": idLog,
-          "id_obras": id,
-          "nomeObra": nomeAditivo,
-          "nome": "Criado Aditivo",
-          "nomePerfil": nomeUsuario,
-          "dataHora": now
-        }
-        const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // url Historico
 
-        window.alert('Cadastrado');
-        window.location.reload();
+        try {
+          // Enviar as credenciais para a sua API usando o axios
+          const response = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_ADITIVO}`, formData); // Url Aditivo
+
+          //Criar um objeto em formato de json para a ação de criar do usuario logado
+          const dadosUsuario = {
+            "id": idLog,
+            "id_obras": id,
+            "nomeObra": nomeAditivo,
+            "nome": "Criado Aditivo",
+            "nomePerfil": nomeUsuario,
+            "dataHora": now
+          }
+          const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // url Historico
+
+          window.alert('Cadastrado');
+          window.location.reload();
+        } catch (err) {
+          if (err.response.status == 400) {
+            window.alert('Preencha todas as informações');
+          }
+          else if (err.response.message == 'Network Error') {
+            window.alert('Erro com servidor');
+          }
+          console.log('Erro ao enviar!', error);
+
+        }
       }
     } catch (error) {
       console.log('Erro ao enviar!', error);
@@ -152,7 +164,7 @@ function CadastrarAditivo() {
 
     Adquirirdados();
   }, [id]); // Adiciona título da obra como dependência
-  
+
   // Achar ultimo ID de log e criar um mais novo
   useEffect(() => {
     const Adquirirdados = async () => {
@@ -195,15 +207,15 @@ function CadastrarAditivo() {
 
   function converterDataFormato(dataISO) {
     const dataObj = new Date(dataISO);
-  
+
     // Obtém o dia, mês e ano da data
     const dia = String(dataObj.getDate()).padStart(2, '0');
     const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Os meses são indexados de 0 a 11
     const ano = dataObj.getFullYear();
-  
+
     // Monta a string no formato desejado
     const dataFormatada = `${dia}/${mes}/${ano}`;
-  
+
     return dataFormatada;
   }
 
@@ -219,13 +231,13 @@ function CadastrarAditivo() {
   function converterParaFormatoISO(dataString) {
     // Divida a string em dia, mês e ano
     const [dia, mes, ano] = dataString.split('/');
-  
+
     // Crie um objeto de data com os componentes
     const data = new Date(`${ano}-${mes}-${dia}T00:00:00`);
-  
+
     // Converta a data para uma string no formato ISO
     const formatoISO = data.toISOString();
-  
+
     return formatoISO;
   }
 
@@ -241,7 +253,7 @@ function CadastrarAditivo() {
 
   useEffect(() => {
     console.log("tipo é ", tipoCaso);
-    switch(tipoCaso){
+    switch (tipoCaso) {
       case "Prazo":
         setIsAditivoPrazo(false);
         setIsAditivoValor(true);
@@ -310,18 +322,18 @@ function CadastrarAditivo() {
     <article className={styles.fundoDeCadastro}>
       <div className={styles.tituloDeCadastro}><h1>Aditivo</h1></div>
       <form className={styles.formularioDeCadastro} onSubmit={handleSubmit}>
-        <label>Nome* <input type="text" id="User" maxlength="255"  
+        <label>Nome* <input type="text" id="User" maxlength="255"
           name="Name"
           onChange={(e) => setNomeAditivo(e.target.value)}
           value={nomeAditivo}
           className={styles.cadastrarNomeAditivo} /></label>
-        <label>Ano<input type="number" id="User" 
+        <label>Ano<input type="number" id="User"
           name="Ano"
           onChange={(e) => setAnoAditivo(e.target.value)}
           value={anoAditivo}
           className={styles.cadastrarAnoAditivo} /></label>
-        <label>Data da Assinatura <input type="date" id="User" 
-          name="DataAssinatura" 
+        <label>Data da Assinatura <input type="date" id="User"
+          name="DataAssinatura"
           onChange={handleDataChange}
           value={dataDocumento}
           className={styles.cadastrarDataAssinaturaAditivo} /></label>
@@ -353,19 +365,19 @@ function CadastrarAditivo() {
             <option>Prazo, Valor e execução</option>
           </select></label>
         )}
-        {isAditivoPrazo ? (<div></div>):(
+        {isAditivoPrazo ? (<div></div>) : (
           <label>Prazo <input type="number" id="prazo"
-          name="prazo"
-          onChange={(e) => setPrazoAditivo(e.target.value)}
-          value={prazoAditivo}
-          className={styles.cadastrarAnoAditivo} /></label>
+            name="prazo"
+            onChange={(e) => setPrazoAditivo(e.target.value)}
+            value={prazoAditivo}
+            className={styles.cadastrarAnoAditivo} /></label>
         )}
-        {isAditivoValor ? (<div></div>):(
+        {isAditivoValor ? (<div></div>) : (
           <label>Valor Contratual <input type="number" id="valor"
-          name="valor"
-          onChange={(e) => setValorContratualAditivo(e.target.value)}
-          value={valorContratualAditivo}
-          className={styles.cadastrarAnoAditivo} /></label>
+            name="valor"
+            onChange={(e) => setValorContratualAditivo(e.target.value)}
+            value={valorContratualAditivo}
+            className={styles.cadastrarAnoAditivo} /></label>
         )}
         <div className={styles.enviarFormulario}>
 

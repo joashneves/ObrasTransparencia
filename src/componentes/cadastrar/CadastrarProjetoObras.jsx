@@ -153,6 +153,7 @@ function CadastrarProjetoObras() {
     const nomeUsuario = window.sessionStorage.getItem('username');
     console.log("Nome de usuario é", nomeUsuario);
     try {
+      
       const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_OBRA}`); // Url Obra
       const dadosRecebidos = response.data;
 
@@ -160,7 +161,7 @@ function CadastrarProjetoObras() {
       const obraExistente = dadosRecebidos.find((obra) => obra.id == id);
 
       if (obraExistente) {
-        console.log("Obra PUT é ", dado)
+
         const response = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_OBRA}/${obraExistente.id}`, dado); // UrlObra
 
 
@@ -177,8 +178,12 @@ function CadastrarProjetoObras() {
 
         window.alert('Atualizado!');
         setIdLog(idLog + 1);
+        
+      
       } else {
+        try{
         // Enviar as credenciais para a sua API usando o axios
+
         console.log("ENVIAR USER", dado)
         const response = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_OBRA}`, dado); // UrlObra
 
@@ -195,6 +200,17 @@ function CadastrarProjetoObras() {
 
         window.alert('Cadastrado');
         history('/procurarObra');
+      }catch (err){
+        if(err.response.status == 400){
+        window.alert('Preencha todas as informações');
+        }
+        else if (err.response.message == 'Network Error') {
+          window.alert('Erro com servidor');
+        }
+        console.log('Erro ao enviar!', error);
+
+      }
+
       }
 
     } catch (error) {

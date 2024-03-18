@@ -44,7 +44,7 @@ const CadastrarMedicao = (props) => {
       formData.append("valorPago", valorPago);
       formData.append("valorMedido", valorMedido);
       formData.append("Medicao", medicao);
-      
+
       console.log("Valor do arquivo: Medicao", formData);
 
       const urlApiMedicao = `${import.meta.env.VITE_REACT_APP_API_URL_MEDICAO}`
@@ -73,19 +73,30 @@ const CadastrarMedicao = (props) => {
         setIdLog(idLog + 1);
         window.location.reload();
       } else {
-        const response = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_MEDICAO}`, formData); // url medição
-        const dadosUsuario = {
-          "id": idLog,
-          "id_obras": id,
-          "nomeObra": nomeMedicao,
-          "nome": "Criado medicção",
-          "nomePerfil": nomeUsuario,
-          "dataHora": now
-        }
-        const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // url historico
+        try {
+          const response = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_MEDICAO}`, formData); // url medição
+          const dadosUsuario = {
+            "id": idLog,
+            "id_obras": id,
+            "nomeObra": nomeMedicao,
+            "nome": "Criado medicção",
+            "nomePerfil": nomeUsuario,
+            "dataHora": now
+          }
+          const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // url historico
 
-        window.alert('Cadastrado');
-        window.location.reload();
+          window.alert('Cadastrado');
+          window.location.reload();
+        } catch (err) {
+          if (err.response.status == 400) {
+            window.alert('Preencha todas as informações');
+          }
+          else if (err.response.message == 'Network Error') {
+            window.alert('Erro com servidor');
+          }
+          console.log('Erro ao enviar!', error);
+
+        }
       }
     } catch (error) {
       console.log('Erro ao enviar!', error);
@@ -187,27 +198,27 @@ const CadastrarMedicao = (props) => {
   function converterParaFormatoISO(dataString) {
     // Divida a string em dia, mês e ano
     const [dia, mes, ano] = dataString.split('/');
-  
+
     // Crie um objeto de data com os componentes
     const data = new Date(`${ano}-${mes}-${dia}T00:00:00`);
-  
+
     // Converta a data para uma string no formato ISO
     const formatoISO = data.toISOString();
-  
+
     return formatoISO;
   }
   function converterParaFormatoISO(dataString) {
-  // Divida a string em dia, mês e ano
-  const [dia, mes, ano] = dataString.split('/');
+    // Divida a string em dia, mês e ano
+    const [dia, mes, ano] = dataString.split('/');
 
-  // Crie um objeto de data com os componentes
-  const data = new Date(`${ano}-${mes}-${dia}T00:00:00`);
+    // Crie um objeto de data com os componentes
+    const data = new Date(`${ano}-${mes}-${dia}T00:00:00`);
 
-  // Converta a data para uma string no formato ISO
-  const formatoISO = data.toISOString();
+    // Converta a data para uma string no formato ISO
+    const formatoISO = data.toISOString();
 
-  return formatoISO;
-}
+    return formatoISO;
+  }
   const converterFormatoDataFinal = (data) => {
     const [dia, mes, ano] = data.split("/");
     return `${ano}-${mes}-${dia}`;
@@ -215,15 +226,15 @@ const CadastrarMedicao = (props) => {
 
   function converterDataFormato(dataISO) {
     const dataObj = new Date(dataISO);
-  
+
     // Obtém o dia, mês e ano da data
     const dia = String(dataObj.getDate()).padStart(2, '0');
     const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Os meses são indexados de 0 a 11
     const ano = dataObj.getFullYear();
-  
+
     // Monta a string no formato desejado
     const dataFormatada = `${dia}/${mes}/${ano}`;
-  
+
     return dataFormatada;
   }
   return (
@@ -252,7 +263,7 @@ const CadastrarMedicao = (props) => {
           onChange={(e) => setValorMedido(e.target.value)} /></label>
 
         <div className={styles.enviarFormulario}>
-        <input type="file"
+          <input type="file"
             id="file"
             name="file"
             ref={inputRef}

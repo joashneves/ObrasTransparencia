@@ -50,10 +50,10 @@ function CadastrarAnexo() {
       const dadosExistente = dadosRecebidos.find((dados) => dados.id == idAnexo); // Verifica se na lista possui um id parecido 
 
       if (dadosExistente) { // se existir atualiza
-        console.log("data",dataPut)
+        console.log("data", dataPut)
         // Enviar as credenciais para a sua API usando o axios
         const respondePut = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_ANEXO}/${idAnexo}`, formData); // url Anexo
-        
+
         //Criar um objeto em formato de json para a ação de atualizar do usuario logado
         const dadosUsuario = {
           "id_obras": id,
@@ -68,18 +68,29 @@ function CadastrarAnexo() {
         setIdLog(idLog + 1);
         window.location.reload();
       } else {
-        const response = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_ANEXO}`, formData); // Url Anexo
-        const dadosUsuario = {
-          "id_obras": id,
-          "nomeObra": nomeAnexo,
-          "nome": "Criado Anexo",
-          "nomePerfil": nomeUsuario,
-          "dataHora": now
-        }
-        const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // url Historico
+        try {
+          const response = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_ANEXO}`, formData); // Url Anexo
+          const dadosUsuario = {
+            "id_obras": id,
+            "nomeObra": nomeAnexo,
+            "nome": "Criado Anexo",
+            "nomePerfil": nomeUsuario,
+            "dataHora": now
+          }
+          const responseUser = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL_HISTORICO}`, dadosUsuario); // url Historico
 
-        window.alert('Cadastrado');
-        window.location.reload();
+          window.alert('Cadastrado');
+          window.location.reload();
+        } catch (err) {
+          if (err.response.status == 400) {
+            window.alert('Preencha todas as informações');
+          }
+          else if (err.response.message == 'Network Error') {
+            window.alert('Erro com servidor');
+          }
+          console.log('Erro ao enviar!', error);
+
+        }
       }
     } catch (error) {
       console.log('Erro ao enviar!', error);
@@ -129,7 +140,7 @@ function CadastrarAnexo() {
     Adquirirdados();
   }, [id]); // Adiciona título da obra como dependência
 
-  
+
   // Achar ultimo ID de log e criar um mais novo
   useEffect(() => {
     const Adquirirdados = async () => {
@@ -162,7 +173,7 @@ function CadastrarAnexo() {
     Adquirirdados();
   }, [idLog]); // Adiciona título da obra como dependência
 
-  
+
   const formatarData = (data) => {
     const dataObj = new Date(data);
     const dia = dataObj.getDate().toString().padStart(2, "0");
@@ -178,13 +189,13 @@ function CadastrarAnexo() {
   function converterParaFormatoISO(dataString) {
     // Divida a string em dia, mês e ano
     const [dia, mes, ano] = dataString.split('/');
-  
+
     // Crie um objeto de data com os componentes
     const data = new Date(`${ano}-${mes}-${dia}T00:00:00`);
-  
+
     // Converta a data para uma string no formato ISO
     const formatoISO = data.toISOString();
-  
+
     return formatoISO;
   }
 
@@ -192,18 +203,18 @@ function CadastrarAnexo() {
     const [dia, mes, ano] = (data).split("/");
     return `${ano}-${mes}-${dia}`;
   };
-  
+
   function converterDataFormato(dataISO) {
     const dataObj = new Date(dataISO);
-  
+
     // Obtém o dia, mês e ano da data
     const dia = String(dataObj.getDate()).padStart(2, '0');
     const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Os meses são indexados de 0 a 11
     const ano = dataObj.getFullYear();
-  
+
     // Monta a string no formato desejado
     const dataFormatada = `${dia}/${mes}/${ano}`;
-  
+
     return dataFormatada;
   }
 
