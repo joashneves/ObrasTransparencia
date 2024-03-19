@@ -10,6 +10,7 @@ import BuscarUsuario from "../componentes/Perfis/BuscarUsuario";
 import CarregarLog from "../componentes/registroLog/CarregarLog";
 import CarregarUsuario from "../componentes/login/CarregarUsuario";
 import ExibirUsuario from "../componentes/login/ExibirUsuario";
+import BotaoVoltarcadastro from "../componentes/miscs/BotaoVoltarcadastro";
 
 const RegistroLog = () =>{
 
@@ -71,6 +72,7 @@ const RegistroLog = () =>{
 
     return (
         <>
+        <BotaoVoltarcadastro/>
         <CriarUsuario/>
         <BuscarLog/>
         <ListaLog/>
