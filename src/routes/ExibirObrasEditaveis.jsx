@@ -6,6 +6,7 @@ import BotaoCriarObra from "../componentes/ExibitObrasEditaveis/botaoCriarObra";
 import CampoParaBuscarObrasEditaveis from "../componentes/ExibitObrasEditaveis/CampoParaBuscarObrasEditaveis";
 import SistemaListaDocumento from "../componentes/ExibitObrasEditaveis/SistemaListaDocumentos";
 import EnviarAdm from "../componentes/ExibitObrasEditaveis/EnviarAdm";
+import Logoff from "../componentes/miscs/Logoff";
 
 const ExibirObrasEditaveis = () => {
   const [buscar, setBuscar] = useState();
@@ -53,6 +54,7 @@ const ExibirObrasEditaveis = () => {
       <>
         <div className="menu">
         <BotaoCriarObra />
+        <Logoff/>
         <EnviarAdm />
         </div>
         <CampoParaBuscarObrasEditaveis

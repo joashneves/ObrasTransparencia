@@ -123,7 +123,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="menuAPI">  <div className="opcaoAPI"><BotaoBaixarAPIExcel/></div>  <div className="opcaoAPI"><BotaoBaixarAPI/></div> </div>
+      <div className="menuAPI">  <div className="opcaoAPI"><BotaoBaixarAPIExcel/></div> <div className="opcaoAPI"><BotaoBaixarAPI/></div> </div>
       <FormularioBuscarObrasTransparencia  
       onBuscarChange={setBuscar}
       onSituacaoChange={setSituacao}

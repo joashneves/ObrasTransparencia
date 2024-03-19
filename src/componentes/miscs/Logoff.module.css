@@ -1,0 +1,13 @@
+.logoff{
+    background-color: #B41F21;
+    width: 12rem;
+    height: 2rem;
+    align-self: initial;
+    text-align: center;
+    border-radius: 12px;
+    
+}
+.logoff:hover{
+    background-color: #ff7b7b;
+    cursor: pointer;
+}
