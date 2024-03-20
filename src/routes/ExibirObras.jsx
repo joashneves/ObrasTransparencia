@@ -38,10 +38,9 @@ const ExibirOBras = () => {
     if (responseAPI.status != 200){
     const Adquirirdados = async () => {
       try {
-
-            const verificarLogin = `${import.meta.env.VITE_REACT_APP_API_URL_USER}/login`
+        
+            const urlApiObras = `${import.meta.env.VITE_REACT_APP_API_URL_OBRA_PUBLICADAS}`
             const response = await axios.get(urlApiObras);
-            const validar = await axios.put(verificarLogin, dadosUser);
             const dataUser = response.data;
 
         const dadosRecebidos = response.data;
