@@ -39,7 +39,7 @@ const ExibirOBras = () => {
     const Adquirirdados = async () => {
       try {
         
-            const urlApiObras = `${import.meta.env.VITE_REACT_APP_API_URL_OBRA_PUBLICADAS}`
+            const urlApiObras = `${import.meta.env.VITE_REACT_APP_API_URL_OBRA}`
             const response = await axios.get(urlApiObras);
             const dataUser = response.data;
 
