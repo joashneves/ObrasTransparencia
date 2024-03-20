@@ -91,6 +91,7 @@ const LoginAlterar = (props) => {
       };
       console.log(dado)
       const response = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_USER}/${userData.id}`, dado, config);
+      window.sessionStorage.setItem('senha', password);
       window.location.reload();
     } else {
       window.alert('As senhas devem ser iguais');
