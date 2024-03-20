@@ -68,9 +68,7 @@ const Login = (props) => {
   useEffect(() => {
     const carregarDados = async () => {
       try {
-        console.log(`${import.meta.env.VITE_REACT_APP_API_URL_USER}`);
         const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER}`, config);
-        console.log(response.data);
         setDados(response.data);
 
         console.error('Erro ao fazer a requisição:', error);

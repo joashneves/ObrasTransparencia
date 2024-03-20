@@ -1,0 +1,47 @@
+:root{
+    --cor-fundo-menu: #405875;
+    --cor-fundo-botao: #2391BA;
+    --cor-fundo-botao-hover: #1E7A9D;
+}
+
+.menu{
+    background-color: var(--cor-fundo-menu);
+}
+.container{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+}
+.logo{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    color: #FFF;
+    font-size: 17px;
+    cursor: pointer;
+}
+.imagem_prefeitura{
+    width: 45px;
+    height: 45px;
+}
+.menu_links {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+.menu_links li{
+    
+    background-color: var(--cor-fundo-botao);
+    height: 45px;
+    color: #FFF;
+    justify-items: center;
+    align-items: center;
+    margin-right: 3px;
+    padding: 0px 10px;
+}
+.menu_links li:hover{
+    background-color: var(--cor-fundo-botao-hover);
+}
+.menu_links a{
+    font-size: 14px;
+}

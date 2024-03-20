@@ -10,6 +10,7 @@ import styles from '../componentes/login/User.module.css';
 import LoadingBar from "../componentes/miscs/LoadingBar";
 import BotaoBaixarAPIExcel from "../componentes/miscs/BotaoBaixarAPIExcel";
 import BotaoBaixarAPI from "../componentes/miscs/BotaoBaixarAPI";
+import PortalDaTransparenciaDiv from "../componentes/detalheExibir/PortalDaTransparenciaDiv";
 
 let chamado = 0;
 
@@ -123,6 +124,7 @@ const Home = () => {
 
   return (
     <>
+      <PortalDaTransparenciaDiv/>
       <div className="menuAPI">  <div className="opcaoAPI"><BotaoBaixarAPIExcel/></div> <div className="opcaoAPI"><BotaoBaixarAPI/></div> </div>
       <FormularioBuscarObrasTransparencia  
       onBuscarChange={setBuscar}
