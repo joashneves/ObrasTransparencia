@@ -31,6 +31,7 @@ const CriarUsuario = () => {
 
   const [documentoSelecionado, setDocumentoSelecionado] = useState(null);
 
+
   const onEditarClick = (dadosDocumento) => {
     console.log("Usuario selecionado", dadosDocumento)
     setDocumentoSelecionado(dadosDocumento);
@@ -51,14 +52,15 @@ const CriarUsuario = () => {
     console.log(idUser);
   };
 
-
-
+  // Recupera token da sessão e coloca em uma var e manda pra api
+  const tokenData = window.sessionStorage.getItem("token");
   const config = {
     headers: {
       'Accept': 'text/plain',
-      'Authorization': `${import.meta.env.VITE_API_TOKEN}`,
+      'Authorization': `Bearer ${tokenData}`,
     },
   };
+
 
   useEffect(() => {
     console.log("Valores atualizados:", {
@@ -76,7 +78,7 @@ const CriarUsuario = () => {
   useEffect(() => {
     const Adquirirdados = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER_PUBLICADAS}public?page=${paginaAtual}&pageSize=${itensPorPagina}`, config);
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER}`, config);
         const dadosRecebidos = response.data;
         // Verificar o ultimo ID da API e coloca mais um quando criar um objeto
         const dadosLog = dadosRecebidos.find((log) => log.id);
@@ -123,7 +125,7 @@ const CriarUsuario = () => {
     };
     console.log(dado)
     try {
-      const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER_PUBLICADAS}`);
+      const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER}`, config);
       const dadosRecebidos = response.data;
 
       //Verificar se tem o usuario
@@ -143,12 +145,11 @@ const CriarUsuario = () => {
       }
 
     } catch (error) {
-      if(error.response && error.response.status === 409){
+      if (error.response && error.response.status === 409) {
         window.alert("Usuario ja existe, escolha outro nome!");
-      }else if(error.response && error.response.status == 500)
-      {
+      } else if (error.response && error.response.status == 500) {
         window.alert("erro no servidor!");
-      }else{
+      } else {
         window.alert("erro!");
       }
       console.log('Erro ao enviar!', error);
@@ -173,7 +174,7 @@ const CriarUsuario = () => {
           <label>Criar Foto?<input type="checkbox" checked={isFoto} onChange={(e) => setIsFoto(e.target.checked)} /></label>
           <label>Alterar senha?<input type="checkbox" checked={isOpcao} onChange={(e) => setIsOpcao(e.target.checked)} /></label>
           <input className={styles.botaoNormal} type="submit" value={"Cadastrar"} />
-          {excluir ? (<ExcluirUsuario id={idUser}/>):(<></>)}
+          {excluir ? (<ExcluirUsuario id={idUser} />) : (<></>)}
         </form>
       </article>
       <BuscarUsuario />

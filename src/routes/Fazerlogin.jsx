@@ -18,15 +18,19 @@ const Fazerlogin = () => {
   const [token, setToken] = useState(); // Define qual token vai ser usado
   const [config, setConfig] = useState({}); // Define qual token vai ser usado
 
+  const [carregadoAPI, setCarregadoAPI] = useState(false)
+
 
   useEffect(() => {
+    let tokenObtido = false; // Flag para indicar se o token foi obtido
+
     const pegarToken = async () => {
       try {
         const getToken = await axios.post(`${import.meta.env.VITE_REACT_APP_TOKEN_URL}`);
         const tokenData = getToken.data.token;
-        setToken(getToken);
+        setToken(tokenData);
         console.log(`informações obtidas: metodo post ${getToken}, formatação: ${tokenData}, e goblal token ${token}`);
-  
+
         const configJson = {
           headers: {
             'Accept': 'text/plain',
@@ -37,20 +41,22 @@ const Fazerlogin = () => {
         setConfig(configJson);
         console.log("Token obtido:", configJson);
         console.log("config obtido:", config);
-        // Chamar verificarUser após a definição de config
-        if(token == undefined){
-          pegarToken();
-        }else{
+
+        // Verifique se o token já foi obtido antes de chamar verificarUser()
+        if (!tokenObtido) {
           verificarUser();
+          tokenObtido = true; // Defina a flag como true após obter o token
+          window.sessionStorage.setItem("token", tokenData)
         }
-          
+
       } catch (error) {
         console.error('Erro ao obter token:', error);
       }
     };
-  
+
     pegarToken();
   }, [token]); // Execute uma vez na montagem
+
 
   const verificarUser = async () => {
     try {
@@ -58,18 +64,19 @@ const Fazerlogin = () => {
       const configJson = {
         headers: {
           'Accept': 'text/plain',
-          'Authorization': `Bearer ${token.data.token}`,
+          'Authorization': `Bearer ${token}`,
         }
       }
       console.log("console do user", configJson)
       const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER}`, configJson);
       const userData = response.data;
       console.log(userData);
-  
-      setJsonData(jsonData);
+
+      setJsonData(userData);
       const nomeUsuario = window.sessionStorage.getItem('username');
       const dataUsuario = userData.find((log) => log.nome == nomeUsuario);
-  
+      setCarregadoAPI(true)
+
       if (dataUsuario) {
         console.log(!dataUsuario.isCadastrarOpcao);
         setNovaSenha(dataUsuario.isCadastrarOpcao);
@@ -87,7 +94,12 @@ const Fazerlogin = () => {
 
   return (
     <>
-      {novaSenha ? (<LoginAlterar />) : (<Login />)}
+      {carregadoAPI ? (<>
+        {novaSenha ? (<LoginAlterar />) : (<Login />)}
+      </>) : (
+        <div>Aguardando carregamento da API...</div>
+      )}
+
     </>
   );
 };

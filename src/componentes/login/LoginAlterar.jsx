@@ -29,13 +29,16 @@ const LoginAlterar = (props) => {
   const [dados, setDados] = useState([]);
   const [paginaAtual, setPaginaAtual] = useState(0);
   const itensPorPagina = 10; // Defina a quantidade desejada de itens por página
-  
+
+  // Recupera token da sessão e coloca em uma var e manda pra api
+  const tokenData = window.sessionStorage.getItem("token");
   const config = {
     headers: {
       'Accept': 'text/plain',
-      'Authorization': `${import.meta.env.VITE_API_TOKEN}`,
+      'Authorization': `Bearer ${tokenData}`,
     },
   };
+
   useEffect(() => {
 
     const verificarUser = async () => {
@@ -72,30 +75,30 @@ const LoginAlterar = (props) => {
     event.preventDefault();
 
     try {
-      if(password == passwordEqual){
-      setIsOpcao(false);
-      //Criar um objeto em formato de json para Obras
-      const dado = {
-        "nome": nomeUsuario,
-        "nomeCompleto": nomeCompleto,
-        "email": email,
-        "senha_hash": password,
-        "isAdm": isAdm,
-        "isCadastrarProjeto": isProjeto,
-        "isCadastrarAnexo": isAnexo,
-        "isCadastrarAditivo": isAditivo,
-        "isCadastrarFiscalGestor": isFiscalGestor,
-        "isCadastrarMedicao": isMedicao,
-        "isCadastrarFoto": isFoto,
-        "isCadastrarOpcao": isOpcao
-      };
-      console.log(dado)
-      const response = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_USER}/${userData.id}`, dado, config);
-      window.sessionStorage.setItem('senha', password);
-      window.location.reload();
-    } else {
-      window.alert('As senhas devem ser iguais');
-    }
+      if (password == passwordEqual) {
+        setIsOpcao(false);
+        //Criar um objeto em formato de json para Obras
+        const dado = {
+          "nome": nomeUsuario,
+          "nomeCompleto": nomeCompleto,
+          "email": email,
+          "senha_hash": password,
+          "isAdm": isAdm,
+          "isCadastrarProjeto": isProjeto,
+          "isCadastrarAnexo": isAnexo,
+          "isCadastrarAditivo": isAditivo,
+          "isCadastrarFiscalGestor": isFiscalGestor,
+          "isCadastrarMedicao": isMedicao,
+          "isCadastrarFoto": isFoto,
+          "isCadastrarOpcao": isOpcao
+        };
+        console.log(dado)
+        const response = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_USER}/${userData.id}`, dado, config);
+        window.sessionStorage.setItem('senha', password);
+        window.location.reload();
+      } else {
+        window.alert('As senhas devem ser iguais');
+      }
 
     } catch (error) {
       console.error('Erro ao fazer a requisição:', error);

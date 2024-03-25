@@ -18,63 +18,74 @@ const ExibirObrasEditaveis = () => {
 
   const [responseAPI, setResponseAPI] = useState({});
 
+  const [carregadoAPI, setCarregadoAPI] = useState(false);
   useEffect(() => {
-    if(responseAPI != 200){
+    if (responseAPI != 200) {
 
-    const AutenticarUser = async () => {
+      const AutenticarUser = async () => {
 
-      try {
-        const username = window.sessionStorage.getItem('username');
-            const password = window.sessionStorage.getItem('senha');
+        try {
+          const username = window.sessionStorage.getItem('username');
+          const password = window.sessionStorage.getItem('senha');
 
-            const dadosUser = {
-                "id": 0,
-                "nome": username,
-                "nomeCompleto": "string",
-                "email": "string",
-                "senha_hash": password,
-                "isAdm": true,
-                "isCadastrarProjeto": true,
-                "isCadastrarAnexo": true,
-                "isCadastrarAditivo": true,
-                "isCadastrarFiscalGestor": true,
-                "isCadastrarMedicao": true,
-                "isCadastrarFoto": true,
-                "isCadastrarOpcao": true
-            }
+          const dadosUser = {
+            "id": 0,
+            "nome": username,
+            "nomeCompleto": "string",
+            "email": "string",
+            "senha_hash": password,
+            "isAdm": true,
+            "isCadastrarProjeto": true,
+            "isCadastrarAnexo": true,
+            "isCadastrarAditivo": true,
+            "isCadastrarFiscalGestor": true,
+            "isCadastrarMedicao": true,
+            "isCadastrarFoto": true,
+            "isCadastrarOpcao": true
+          }
+          // Recupera token da sessão e coloca em uma var e manda pra api
+          const tokenData = window.sessionStorage.getItem("token");
+          const config = {
+            headers: {
+              'Accept': 'text/plain',
+              'Authorization': `Bearer ${tokenData}`,
+            },
+          };
 
-            const urlApiObras = `${import.meta.env.VITE_REACT_APP_API_URL_USER}`
-            const verificarLogin = `${import.meta.env.VITE_REACT_APP_API_URL_USER}/login`
-            const response = await axios.get(urlApiObras);
-            const validar = await axios.put(verificarLogin, dadosUser);
-            const dataUser = response.data;
+          const urlApiObras = `${import.meta.env.VITE_REACT_APP_API_URL_USER} `
+          const verificarLogin = `${import.meta.env.VITE_REACT_APP_API_URL_USER}/login`
+          const response = await axios.get(urlApiObras, config);
+          const validar = await axios.put(verificarLogin, dadosUser, config);
+          const dataUser = response.data;
 
-        const acharUser = dataUser.find((o) => o.nome == username);
+          const acharUser = dataUser.find((o) => o.nome == username);
 
-        setResponseAPI(response);
+          setResponseAPI(response);
 
-        if (!acharUser) {
+          if (!acharUser) {
+            history('/login');
+          }
+          console.log("logado");
+          setCarregadoAPI(true);
+        } catch {
+          console.log("Erro no servidor ou na autenticação")
           history('/login');
         }
-        console.log("logado");
-      } catch {
-        console.log("Erro no servidor ou na autenticação")
-        history('/login');
-      }
 
+      }
+      AutenticarUser();
     }
-    AutenticarUser();
-  }
 
   }, [history]);
 
-  
-    return (
-      <>
+
+  return (
+    <>
+      {carregadoAPI ? (<>
         <div className="menu">
-        <BotaoCriarObra />
-        <Logoff/>
-        <EnviarAdm />
+          <BotaoCriarObra />
+          <Logoff />
+          <EnviarAdm />
         </div>
         <CampoParaBuscarObrasEditaveis
           onBuscarChange={setBuscar}
@@ -88,8 +99,10 @@ const ExibirObrasEditaveis = () => {
           numero={numero}
           tipoDeObra={tipoDeObra}
           publicado={publicado} />
-      </>
-    );
-  };
+      </>) : (<div>Aguardando carregamento da API...</div>)}
 
-  export default ExibirObrasEditaveis;
+    </>
+  );
+};
+
+export default ExibirObrasEditaveis;

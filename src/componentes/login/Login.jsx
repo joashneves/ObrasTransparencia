@@ -15,13 +15,6 @@ const Login = (props) => {
   const [paginaAtual, setPaginaAtual] = useState(0);
   const itensPorPagina = 1; // Defina a quantidade desejada de itens por página
 
-
-  const config = {
-    headers: {
-      'Accept': 'text/plain'
-    },
-  };
-
   const handleLogin = async (event) => {
     event.preventDefault();
     const data = {
@@ -44,6 +37,16 @@ const Login = (props) => {
     const senha = dados.find((log) => log.nome == username);
 
     try {
+
+      // Recupera token da sessão e coloca em uma var e manda pra api
+      const tokenData = window.sessionStorage.getItem("token");
+      const config = {
+        headers: {
+          'Accept': 'text/plain',
+          'Authorization': `Bearer ${tokenData}`,
+        },
+      };
+      
       const response = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL_USER}/login`, data, config);
       console.log(`${response.status}`)
       // Aqui você deve verificar as propriedades corretas na resposta da API
@@ -67,6 +70,15 @@ const Login = (props) => {
 
   useEffect(() => {
     const carregarDados = async () => {
+
+      const tokenData = window.sessionStorage.getItem("token");
+      const config = {
+        headers: {
+          'Accept': 'text/plain',
+          'Authorization': `Bearer ${tokenData}`,
+        },
+      };
+
       try {
         const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_USER}`, config);
         setDados(response.data);
