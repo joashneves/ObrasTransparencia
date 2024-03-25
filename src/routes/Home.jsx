@@ -37,7 +37,6 @@ const Home = () => {
   const Adquirirdados = async (event) => {
     try {
       const apiUrlObras = `${import.meta.env.VITE_REACT_APP_API_URL_OBRA_PUBLICADAS}?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`;
-      console.log(apiUrlObras);
       const response = await axios.get(apiUrlObras);
       const obrasData = response.data;
       console.log(obrasData);

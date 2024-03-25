@@ -7,13 +7,10 @@ import axios from "axios";
 
 const BotaoBaixarAPIExcel = () => {
 
-    const paginaAtual = 0;
-    const itensPorPagina = 100;
-
     const baixarExcel = async () => {
         try {
             // Faz a solicitação GET à API
-            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_OBRA_PUBLICADAS}?pageNumber=${paginaAtual}&pageQuantity=${itensPorPagina}`);
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL_OBRA_BAIXAR}`);
 
             // Obtém os dados da resposta
             const data = response.data;
