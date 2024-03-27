@@ -3,13 +3,14 @@ import styles from "./CadastrarAnexo.module.css"
 import EnviarDocumento from "../EnviarDocumento";
 import ButtonSalvar from "../ButtonSalvar";
 import TabelaAnexo from "./tabela/TabelaAnexo";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 
 function CadastrarAnexo() {
 
   const { id } = useParams(); // Captura o paramentro da pagina
+  const history = useNavigate();
   const [idAnexo, setIdAnexo] = useState(0); // Id do anexo
 
   const [nomeAnexo, setNomeAnexo] = useState();
@@ -94,6 +95,8 @@ function CadastrarAnexo() {
       }
     } catch (error) {
       console.log('Erro ao enviar!', error);
+      window.alert(`Ocorreu um erro: ${err}`);
+      history('/ProcurarObra');
     }
   }
   const setEditarDocumento = (documentoSelecionado) => {

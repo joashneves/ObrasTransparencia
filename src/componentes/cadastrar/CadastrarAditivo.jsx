@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, ChangeEvent } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./CadastrarAditivo.module.css";
 import ButtonSalvar from "../ButtonSalvar";
 import TabelaAditivo from "./tabela/TabelaAditivo";
@@ -9,6 +9,7 @@ import axios from "axios";
 function CadastrarAditivo() {
 
   const { id } = useParams(); // Captura o paramentro da pagina
+  const history = useNavigate();
   const [idAditivo, setIdAditivo] = useState(0); // Id do Aditivo
 
   const [nomeAditivo, setNomeAditivo] = useState();
@@ -114,6 +115,8 @@ function CadastrarAditivo() {
       }
     } catch (error) {
       console.log('Erro ao enviar!', error);
+      window.alert(`Ocorreu um erro: ${err}`);
+      history('/ProcurarObra')
     }
   }
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, ChangeEvent } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./CadastrarFoto.module.css"
 
 import axios from "axios";
@@ -7,6 +7,7 @@ import ExibirFoto from "./tabela/ExibirFoto";
 function CadastrarFoto() {
 
   const { id } = useParams(); // Captura o paramentro da pagina
+  const history = useNavigate();
   const [idFoto, setIdFoto] = useState(0); // Id do Foto
 
   const [nomeFoto, setNomeFoto] = useState();
@@ -88,7 +89,8 @@ function CadastrarFoto() {
 
       } catch (err) {
         console.log("Erro", err);
-
+        window.alert(`Ocorreu um erro: ${err}`);
+        history('/ProcurarObra');
       }
     };
 
@@ -121,7 +123,8 @@ function CadastrarFoto() {
 
       } catch (err) {
         console.log("Erro", err);
-
+        window.alert(`Ocorreu um erro: ${err}`);
+        history('/ProcurarObra');
       }
     };
 

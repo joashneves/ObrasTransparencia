@@ -90,6 +90,7 @@ const Home = () => {
       // Se os campos estiverem vazios, carrega todos os dados novamente
     if(responseAPI.status != 200){
       Adquirirdados();
+      
       } 
     }
   }, [

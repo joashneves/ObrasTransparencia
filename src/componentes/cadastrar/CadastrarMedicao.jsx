@@ -100,6 +100,8 @@ const CadastrarMedicao = (props) => {
       }
     } catch (error) {
       console.log('Erro ao enviar!', error);
+      window.alert(`Ocorreu um erro: ${err}`);
+      history('/ProcurarObra')
     }
   }
   const setEditarDocumento = (documentoSelecionado) => {

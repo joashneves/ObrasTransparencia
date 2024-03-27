@@ -80,7 +80,8 @@ function CadastrarProjetoObras() {
 
       } catch (err) {
         console.log("Erro", err);
-
+        window.alert(`Ocorreu um erro: ${err}`);
+        history('/ProcurarObra')
       }
     };
 
@@ -112,7 +113,8 @@ function CadastrarProjetoObras() {
 
       } catch (err) {
         console.log("Erro", err);
-
+        window.alert(`Ocorreu um erro: ${err}`)
+        history('/procurarObra');
       }
     };
 

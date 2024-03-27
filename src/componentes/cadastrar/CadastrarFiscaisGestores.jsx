@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./CadastrarFiscaisGestores.module.css";
 import TabelaGestoresFiscais from "./tabela/TabelaGestoresFiscais";
 
@@ -8,6 +8,7 @@ import axios from "axios";
 function CadastrarFiscaisGestores() {
 
   const { id } = useParams();
+  const history = useNavigate();
   const [idGestorFiscal, setIdGestorFiscal] = useState()
 
   const [nome, setNome] = useState();
@@ -87,6 +88,8 @@ function CadastrarFiscaisGestores() {
       }
     } catch (error) {
       console.log('Erro ao enviar!', error);
+      window.alert(`Ocorreu um erro: ${err}`);
+      history('/ProcurarObra');
     }
 
   }
@@ -149,7 +152,8 @@ function CadastrarFiscaisGestores() {
 
       } catch (err) {
         console.log("Erro", err);
-
+        window.alert(`Ocorreu um erro: ${err}`);
+        history('/ProcurarObra');
       }
     };
 
